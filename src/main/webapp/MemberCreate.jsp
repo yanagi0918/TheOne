@@ -97,7 +97,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">照片</label>
                                 <div class="col-sm-8 text-center">
-                                    <img class="img-fluid mx-auto mb-4" id="preview_progressbarTW_img" src="#" alt="請選擇您的照片" style="width: 320px; height: 200px;">
+                                    <img class="img-fluid mx-auto mb-4" id="preview_progressbarTW_img" src="#" alt="請選擇您的照片" style="width: 260px; height: 320px;">
                                     <input class="form-control" type="file" name="image" id="imgInp" accept="image/jpeg, image/png">
                                 </div>
                             </div>
