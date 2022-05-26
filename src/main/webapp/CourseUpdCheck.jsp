@@ -70,6 +70,7 @@
 							<label class="col-sm-2 col-form-label">課程名稱</label>
 							<div class="col-sm-8">
 							<!--<input type="hidden" class="form-control" name="courseName" value="update">-->
+							<!--<input type="hidden" class="form-control" name="courseName" value="update">-->
 								<input type="text" class="form-control" name="courseName"
 									value="<%=course.getCourseName()%>" id="courseIntroduction">
 							</div>
