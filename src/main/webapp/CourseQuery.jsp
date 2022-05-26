@@ -114,33 +114,6 @@
 								<th scope="col">價錢</th>
 							</tr>
 						</thead>
-<!-- 						<tbody> -->
-<%-- 							<% List<Course> courseList = (List<Course>) request.getAttribute("courseList"); %> --%>
-<%-- 							<% for (Course course : courseList) {%> --%>
-<!-- 							<tr> -->
-<%-- 								<td><%= course.getCourseNo()%></td> --%>
-<%-- 								<td><%= course.getCourseCategory()%></td> --%>
-<%-- 								<td><%= course.getCourseName()%></td> --%>
-<%-- 								<td><%= course.getCourseIntroduction()%></td> --%> 
-<%-- 								<td><%= course.getLecturer()%></td> --%>
-<%-- 								<td><%= course.getDate()%></td> --%>
-<%-- 								<td><%= course.getCoursePic()%></td> --%> 
-<%-- 								<td><%= course.getCourseVedio()%></td> --%> 
-<%-- 								<td><%= course.getScore()%></td> --%>
-<%-- 								<td><%= course.getPrice()%></td> --%>
-
-<!-- 								<td> -->
-<!-- 									<button type="button" class="btn btn-outline-success m-0" -->
-<%-- 										onclick="location.href='./CourseServletDS?courseNo=<%=course.getCourseNo()%>&detailForm=詳細'">詳細</button> --%>
-
-<!-- 									<button type="button" class="btn btn-outline-primary m-0" -->
-<%-- 										onclick="location.href='./CourseServletDS?courseNo=<%=course.getCourseNo()%>&UptdByCourseNO=更新查詢'">更新</button> --%>
-									
-<!-- 									<button type="button" class="btn btn-outline-danger m-0" -->
-<%-- 										onclick="javascript:if(confirm('確認要刪除嗎?'))location.href='./CourseServletDS?courseNo=<%= course.getCourseNo()%>&DELETE=刪除'">刪除</button> --%>
-<!-- 								</td> -->
-<%-- 								<% } %> --%>
-<!-- 							</tr> -->
 
 							<c:forEach var="course" items="${courseList}">
 							<tr>

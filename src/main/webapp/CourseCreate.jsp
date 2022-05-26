@@ -82,17 +82,15 @@
 								maxlength="15" id="date" required>
 						</div>
 					</div>
-<!-- ************** -->
+
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">課程圖</label>
 						<div class="col-sm-8 text-center">
-							<img class="img-fluid mx-auto mb-4"
-								id="courseImg" src="#" alt="請選擇課程圖"
-								style="width: 320px; height: 200px;">
-								 <input class="form-control" type="file" name="imgURL" id="idImg" accept="image/jpeg, image/png" >
+							<img class="img-fluid mx-auto mb-4" id="preview_img" src="#" alt="請選擇課程圖" style="width: 320px; height: 200px;">
+							<input class="form-control" type="file" name="imgURL" id="imgInput" accept="image/jpeg, image/png" >
 						</div>
 					</div>
-
+			
 <!-- 					<div class="row mb-3"> -->
 <!-- 						<label class="col-sm-2 col-form-label">圖片位置</label> -->
 <!-- 						<div class="col-sm-8"> -->
@@ -100,7 +98,7 @@
 <!-- 								id="coursePic"> -->
 <!-- 						</div> -->
 <!-- 					</div> -->
-<!-- ************ -->
+
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">影片位置</label>
 						<div class="col-sm-8">

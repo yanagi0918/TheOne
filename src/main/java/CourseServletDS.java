@@ -125,7 +125,7 @@ public class CourseServletDS extends HttpServlet {
 			while (fieldsIterator.hasNext()) {
 				FileItem fieldItem = (FileItem) fieldsIterator.next();
 				String fieldName = fieldItem.getFieldName();
-				String fieldValue = fieldItem.getString("UTF-8");
+				String fieldValue = fieldItem.getString("UTF-8");//取得value值
 				
 				if(!fieldItem.isFormField() && !fieldItem.getName().equals("")) {
 					File imageFile = new File(System.currentTimeMillis() + "_" + fieldItem.getName());//幫檔名前面加上時間戳(毫秒)
