@@ -13,124 +13,109 @@ import javax.servlet.http.*;
 import javax.naming.*;
 import javax.sql.*;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.jasper.tagplugins.jstl.core.ForEach;
 
 import Bean.Interview;
+import Bean.Languages;
 import DAO.IntvDAO;
-
-
 
 @WebServlet("/InterViewServletDS")
 public class InterViewServletDS extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-                    throws ServletException, IOException {
-    try {
-     request.setCharacterEncoding("UTF-8");
-		//get connection to DAO
-		DataSource ds = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/FindJobDB");
-		IntvDAO intvDAO = new IntvDAO(ds.getConnection()); 
 
-		if (request.getParameter("UpdateId") != null) { //get UpdateId & deliver event to update page
-			Interview intvForUpdate = intvDAO.searchByCv_No(Integer.parseInt(request.getParameter("UpdateId")));
-			if (intvForUpdate == null) { //check adId exist
-				getServletContext().getRequestDispatcher("/404.jsp").forward(request, response);
-			}
-			request.setAttribute("intvForUpdate", intvForUpdate);
-			getServletContext().getRequestDispatcher("/IntvUpdate.jsp").forward(request, response);
-		} else if (request.getParameter("DeleteId") != null) { //DeleteId exist & do delete
-			processDelete(request, response, intvDAO);
-		} else { //Event's index
-			showData(request, response, intvDAO);
-		}
-	} catch (NamingException | SQLException | ParseException e) {
-		e.printStackTrace();
-	}
-}
-     
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			System.out.println("InterViewServletDS doGet start...");
 			request.setCharacterEncoding("UTF-8");
 			// get connection to DAO
 			DataSource ds = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/FindJobDB");
-			IntvDAO intvDAO  = new IntvDAO(ds.getConnection());
+			IntvDAO intvDAO = new IntvDAO(ds.getConnection());
 
-			// get upload stream
-			DiskFileItemFactory factory = new DiskFileItemFactory();
-			factory.setSizeThreshold(4096);
-			ServletFileUpload upload = new ServletFileUpload(factory);
-			upload.setSizeMax(4194304);
+			if (request.getParameter("UpdateId") != null) { // get UpdateId & deliver event to update page
+				Interview intvForUpdate = intvDAO.searchByCv_No(Integer.parseInt(request.getParameter("UpdateId")));
+				if (intvForUpdate == null) { // check cv_no exist
+					getServletContext().getRequestDispatcher("/404.jsp").forward(request, response);
+				}
+				//intvForUpdate.setLanList(intvForUpdate.getLanguage().split(","));
+//				String[] tmp = intvForUpdate.getLanguage().split(",");
+				for(String tmp : intvForUpdate.getLanguage().split(",")) {
+					for(Languages lans : intvForUpdate.getLanguageArray()) {
+						if(lans.getLanguage().equals(tmp)) {
+							lans.setCheckStatus("Y");
+							break;
+						}
+					}
+				}
+				
+				
+				request.setAttribute("intvForUpdate", intvForUpdate);
+				getServletContext().getRequestDispatcher("/IntvUpdate.jsp").forward(request, response);
+			} else if (request.getParameter("DeleteId") != null) { // DeleteId exist & do delete
+				processDelete(request, response, intvDAO);
+			} else { // Event's index
+				showData(request, response, intvDAO);
+			}
+		} catch (NamingException | SQLException | ParseException e) {
+			e.printStackTrace();
+		}
+		System.out.println("InterViewServletDS doGet end...");
+	}
 
-			// get fields 
-			// {[FieldName1="fieldValue1"],[FieldName2="fieldValue2"],[FieldName3="fieldValue3"]}
-			List<FileItem> fields = upload.parseRequest(request);
-			Iterator<FileItem> fieldsIterator = fields.iterator();
-			// put data into bean
-			Interview interview = new Interview();
-			while (fieldsIterator.hasNext()) {
-				FileItem fieldItem = (FileItem) fieldsIterator.next();
-				String fieldName = fieldItem.getFieldName();
-				String fieldValue = fieldItem.getString("UTF-8");
-				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-//				System.out.println(dtf.format(LocalDateTime.now())); 
-
-				if (!fieldItem.isFormField() && !fieldItem.getName().equals("")) {
-				} else if (fieldName.equals("cv_no")) {
-					System.out.println("fieldValue: "+fieldValue);
-					interview.setCv_No(Integer.parseInt(fieldValue));
-				}  else if (fieldName.equals("Int_Time")) {
-					interview.setInt_Time(fieldValue);
-				} else if (fieldName.equals("Comp_Name")) {
-					interview.setComp_Name(fieldValue);
-				} else if (fieldName.equals("Job_Name")) {
-					interview.setJob_Name(fieldValue);
-				} else if (fieldName.equals("Offer")) {
-					interview.setOffer(fieldValue);
-				} else if (fieldName.equals("Test")) {
-					interview.setTest(fieldValue);
-				} else if (fieldName.equals("Language")) {
-					interview.setLanguage(fieldValue);
-				} else if (fieldName.equals("QA")) {
-					interview.setQA(fieldValue);
-				} else if (fieldName.equals("Share")) {
-					interview.setShare(fieldValue);
-				} else if (fieldName.equals("Int_Score")) {
-					interview.setInt_Score(Integer.parseInt(fieldValue));
-				} else if (fieldName.equals("Comp_Score")) {
-					interview.setComp_Score(Integer.parseInt(fieldValue));
-				} else if (fieldName.equals("USER_ID")) {
-					interview.setUSER_ID(fieldValue);								
-				} else if (fieldName.equals("Created_Time")) {
-					interview.setCreated_Time(dtf.format(LocalDateTime.now()));
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			System.out.println("InterViewServletDS doPost start...");
+			request.setCharacterEncoding("UTF-8");
+			// get connection to DAO
+			DataSource ds = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/FindJobDB");
+			IntvDAO intvDAO = new IntvDAO(ds.getConnection());
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			String[] Languages = request.getParameterValues("Language");
+			String langStr = "";
+			/**
+			 * 獲取陣列資料的技巧，可以避免insts陣列為null時引發的空指標異常錯誤！
+			 */
+			for (int i = 0; Languages != null && i < Languages.length; i++) {
+				if (i == Languages.length - 1) {
+					langStr += Languages[i];
+				} else {
+					langStr += Languages[i] + ",";
 				}
 			}
-			
-			System.out.println("cv_no: "+interview.getCv_No());
-			if (interview.getCv_No() == 0) { //EventCreate.jsp <input:hidden name="Cv_No" value="0">
-				System.out.println("processCreate");
+
+			Interview interview = new Interview();
+			interview.setCv_No(Integer.parseInt(request.getParameter("cv_no")));
+			interview.setInt_Time(request.getParameter("Int_Time"));
+			interview.setComp_Name(request.getParameter("Comp_Name"));
+			interview.setJob_Name(request.getParameter("Job_Name"));
+			interview.setOffer(request.getParameter("Offer"));
+			interview.setTest(request.getParameter("Test"));
+			interview.setLanguage(langStr);
+			interview.setQA(request.getParameter("QA"));
+			interview.setShare(request.getParameter("Share"));
+			interview.setInt_Score(Integer.parseInt(request.getParameter("Int_Score")));
+			interview.setComp_Score(Integer.parseInt(request.getParameter("Comp_Score")));
+			interview.setUSER_ID(request.getParameter("USER_ID"));
+			interview.setCreated_Time(dtf.format(LocalDateTime.now()));
+
+			if (interview.getCv_No() == 0) { // EventCreate.jsp <input:hidden name="Cv_No" value="0">
+
 				processCreate(request, response, intvDAO, interview);
 			} else {
-				System.out.println("processUpdate");
 				processUpdate(request, response, intvDAO, interview);
 			}
 
 		} catch (NamingException | SQLException | ParseException e) {
 			e.printStackTrace();
-		} catch (FileUploadException e) {
-			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("InterViewServletDS doPost end...");
 	}
-	
+
 	private void showData(HttpServletRequest request, HttpServletResponse response, IntvDAO intvDAO)
 			throws SQLException, IOException, ServletException {
-		int page = 1; //default page1
+		System.out.println("InterViewServletDS showData start...");
+		int page = 1; // default page1
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
@@ -145,7 +130,7 @@ public class InterViewServletDS extends HttpServlet {
 		}
 		intvDAO.closeConn();
 	}
-	
+
 	private void processDelete(HttpServletRequest request, HttpServletResponse response, IntvDAO intvDAO)
 			throws SQLException, IOException, ParseException, ServletException {
 		int deleteId = Integer.parseInt(request.getParameter("DeleteId"));
@@ -183,8 +168,5 @@ public class InterViewServletDS extends HttpServlet {
 		}
 		intvDAO.closeConn();
 	}
-
-	
- 
 
 }
