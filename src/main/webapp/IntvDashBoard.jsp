@@ -38,8 +38,8 @@
                                     <td><%= interview.getInt_Score()%></td>
                                     <td><%= interview.getComp_Score() %></td>
                                     <td>
-                                        <button type="button" class="btn btn-outline-primary m-0" onclick="location.href='./InterViewServletDS?UpdateId=<%= interview.getCv_No() %> '">Update</button>
-                                        <button type="button" class="btn btn-outline-danger m-0" onclick="location.href='./InterViewServletDS?DeleteId=<%= interview.getCv_No() %>'">Delete</button>
+                                        <button type="button" class="btn btn-outline-primary m-0" onclick="location.href='./InterViewServletDS?UpdateId=<%= interview.getCv_No() %> '">修改</button>
+                                        <button type="button" class="btn btn-outline-danger m-0" onclick="location.href='./InterViewServletDS?DeleteId=<%= interview.getCv_No() %>'">刪除</button>
                                     </td>
                                 </tr>
                             <% } %>

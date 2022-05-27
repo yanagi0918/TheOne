@@ -45,7 +45,7 @@ public class IntvDAO {
 	public boolean createIntv(Interview interviewdate) {
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(CRTAE_SQL);
-			pstmt.setDate(1, interviewdate.getCreated_Time());
+			pstmt.setTimestamp(1, interviewdate.getCreated_Time());
 			pstmt.setDate(2, interviewdate.getInt_Time());
 			pstmt.setString(3, interviewdate.getComp_Name());
 			pstmt.setString(4, interviewdate.getJob_Name());
@@ -71,7 +71,7 @@ public class IntvDAO {
 	public boolean updateInterview(Interview interviewdate) {
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(UPDATE_SQL);
-			pstmt.setDate(1, interviewdate.getCreated_Time());
+			pstmt.setTimestamp(1, interviewdate.getCreated_Time());
 			pstmt.setDate(2, interviewdate.getInt_Time());
 			pstmt.setString(3, interviewdate.getComp_Name());
 			pstmt.setString(4, interviewdate.getJob_Name());
@@ -118,7 +118,7 @@ public class IntvDAO {
 			Interview interviewdate = new Interview();
 			if (rs.next()) {
 				interviewdate.setCv_No(rs.getInt("cv_no"));
-				interviewdate.setCreated_Time(rs.getDate("Created_Time"));
+				interviewdate.setCreated_Time(rs.getTimestamp("Created_Time"));
 				interviewdate.setInt_Time(rs.getDate("Int_Time"));
 				interviewdate.setComp_Name(rs.getString("Comp_Name"));
 				interviewdate.setJob_Name(rs.getString("Job_Name"));
@@ -153,7 +153,7 @@ public class IntvDAO {
 			while (rs.next()) {
 				interviewdate = new Interview();
 				interviewdate.setCv_No(rs.getInt("cv_no"));
-				interviewdate.setCreated_Time(rs.getDate("Created_Time"));
+				interviewdate.setCreated_Time(rs.getTimestamp("Created_Time"));
 				interviewdate.setInt_Time(rs.getDate("Int_Time"));
 				interviewdate.setComp_Name(rs.getString("Comp_Name"));
 				interviewdate.setJob_Name(rs.getString("Job_Name"));
@@ -185,7 +185,7 @@ public class IntvDAO {
 			while (rs.next()) {
 				interview = new Interview();
 				interview.setCv_No(rs.getInt("cv_no"));
-				interview.setCreated_Time(rs.getDate("Created_Time"));
+				interview.setCreated_Time(rs.getTimestamp("Created_Time"));
 				interview.setInt_Time(rs.getDate("Int_Time"));
 				interview.setComp_Name(rs.getString("Comp_Name"));
 				interview.setJob_Name(rs.getString("Job_Name"));
