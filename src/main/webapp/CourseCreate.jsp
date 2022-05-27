@@ -20,6 +20,14 @@
 			return false;
 		}
 	}
+	
+	//另一種上傳圖片同步顯示的分法	
+// 	imgInput.onchange = evt => {
+// 		  const [file] = imgInp.files
+// 		  if (file) {
+// 			  preview_img.src = URL.createObjectURL(file)
+// 		  }
+// 		}
 </script>
 
 <BODY>
