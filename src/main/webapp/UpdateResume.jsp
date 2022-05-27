@@ -58,7 +58,7 @@ textarea {
 <div class="row mb-3">
 <label class="col-sm-2 col-form-label">畢業科系:</label>
 <div class="col-sm-8">
-<input type='text' name='DEPT' value='<%=resume.getDept() %>'/>
+<input type='text' name='DEPT' value='<%=resume.getDept() %>' class="form-control"/>
 </div>
 </div>
 
