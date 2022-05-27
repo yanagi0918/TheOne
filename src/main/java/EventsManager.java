@@ -30,7 +30,7 @@ public class EventsManager extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			request.setCharacterEncoding("UTF-8");
-			//get connection to DAO     git test
+			//get connection to DAO     git test test test
 			DataSource ds = (DataSource) new InitialContext().lookup("java:comp/env/jdbc/FindJobDB");
 			EventsDAO eventDAO = new EventsDAO(ds.getConnection());
 
