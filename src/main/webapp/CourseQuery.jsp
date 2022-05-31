@@ -134,6 +134,7 @@
 									
 									<button type="button" class="btn btn-outline-danger m-0"
 										onclick="javascript:if(confirm('確認要刪除嗎?'))location.href='./CourseServletDS?courseNo=${course.courseNo}&DELETE=刪除'">刪除</button>
+<%-- 								亦可		onclick="if(confirm('確認要刪除嗎?'))location.href='./CourseServletDS?courseNo=${course.courseNo}&DELETE=刪除'">刪除</button> --%>
 								</td>
 							</tr>
 							</c:forEach>
