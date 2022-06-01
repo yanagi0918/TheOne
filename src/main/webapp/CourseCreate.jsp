@@ -11,6 +11,7 @@
 }
 </style>
 
+<<<<<<< Updated upstream
 <script>
 	function create() {
 		var msg = "您真的確定要新增嗎？\n\n請確認！";
@@ -20,7 +21,17 @@
 			return false;
 		}
 	}
+	
+	//另一種上傳圖片同步顯示的分法	
+// 	imgInput.onchange = evt => {
+// 		  const [file] = imgInp.files
+// 		  if (file) {
+// 			  preview_img.src = URL.createObjectURL(file)
+// 		  }
+// 		}
 </script>
+=======
+>>>>>>> Stashed changes
 
 <BODY>
 	<div class="container-fluid pt-4 px-4">
@@ -82,17 +93,15 @@
 								maxlength="15" id="date" required>
 						</div>
 					</div>
-<!-- ************** -->
+
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">課程圖</label>
 						<div class="col-sm-8 text-center">
-							<img class="img-fluid mx-auto mb-4"
-								id="preview_progressbarTW_img" src="#" alt="請選擇課程圖"
-								style="width: 320px; height: 200px;">
-								 <input class="form-control" type="file" name="imgURL" id="imgInp" accept="image/jpeg, image/png" >
+							<img class="img-fluid mx-auto mb-4" id="preview_img" src="#" alt="請選擇課程圖" style="width: 320px; height: 200px;">
+							<input class="form-control" type="file" name="imgURL" id="imgInput" accept="image/jpeg, image/png" >
 						</div>
 					</div>
-
+			
 <!-- 					<div class="row mb-3"> -->
 <!-- 						<label class="col-sm-2 col-form-label">圖片位置</label> -->
 <!-- 						<div class="col-sm-8"> -->
@@ -100,7 +109,7 @@
 <!-- 								id="coursePic"> -->
 <!-- 						</div> -->
 <!-- 					</div> -->
-<!-- ************ -->
+
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">影片位置</label>
 						<div class="col-sm-8">
@@ -126,8 +135,10 @@
 					</div>
 
 					<div>
-						<button type="submit" class="btn btn-primary" name="inset"
-							value="新增課程" onclick="javascript:return create();">確認新增</button>
+<!-- 						<button type="submit" class="btn btn-primary" name="inset" -->
+<!-- 							value="新增課程" onclick="create()">確認新增</button> -->
+						<button type="submit" class="btn btn-primary" name="inset" id="inset1" 
+						value="新增課程" >確認新增</button>
 						<button type="reset" class="btn btn-primary" name="reset"
 							value="清空輸入">清空輸入</button>
 						<button type="button" class="btn btn-primary" id="correctInput">一鍵輸入</button>
@@ -138,6 +149,31 @@
 			</div>
 		</div>
 	</div>
+
+	<script>
+		document.getElementById("inset1").onclick = function() {
+			if (confirm("您真的確定要新增嗎？\n\n請確認！")) {
+				return true
+			} else
+				return false
+		}
+		
+// 		document.getElementById("inset1").addEventListener("click", function() {
+// 			if (confirm("您真的確定要新增嗎？\n\n請確認！")) {
+// 				return true
+// 			} else
+// 				return false
+// 		})
+		
+// 		function create() {
+// 			var msg = "您真的確定要新增嗎？\n\n請確認！";
+// 			if (confirm(msg) == true) {
+// 				return true;
+// 			} else {
+// 				return false;
+// 			}
+// 		}
+	</script>
 </BODY>
 
 <%@include file="DashBoardFooter.jspf"%>

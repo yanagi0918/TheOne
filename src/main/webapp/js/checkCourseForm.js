@@ -31,18 +31,18 @@ function checkCourseForm() {
 	return checkResult;
  } 
  
- $("#imgInp").change(function() {
+  $("#imgInput").change(function() {
 		readURL(this);
 	});
 	function readURL(input) {
 		if (input.files && input.files[0]) {
 			var reader = new FileReader();
 			reader.onload = function(e) {
-				$("#preview_progressbarTW_img").attr('src', e.target.result);
+				$("#preview_img").attr('src', e.target.result);
 			}
 			reader.readAsDataURL(input.files[0]);
 		}
-	}  
+	}
 
 $('#correctInput').click(function () {
     $('#courseName').val('面試必勝10招')
