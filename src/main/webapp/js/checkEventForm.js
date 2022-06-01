@@ -29,7 +29,7 @@ $(function() {
 		}
 	}
 
-	$('.delete-btn').click(function() {
+	$('.btn-eventDelete').click(function() {
 		Swal.fire({
 			title: '確認是否刪除?',
 			text: "刪除後將無法回復!",
@@ -54,8 +54,8 @@ $(function() {
 		})
 	})
 
-	$('.update-btn').click(function() {
-		location.href = `./EventsManager?UpdateId=${$(this).val()}`
+	$('.btn-eventUpdate').click(function() {
+		location.href = `./EventsManager?UpdateId=${$(this).val()}`;
 	})
 
 	$('#btn-submit').click(function() {
@@ -74,7 +74,7 @@ $(function() {
 			checkEventForm = false;
 		}
 
-		if ($('#imgInp').val() == "" && $('#adId').val() == 0) {
+		if ($('#imgInp').val() == "" && $('#eventId').val() == 0) {
 			warningStr += "請輸入廣告圖" + "<br>";
 			checkEventForm = false;
 		}
@@ -97,7 +97,7 @@ $(function() {
 		}
 
 		let confirmStr = '確認修改廣告?';
-		if ($('#adId').val() == 0) {
+		if ($('#eventId').val() == 0) {
 			confirmStr = '確認新增廣告?';
 		}
 
