@@ -1,6 +1,6 @@
 <%@ page import="org.apache.jasper.tagplugins.jstl.core.ForEach" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="Bean.Event" %>
+<%@ page import="Bean.EventBean" %>
 <%@ page import="java.util.List" %>
 
 
@@ -28,30 +28,24 @@
                             </thead>
                             <tbody>
                             <%
-                            int pageCount = (int) request.getAttribute("pageCount");
-                            List<Event> events = (List<Event>) request.getAttribute("events");
-                            for(Event event : events){
+                            List<EventBean> events = (List<EventBean>) request.getAttribute("events");
+                            for(EventBean event : events){
                             %>
                                 <tr>
-                                    <td><%= event.getAdId() %></td>
-                                    <td><%= event.getCompIdAfterCompensate() %></td>
+                                    <td><%= event.getEventId() %></td>
+                                    <td><%= event.getCompId() %></td>
                                     <td><%= event.getPrice() %></td>
-                                    <td><%= event.getPostStart() %></td>
-                                    <td><%= event.getPostEnd() %></td>
+                                    <td><%= event.getFormatedPostStart() %></td>
+                                    <td><%= event.getFormatedPostEnd() %></td>
                                     <td><%= event.getRemark() %></td>
                                     <td>
-                                        <button type="button" class="btn btn-outline-primary m-0 update-btn" value="<%= event.getAdId() %>">更新</button>
-                                        <button type="button" class="btn btn-outline-danger m-0 delete-btn" value="<%= event.getAdId() %>">刪除</button>
+                                        <button type="button" class="btn btn-outline-primary m-0 update-btn" value="<%= event.getEventId() %>">更新</button>
+                                        <button type="button" class="btn btn-outline-danger m-0 delete-btn" value="<%= event.getEventId() %>">刪除</button>
                                     </td>
                                 </tr>
                             <% } %>
                             </tbody>
                         </table>
-                    </div>
-                    <div class="btn-group mt-4 me-2" role="group">
-                    <% for (int i = 1 ; i <= pageCount ; i++){ %>
-                        <button type="button" class="btn btn-primary" onclick="location.href='./EventsManager?page=<%= i %>'"><%= i %></button>
-                    <% } %>    
                     </div>
                 </div>
             </div>
