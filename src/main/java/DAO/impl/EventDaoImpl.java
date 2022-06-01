@@ -45,8 +45,7 @@ public class EventDaoImpl implements EventDao {
 
 	@Override
 	public void deleteEvent(int pk) {
-		EventBean event = null;
-		event.setEventId(pk);
+		EventBean event = session.get(EventBean.class, pk);
 		session.delete(event);
 	}
 

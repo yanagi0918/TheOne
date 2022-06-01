@@ -16,7 +16,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">廣告編號</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="adId" value="<%= eventForUpdate.getEventId() %>" readonly id="adId">
+                                    <input type="text" class="form-control" name="eventId" value="<%= eventForUpdate.getEventId() %>" readonly id="eventId">
                                 </div>
                             </div>
                             <div class="row mb-3">

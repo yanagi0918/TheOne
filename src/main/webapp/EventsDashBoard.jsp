@@ -29,7 +29,8 @@
                             <tbody>
                             <%
                             List<EventBean> events = (List<EventBean>) request.getAttribute("events");
-                            for(EventBean event : events){
+                            if(events != null){
+                            	for(EventBean event : events){
                             %>
                                 <tr>
                                     <td><%= event.getEventId() %></td>
@@ -39,11 +40,11 @@
                                     <td><%= event.getFormatedPostEnd() %></td>
                                     <td><%= event.getRemark() %></td>
                                     <td>
-                                        <button type="button" class="btn btn-outline-primary m-0 update-btn" value="<%= event.getEventId() %>">更新</button>
-                                        <button type="button" class="btn btn-outline-danger m-0 delete-btn" value="<%= event.getEventId() %>">刪除</button>
+                                        <button type="button" class="btn btn-outline-primary m-0 btn-eventUpdate" value="<%= event.getEventId() %>">更新</button>
+                                        <button type="button" class="btn btn-outline-danger m-0 btn-eventDelete" value="<%= event.getEventId() %>">刪除</button>
                                     </td>
                                 </tr>
-                            <% } %>
+                            <% }} %>
                             </tbody>
                         </table>
                     </div>

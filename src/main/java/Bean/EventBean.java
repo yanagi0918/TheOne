@@ -88,7 +88,7 @@ public class EventBean implements Serializable {
 	public Date getPostEnd() {
 		return postEnd;
 	}
-	
+
 	public String getFormatedPostEnd() {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		String str = format.format(postEnd);
