@@ -1,9 +1,9 @@
+<%@page import="java.security.Provider.Service"%>
 <%@ page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="Bean.Job"%>
 <%@ page import="java.util.List"%>
-<%@ page import="DAO.impl.JobDaoImpl"%>
 
 <%@include file="DashBoardHeader.jspf"%>
 <title>All Jobs</title>
@@ -25,7 +25,6 @@
 		<input type="submit" value="以職缺名稱快速查詢" class="btn btn-primary mb-0" >
 		</div>
 	</form>
-	
 	<table class="table align-middle table-bordered table-hover mb-0">
 	<thead>
 		<tr class="text-dark">
@@ -41,8 +40,10 @@
 		</tr>
 		</thead>
         <tbody>
-		<%
-		List<Job> jobs = (List<Job>) request.getAttribute("allJobs");
+		
+<%
+@SuppressWarnings("unchecked")
+ 		List<Job> jobs = (List<Job>) request.getAttribute("jobs");
 		if(jobs !=null){
 		for (Job job : jobs) {
 		%>

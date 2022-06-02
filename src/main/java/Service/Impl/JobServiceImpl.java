@@ -14,6 +14,7 @@ import util.HibernateUtils;
 public class JobServiceImpl implements JobService{
 	SessionFactory factory;
 	JobDao jobDao;
+	
 	public JobServiceImpl() {
 		this.factory = HibernateUtils.getSessionFactory();
 		this.jobDao = new JobDaoImpl();
@@ -56,13 +57,13 @@ public class JobServiceImpl implements JobService{
 	}
 
 	@Override
-	public Job getJobByJobID(int job_id) {
+	public Job getJobByJobID(int pk) {
 		Job job = null;
 		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			job = jobDao.getJobByJobID(job_id);
+			job = jobDao.getJobByJobID(pk);
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null) {
@@ -74,12 +75,12 @@ public class JobServiceImpl implements JobService{
 	}
 
 	@Override
-	public void delete(int job_id) {
+	public void delete(int pk) {
 		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			jobDao.delete(job_id);
+			jobDao.delete(pk);
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null) {
