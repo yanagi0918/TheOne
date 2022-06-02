@@ -1,33 +1,44 @@
 package Bean;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Comment {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-	private int share_id;
+@Entity
+@Table(name = "Comment_Table")
+public class CommentBean implements Serializable {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer share_id;
 	private Date ref_time;
 	private String comp_name;
-	private int comp_score;
+	private Integer comp_score;
 	private String job_name;
-	private int job_score;
+	private Integer job_score;
 	private String job_description;
-	private int std_hour;
-	private int real_hour;
-	private int over_freq;
-	private float seniority;
-	private float total_seniority;
-	private int monthly_salary;
-	private int yearly_salary;
-	private int bonus_count;
+	private Integer std_hour;
+	private Integer real_hour;
+	private Integer over_freq;
+	private Float seniority;
+	private Float total_seniority;
+	private Integer monthly_salary;
+	private Integer yearly_salary;
+	private Integer bonus_count;
 	private String share;
 	private String user_id;
 
-	public Comment() {
+	public CommentBean() {
 	}
 
-	public Comment(int share_id, Date ref_time, String comp_name, int comp_score, String job_name, int job_score,
-			String job_description, int std_hour, int real_hour, int over_freq, float seniority, float total_seniority,
-			int monthly_salary, int yearly_salary, int bonus_count, String share, String user_id) {
+	public CommentBean(Integer share_id, Date ref_time, String comp_name, Integer comp_score, String job_name, Integer job_score,
+			String job_description, Integer std_hour, Integer real_hour, Integer over_freq, Float seniority, Float total_seniority,
+			Integer monthly_salary, Integer yearly_salary, Integer bonus_count, String share, String user_id) {
 		this.share_id = share_id;
 		this.ref_time = ref_time;
 		this.comp_name = comp_name;
@@ -48,9 +59,9 @@ public class Comment {
 
 	}
 
-	public Comment(Date ref_time, String comp_name, int comp_score, String job_name, int job_score,
-			String job_description, int std_hour, int real_hour, int over_freq, float seniority, float total_seniority,
-			int monthly_salary, int yearly_salary, int bonus_count, String share, String user_id) {
+	public CommentBean(Date ref_time, String comp_name, Integer comp_score, String job_name, Integer job_score,
+			String job_description, Integer std_hour, Integer real_hour, Integer over_freq, Float seniority, Float total_seniority,
+			Integer monthly_salary, Integer yearly_salary, Integer bonus_count, String share, String user_id) {
 		this.ref_time = ref_time;
 		this.comp_name = comp_name;
 		this.comp_score = comp_score;
@@ -70,15 +81,15 @@ public class Comment {
 
 	}
 
-	public Comment(int share_id) {
+	public CommentBean(Integer share_id) {
 		this.share_id = share_id;
 	}
 
-	public int getShare_id() {
+	public Integer getShare_id() {
 		return share_id;
 	}
 
-	public void setShare_id(int share_id) {
+	public void setShare_id(Integer share_id) {
 		this.share_id = share_id;
 	}
 
@@ -98,11 +109,11 @@ public class Comment {
 		this.comp_name = comp_name;
 	}
 
-	public int getComp_score() {
+	public Integer getComp_score() {
 		return comp_score;
 	}
 
-	public void setComp_score(int comp_score) {
+	public void setComp_score(Integer comp_score) {
 		this.comp_score = comp_score;
 	}
 
@@ -114,11 +125,11 @@ public class Comment {
 		this.job_name = job_name;
 	}
 
-	public int getJob_score() {
+	public Integer getJob_score() {
 		return job_score;
 	}
 
-	public void setJob_score(int job_score) {
+	public void setJob_score(Integer job_score) {
 		this.job_score = job_score;
 	}
 
@@ -130,67 +141,67 @@ public class Comment {
 		this.job_description = job_description;
 	}
 
-	public int getStd_hour() {
+	public Integer getStd_hour() {
 		return std_hour;
 	}
 
-	public void setStd_hour(int std_hour) {
+	public void setStd_hour(Integer std_hour) {
 		this.std_hour = std_hour;
 	}
 
-	public int getReal_hour() {
+	public Integer getReal_hour() {
 		return real_hour;
 	}
 
-	public void setReal_hour(int real_hour) {
+	public void setReal_hour(Integer real_hour) {
 		this.real_hour = real_hour;
 	}
 
-	public int getOver_freq() {
+	public Integer getOver_freq() {
 		return over_freq;
 	}
 
-	public void setOver_freq(int over_freq) {
+	public void setOver_freq(Integer over_freq) {
 		this.over_freq = over_freq;
 	}
 
-	public float getSeniority() {
+	public Float getSeniority() {
 		return seniority;
 	}
 
-	public void setSeniority(float seniority) {
+	public void setSeniority(Float seniority) {
 		this.seniority = seniority;
 	}
 
-	public float getTotal_seniority() {
+	public Float getTotal_seniority() {
 		return total_seniority;
 	}
 
-	public void setTotal_seniority(float total_seniority) {
+	public void setTotal_seniority(Float total_seniority) {
 		this.total_seniority = total_seniority;
 	}
 
-	public int getMonthly_salary() {
+	public Integer getMonthly_salary() {
 		return monthly_salary;
 	}
 
-	public void setMonthly_salary(int monthly_salary) {
+	public void setMonthly_salary(Integer monthly_salary) {
 		this.monthly_salary = monthly_salary;
 	}
 
-	public int getYearly_salary() {
+	public Integer getYearly_salary() {
 		return yearly_salary;
 	}
 
-	public void setYearly_salary(int yearly_salary) {
+	public void setYearly_salary(Integer yearly_salary) {
 		this.yearly_salary = yearly_salary;
 	}
 
-	public int getBonus_count() {
+	public Integer getBonus_count() {
 		return bonus_count;
 	}
 
-	public void setBonus_count(int bonus_count) {
+	public void setBonus_count(Integer bonus_count) {
 		this.bonus_count = bonus_count;
 	}
 
@@ -212,7 +223,7 @@ public class Comment {
 
 	@Override
 	public String toString() {
-		return "Comment [share_id=" + share_id + ", ref_time=" + ref_time + ", comp_name" + comp_name + ", comp_score"
+		return "CommentBean [share_id=" + share_id + ", ref_time=" + ref_time + ", comp_name" + comp_name + ", comp_score"
 				+ comp_score + ", job_name" + job_name + ", job_score" + job_score + ", job_description"
 				+ job_description + ", std_hour" + std_hour + ", real_hour" + real_hour + ", over_freq" + over_freq
 				+ ", seniority" + seniority + ", total_seniority" + total_seniority + ", monthly_salary"

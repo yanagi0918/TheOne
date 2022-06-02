@@ -11,11 +11,24 @@
 	<div class="bg-light text-center rounded p-4">
 		<div class="d-flex align-items-center justify-content-between mb-4">
 			<h6 class="mb-0">公司職位評論</h6>
+			<div class="form-control-sm w-75 rounded-pill bg-white">
+				<span class="float-start mx-1 my-2 rounded-circle"> 
+				<i class="fa-solid fa-magnifying-glass"></i>
+				</span>
+				<div class="">
+					<input
+						class="form-control float-start bg-transparent border-0 w-75 searchBar"
+						type="search" data-table="order-table" placeholder="搜尋...">
+				</div>
+			</div>
+
 			<button type="button" class="btn btn-primary mb-0"
 				onclick="location.href='./CommentNew'">新增評論</button>
 		</div>
 		<div class="table-responsive">
-			<table class="table align-middle table-bordered table-hover mb-0" id="myTable">
+			<table
+				class="table align-middle table-bordered table-hover mb-0 order-table"
+				id="myTable">
 				<thead>
 					<tr class="text-dark">
 						<th scope="col" onclick="javascript:sortTable(0)">編號</th>
@@ -47,9 +60,11 @@
 							<td><c:out value="${comment.share_id}" /></td>
 							<td><c:out value="${comment.ref_time}" /></td>
 							<td><c:out value="${comment.comp_name}" /></td>
-							<td class="listComp" data-score="<c:out value='${comment.comp_score}' />"></td>
+							<td class="listComp"
+								data-score="<c:out value='${comment.comp_score}' />"></td>
 							<td><c:out value="${comment.job_name}" /></td>
-							<td class="listJob" data-score="<c:out value='${comment.job_score}' />"></td>
+							<td class="listJob"
+								data-score="<c:out value='${comment.job_score}' />"></td>
 							<!-- 
 							<td><c:out value="${comment.job_description}" /></td>
 							<td><c:out value="${comment.std_hour}" /></td>
@@ -68,8 +83,9 @@
 									onclick="location.href='./CommentDetail?id=<c:out value='${comment.share_id}' />'">內容</button>
 								<button type="button" class="btn btn-outline-primary m-0"
 									onclick="location.href='./CommentEdit?id=<c:out value='${comment.share_id}' />'">修改</button>
-								<button type="button" class="btn btn-outline-danger m-0" onclick="javascript:if(confirm('確定要刪除嗎?'))location.href='./CommentDelete?id=<c:out value='${comment.share_id}' />'; else location.href='./CommentsManager'">刪除</button>
-														
+								<button id="delete" type="button"
+									class="btn btn-outline-danger m-0"
+									onclick="javascript:if(confirm('確定要刪除嗎?'))location.href='./CommentDelete?id=<c:out value='${comment.share_id}' />'; else location.href='./CommentsManager'">刪除</button>
 						</tr>
 					</c:forEach>
 				</tbody>
