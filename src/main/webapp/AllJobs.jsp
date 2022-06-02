@@ -1,9 +1,9 @@
-<%@page import="DAO.JobDao"%>
 <%@ page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="Bean.Job"%>
 <%@ page import="java.util.List"%>
+<%@ page import="DAO.impl.JobDaoImpl"%>
 
 <%@include file="DashBoardHeader.jspf"%>
 <title>All Jobs</title>
@@ -25,11 +25,10 @@
 		<input type="submit" value="以職缺名稱快速查詢" class="btn btn-primary mb-0" >
 		</div>
 	</form>
-	<%
-	List<Job> list = DAO.JobDao.getAllJobs();
-	%>
+	
 	<table class="table align-middle table-bordered table-hover mb-0">
-		<tr>
+	<thead>
+		<tr class="text-dark">
 			<th>職缺編號</th>
 			<th>職缺名稱</th>
 			<th>職缺性質</th>
@@ -40,9 +39,14 @@
 			<th>更新</th>
 			<th>刪除</th>
 		</tr>
+		</thead>
+        <tbody>
 		<%
-		for (Job job : list) {
+		List<Job> jobs = (List<Job>) request.getAttribute("allJobs");
+		if(jobs !=null){
+		for (Job job : jobs) {
 		%>
+		
 		<tr>
 			<td><%=job.getJob_id()%></td>
 			<td><%=job.getTitle()%></td>
@@ -60,7 +64,9 @@
 
 		<%
 		}
+		}
 		%>
+		</tbody>
 	</table>
 	</div>
 	</div>

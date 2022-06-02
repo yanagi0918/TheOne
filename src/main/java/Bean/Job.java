@@ -1,19 +1,30 @@
 package Bean;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Job_Table")
 public class Job{
-	private int job_id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer job_id;
 	private String title;
 	private String job_description;
 	private String qualification;
-	private int required_number;
+	private Integer required_number;
 	private String salary;
 	private String comp_id;
 	public Job() {
 		
 	}
-	public int getJob_id() {
+	public Integer getJob_id() {
 		return job_id;
 	}
-	public void setJob_id(int job_id) {
+	public void setJob_id(Integer job_id) {
 		this.job_id = job_id;
 	}
 	public String getTitle() {
@@ -34,10 +45,10 @@ public class Job{
 	public void setQualification(String qualification) {
 		this.qualification = qualification;
 	}
-	public int getRequired_number() {
+	public Integer getRequired_number() {
 		return required_number;
 	}
-	public void setRequired_number(int required_number) {
+	public void setRequired_number(Integer required_number) {
 		this.required_number = required_number;
 	}
 	public String getSalary() {
