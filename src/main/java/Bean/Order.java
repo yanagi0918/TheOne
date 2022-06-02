@@ -3,18 +3,31 @@ package Bean;
 import java.io.Serializable;
 import java.sql.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Order_Table")
 public class Order implements Serializable {
-	private int orderId;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer orderId;
 	private String userId;
 	private String productId;
-	private int totalPrice;
+	private Integer totalPrice;
+	@Column(columnDefinition = "Date")
 	private Date orderDate;
 	private String state;
 
 	
 	public Order() {	}
 	
-	public Order(int orderId, String userId, String productId, int totalPrice, Date orderDate, String state) {
+	public Order(Integer orderId, String userId, String productId, Integer totalPrice, Date orderDate, String state) {
 		super();
 		this.orderId = orderId;
 		this.userId = userId;
@@ -25,10 +38,10 @@ public class Order implements Serializable {
 	}
 
 
-	public int getOrderId() {
+	public Integer getOrderId() {
 		return orderId;
 	}
-	public void setOrderId(int orderId) {
+	public void setOrderId(Integer orderId) {
 		this.orderId = orderId;
 	}
 	public String getUserId() {
@@ -43,10 +56,10 @@ public class Order implements Serializable {
 	public void setProductId(String productId) {
 		this.productId = productId;
 	}
-	public int getTotalPrice() {
+	public Integer getTotalPrice() {
 		return totalPrice;
 	}
-	public void setTotalPrice(int totalPrice) {
+	public void setTotalPrice(Integer totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 
@@ -65,6 +78,24 @@ public class Order implements Serializable {
 	public void setState(String state) {
 		this.state = state;
 	}
-	
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Order [orderId=");
+		builder.append(orderId);
+		builder.append(", userId=");
+		builder.append(userId);
+		builder.append(", productId=");
+		builder.append(productId);
+		builder.append(", totalPrice=");
+		builder.append(totalPrice);
+		builder.append(", orderDate=");
+		builder.append(orderDate);
+		builder.append(", state=");
+		builder.append(state);
+		builder.append("]");
+		return builder.toString();
+	}
+	
 }

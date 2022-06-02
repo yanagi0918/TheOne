@@ -1,11 +1,10 @@
-package DAO;
+package Service;
 
 import java.util.List;
 
 import Bean.Order;
 
-public interface OrderDao {
-	
+public interface OrderService {
 	boolean isDup(int pk);
 
 	int save(Order order);
@@ -19,5 +18,3 @@ public interface OrderDao {
 	void updateOrder(Order order);
 
 }
-
-
