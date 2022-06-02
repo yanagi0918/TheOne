@@ -9,8 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import DAO.JobDao;
+
 import Bean.Job;
+import Service.JobService;
+import Service.Impl.JobServiceImpl;
 @WebServlet(name = "JobController", urlPatterns = { "/new", "/insert", "/delete", "/edit","/update"})
 		
 public class JobController extends HttpServlet {
@@ -54,10 +56,10 @@ public class JobController extends HttpServlet {
 	private void allJobs(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-		List<Job> allJobs = JobDao.getAllJobs();
+		JobService jobService = new JobServiceImpl();
+		List<Job> allJobs = jobService.getAllJobs();
 		request.setAttribute("allJobs", allJobs);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("AllJobs.jsp");
-		dispatcher.forward(request, response);
+		request.getRequestDispatcher("AllJobs.jsp").forward(request, response);
 	}
 	
 	private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -71,7 +73,8 @@ public class JobController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		int job_id = Integer.parseInt(request.getParameter("job_id"));
-		Job existingJob = JobDao.getJobByJobID(job_id);
+		JobService jobService = new JobServiceImpl();
+		Job existingJob = jobService.getJobByJobID(job_id);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("JobDashBoard.jsp");
 		request.setAttribute("job", existingJob);
 		dispatcher.forward(request, response);
@@ -95,7 +98,8 @@ public class JobController extends HttpServlet {
         job.setRequired_number(REQUIRED_NUMBER);
         job.setSalary(SALARY);
         job.setComp_id(COMP_ID);
-        JobDao.insert(job);
+        JobService jobService = new JobServiceImpl();
+        jobService.save(job);
         response.sendRedirect("AllJobs.jsp");
 		
 	}
@@ -121,7 +125,8 @@ public class JobController extends HttpServlet {
         job.setRequired_number(REQUIRED_NUMBER);
         job.setSalary(SALARY);
         job.setComp_id(COMP_ID);
-        JobDao.update(job);
+        JobService jobService = new JobServiceImpl();
+        jobService.update(job);
         response.sendRedirect("AllJobs.jsp");
 		
 	}
@@ -131,7 +136,8 @@ public class JobController extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		String sid = request.getParameter("job_id");
 		int job_id = Integer.parseInt(sid);
-		JobDao.delete(job_id);
+		JobService jobService = new JobServiceImpl();
+		jobService.delete(job_id);
 		response.sendRedirect("AllJobs.jsp");
 	}
 

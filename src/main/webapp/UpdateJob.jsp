@@ -1,12 +1,14 @@
-<%@page import="DAO.JobDao"%>
+<%@page import="DAO.impl.JobDaoImpl"%>
 <%@ page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="Bean.Job"%>
 <%@include file="DashBoardHeader.jspf"%>
-<%String sid=request.getParameter("job_id");
+<%
+String sid=request.getParameter("job_id");
 int job_id=Integer.parseInt(sid);
-Job job = JobDao.getJobByJobID(job_id); %>
+Job job = JobDaoImpl.getJobByJobID(job_id);
+%>
 <style>
 .center{
  text-align:center;

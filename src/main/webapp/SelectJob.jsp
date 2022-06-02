@@ -1,4 +1,4 @@
-<%@page import="DAO.JobDao"%>
+<%@page import="DAO.impl.JobDaoImpl"%>
 <%@ page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -32,7 +32,7 @@ text-align:right;
 </form>
 <%
 String title = request.getParameter("TITLE");
-List<Job> list = JobDao.getJobByTitle(title);
+List<Job> list = JobDaoImpl.getJobByTitle(title);
 %>
 <table border='1' class='table'>
 	<tr>

@@ -1,11 +1,11 @@
-package DAO;
+package Service;
 
 import java.util.List;
 
 import Bean.Job;
 
-public interface JobDao {
-	int save(Job job);
+public interface JobService {
+int save(Job job);
 	
 	List<Job> getAllJobs();
 	
