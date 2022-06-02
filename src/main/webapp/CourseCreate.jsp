@@ -41,7 +41,7 @@
 					<h6 class="mb-0">新增課程資訊</h6>
 				</div>
 
-				<FORM ACTION="./CourseServletDS" method="post" enctype="multipart/form-data" onsubmit="return checkCourseForm()">
+				<FORM ACTION="./CourseController" method="post" enctype="multipart/form-data" onsubmit="return checkCourseForm()">
 
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">課程名稱</label>
@@ -143,7 +143,7 @@
 							value="清空輸入">清空輸入</button>
 						<button type="button" class="btn btn-primary" id="correctInput">一鍵輸入</button>
 						<button type="button" class="btn btn-primary" 
-							onclick="location.href='./CourseServletDS'">取消</button>
+							onclick="location.href='./CourseController'">取消</button>
 					</div>
 				</FORM>
 			</div>

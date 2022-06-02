@@ -14,7 +14,7 @@
 					<h6 class="mb-0">更新課程資訊</h6>
 				</div>
 <!-- 					<div class="table-responsive"> -->
-					<FORM ACTION="./CourseServletDS" method="post">
+					<FORM ACTION="./CourseController" method="post">
 
 							<% Course course = (Course) request.getAttribute("course");%>
 						<div class="row mb-3">
@@ -129,13 +129,13 @@
 						<div>
 <!-- 							<button type="submit" class="btn btn-primary" name="updateConfirm" value="確認更改" onclick="javascript:return upd();">確認更改</button> -->
 							<button type="button" class="btn btn-outline-primary m-0"
-										onclick="location.href='./CourseServletDS?courseNo=<%=course.getCourseNo()%>&UptdByCourseNO=更新查詢'">更新</button>
+										onclick="location.href='./CourseController?courseNo=<%=course.getCourseNo()%>&UptdByCourseNO=更新查詢'">更新</button>
 										
 <!-- 							<button type="reset" class="btn btn-primary" name="reset" -->
 <!-- 								value="回復原始資料">回復原始資料</button> -->
 
 							<button type="button" class="btn btn-primary"
-								onclick="location.href='./CourseServletDS'">取消</button>
+								onclick="location.href='./CourseController'">取消</button>
 						</div>
 					</FORM>
 				</div>

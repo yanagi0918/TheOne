@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
-<%@ page import="Bean.Course"%>
+<%@ page import="Bean.CourseBean"%>
 <%@include file="DashBoardHeader.jspf"%>
 
 <style>
@@ -26,7 +26,7 @@
 						onclick="location.href='./CourseCreate.jsp'">新增課程</button>
 				</div>
 
-				<FORM ACTION="./CourseServletDS" method="get">
+				<FORM ACTION="./CourseController" method="get">
 
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">課程編號</label>
@@ -127,14 +127,14 @@
 								
 								<td>
 									<button type="button" class="btn btn-outline-success m-0"
-										onclick="location.href='./CourseServletDS?courseNo=${course.courseNo}&detailForm=詳細'">詳細</button>
+										onclick="location.href='./CourseController?courseNo=${course.courseNo}&detailForm=詳細'">詳細</button>
 
 									<button type="button" class="btn btn-outline-primary m-0"
-										onclick="location.href='./CourseServletDS?courseNo=${course.courseNo}&UptdByCourseNO=更新查詢'">更新</button>
+										onclick="location.href='./CourseController?courseNo=${course.courseNo}&UptdByCourseNO=更新查詢'">更新</button>
 									
 									<button type="button" class="btn btn-outline-danger m-0"
-										onclick="javascript:if(confirm('確認要刪除嗎?'))location.href='./CourseServletDS?courseNo=${course.courseNo}&DELETE=刪除'">刪除</button>
-<%-- 								亦可		onclick="if(confirm('確認要刪除嗎?'))location.href='./CourseServletDS?courseNo=${course.courseNo}&DELETE=刪除'">刪除</button> --%>
+										onclick="javascript:if(confirm('確認要刪除嗎?'))location.href='./CourseController?courseNo=${course.courseNo}&DELETE=刪除'">刪除</button>
+<%-- 								亦可		onclick="if(confirm('確認要刪除嗎?'))location.href='./CourseController?courseNo=${course.courseNo}&DELETE=刪除'">刪除</button> --%>
 								</td>
 							</tr>
 							</c:forEach>

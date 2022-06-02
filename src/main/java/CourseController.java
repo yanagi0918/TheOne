@@ -17,8 +17,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import Bean.CourseBean;
 import DAO.CourseDAO;
 
-@WebServlet("/CourseServletDS")
-public class CourseServletDS extends HttpServlet {
+@WebServlet("/CourseController")
+public class CourseController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	//test github by Vincet Lian

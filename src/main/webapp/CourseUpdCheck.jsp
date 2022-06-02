@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page import="Bean.Course"%>
+<%@ page import="Bean.CourseBean"%>
 <%@include file="DashBoardHeader.jspf"%>
 
 <BODY>
@@ -13,10 +13,10 @@
 					<h6 class="mb-0">更新課程資訊</h6>
 				</div>
 				<!-- 					<div class="table-responsive"> -->
-				<FORM ACTION="./CourseServletDS" method="get"
+				<FORM ACTION="./CourseController" method="get"
 					onsubmit="return checkCourseForm()">
 
-					<% Course course = (Course) request.getAttribute("course");%>
+					<% CourseBean course = (CourseBean) request.getAttribute("course");%>
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">課程編號</label>
 						<div class="col-sm-8">
@@ -146,7 +146,7 @@
 							value="回復原始資料">回復原始資料</button>
 
 						<button type="button" class="btn btn-primary"
-							onclick="location.href='./CourseServletDS'">取消</button>
+							onclick="location.href='./CourseController'">取消</button>
 					</div>
 				</FORM>
 			</div>
