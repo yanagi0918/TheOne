@@ -10,11 +10,15 @@ import DAO.EventDao;
 import util.HibernateUtils;
 
 public class EventDaoImpl implements EventDao {
-	SessionFactory factory = HibernateUtils.getSessionFactory();
-	Session session = factory.getCurrentSession();
+	SessionFactory factory;
+
+	public EventDaoImpl() {
+		this.factory = HibernateUtils.getSessionFactory();
+	}
 
 	@Override
 	public boolean isDup(int pk) {
+		Session session = factory.getCurrentSession();
 		EventBean event = (EventBean) session.get(EventBean.class, pk);
 		if (event != null) {
 			return true;
@@ -25,11 +29,15 @@ public class EventDaoImpl implements EventDao {
 
 	@Override
 	public int save(EventBean event) {
-		return (int) session.save(event);
+		Session session = factory.getCurrentSession();
+		int pk = 0;
+		pk = (int) session.save(event);
+		return pk;
 	}
 
 	@Override
 	public List<EventBean> getAllEvents() {
+		Session session = factory.getCurrentSession();
 		List<EventBean> events = null;
 		String hql = "FROM EventBean";
 		events = session.createQuery(hql, EventBean.class).getResultList();
@@ -38,19 +46,22 @@ public class EventDaoImpl implements EventDao {
 
 	@Override
 	public EventBean getEvent(int pk) {
-		EventBean event = null;
-		event = session.get(EventBean.class, pk);
+		Session session = factory.getCurrentSession();
+		EventBean event = session.get(EventBean.class, pk);
 		return event;
 	}
 
 	@Override
 	public void deleteEvent(int pk) {
-		EventBean event = session.get(EventBean.class, pk);
+		Session session = factory.getCurrentSession();
+		EventBean event = new EventBean();
+		event.setEventId(pk);
 		session.delete(event);
 	}
 
 	@Override
 	public void updateEvent(EventBean event) {
+		Session session = factory.getCurrentSession();
 		session.saveOrUpdate(event);
 	}
 

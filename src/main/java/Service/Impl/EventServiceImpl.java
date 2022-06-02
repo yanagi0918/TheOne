@@ -13,13 +13,18 @@ import Service.EventService;
 import util.HibernateUtils;
 
 public class EventServiceImpl implements EventService {
-	SessionFactory factory = HibernateUtils.getSessionFactory();
-	Session session = factory.getCurrentSession();
-	EventDao eventDao = new EventDaoImpl();
+	SessionFactory factory;
+	EventDao eventDao;
+
+	public EventServiceImpl() {
+		this.factory = HibernateUtils.getSessionFactory();
+		this.eventDao = new EventDaoImpl();
+	}
 
 	@Override
 	public boolean isDup(int pk) {
 		boolean result = false;
+		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
@@ -29,6 +34,7 @@ public class EventServiceImpl implements EventService {
 			if (tx != null) {
 				tx.rollback();
 			}
+			throw new RuntimeException(e);
 		}
 		return result;
 	}
@@ -36,6 +42,7 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public int save(EventBean event) {
 		int n = 0;
+		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
@@ -45,6 +52,7 @@ public class EventServiceImpl implements EventService {
 			if (tx != null) {
 				tx.rollback();
 			}
+			throw new RuntimeException(e);
 		}
 		return n;
 	}
@@ -52,6 +60,7 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public List<EventBean> getAllEvents() {
 		List<EventBean> events = null;
+		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
@@ -61,6 +70,7 @@ public class EventServiceImpl implements EventService {
 			if (tx != null) {
 				tx.rollback();
 			}
+			throw new RuntimeException(e);
 		}
 		return events;
 	}
@@ -68,6 +78,7 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public EventBean getEvent(int pk) {
 		EventBean event = null;
+		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
@@ -77,12 +88,14 @@ public class EventServiceImpl implements EventService {
 			if (tx != null) {
 				tx.rollback();
 			}
+			throw new RuntimeException(e);
 		}
 		return event;
 	}
 
 	@Override
 	public void deleteEvent(int pk) {
+		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
@@ -92,11 +105,13 @@ public class EventServiceImpl implements EventService {
 			if (tx != null) {
 				tx.rollback();
 			}
+			throw new RuntimeException(e);
 		}
 	}
 
 	@Override
 	public void updateEvent(EventBean event) {
+		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
@@ -106,6 +121,7 @@ public class EventServiceImpl implements EventService {
 			if (tx != null) {
 				tx.rollback();
 			}
+			throw new RuntimeException(e);
 		}
 	}
 
