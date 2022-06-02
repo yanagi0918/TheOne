@@ -9,9 +9,9 @@ int save(Job job);
 	
 	List<Job> getAllJobs();
 	
-	Job getJobByJobID(int job_id);
+	Job getJobByJobID(int pk);
 
-	void delete(int job_id);
+	void delete(int pk);
 	
 	void update(Job job);
 	

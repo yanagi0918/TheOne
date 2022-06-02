@@ -30,17 +30,17 @@ public class JobDaoImpl implements JobDao{
 	}
 
 	@Override
-	public Job getJobByJobID(int job_id) {
+	public Job getJobByJobID(int pk) {
 		Session session = factory.getCurrentSession();
-		Job job = session.get(Job.class,job_id);
+		Job job = session.get(Job.class,pk);
 		return job;
 	}
 
 	@Override
-	public void delete(int job_id) {
+	public void delete(int pk) {
 		Session session = factory.getCurrentSession();
 		Job job = new Job();
-		job.setJob_id(job_id);
+		job.setJob_id(pk);
 		session.delete(job);
 		}
 

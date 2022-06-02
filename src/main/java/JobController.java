@@ -1,6 +1,7 @@
 
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -26,9 +27,11 @@ public class JobController extends HttpServlet {
     	doGet(request, response);
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String action = request.getServletPath();
 		try {
-			//test123
+			String action = request.getServletPath();
+			
+			Job job = new Job();
+			
             switch (action) {
                 case "/new":
                     showNewForm(request, response);
@@ -46,19 +49,19 @@ public class JobController extends HttpServlet {
                     updateJobServlet(request, response);
                     break;
                 default:
-                    allJobs(request, response);
+                    allJobs(request, response,job);
                     break;
             }
         } catch (Exception ex) {
             throw new ServletException(ex);
         }
     }
-	private void allJobs(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void allJobs(HttpServletRequest request, HttpServletResponse response,Job job) throws SQLException, IOException, ServletException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		JobService jobService = new JobServiceImpl();
-		List<Job> allJobs = jobService.getAllJobs();
-		request.setAttribute("allJobs", allJobs);
+		List<Job> jobs = jobService.getAllJobs();
+		request.setAttribute("jobs", jobs);
 		request.getRequestDispatcher("AllJobs.jsp").forward(request, response);
 	}
 	
