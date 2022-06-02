@@ -1,6 +1,6 @@
 <%@ page import="org.apache.jasper.tagplugins.jstl.core.ForEach" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="Bean.Event" %>
+<%@ page import="Bean.EventBean" %>
 <%@ page import="java.util.List" %>
 
 
@@ -15,7 +15,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">刊登公司統編</label>
                                 <div class="col-sm-8">
-                                    <input type="hidden" class="form-control" name="adId" value="0" id="adId">
+                                    <input type="hidden" class="form-control" name="eventId" value="0" id="eventId">
                                     <input type="text" class="form-control" name="compId" maxlength="8" required id="compId">
                                 </div>
                             </div>
