@@ -30,7 +30,7 @@
 		<mapping class="Bean.EventBean" />
 		<mapping class="Bean.Order" />
 		<mapping class="Bean.CommentBean" />
-
+		<mapping class="Bean.Interview" />
 		
 		
 	</session-factory>
