@@ -20,36 +20,30 @@
                                     <th scope="col">面試內容編號</th>
                                     <th scope="col">面試公司</th>
                                     <th scope="col">職缺名稱</th>
-                                    <th scope="col">面試評分</th>
                                     <th scope="col">公司評分</th>
                                     <th scope="col">修改</th>
                                 </tr>
                             </thead>
                             <tbody>
                             <%
-                            int pageCount = (int) request.getAttribute("pageCount");
                             List<Interview> interviews = (List<Interview>) request.getAttribute("interviews");
+                            if(interviews != null){
                             for(Interview interview : interviews){
                             %>
                                 <tr>
-                                    <td><%= interview.getCv_No() %></td>
-                                    <td><%= interview.getComp_Name() %></td>
-                                    <td><%= interview.getJob_Name() %></td>
-                                    <td><%= interview.getInt_Score()%></td>
-                                    <td><%= interview.getComp_Score() %></td>
+                                    <td><%= interview.getCvNo() %></td>
+                                    <td><%= interview.getCompName() %></td>
+                                    <td><%= interview.getJobName() %></td>
+                                    <td><%= interview.getCompScore() %></td>
                                     <td>
-                                        <button type="button" class="btn btn-outline-primary m-0" onclick="location.href='./InterViewServletDS?UpdateId=<%= interview.getCv_No() %> '">修改</button>
-                                        <button type="button" class="btn btn-outline-danger m-0" onclick="location.href='./InterViewServletDS?DeleteId=<%= interview.getCv_No() %>'">刪除</button>
+                                         <button type="button" class="btn btn-outline-primary m-0" onclick="location.href='./InterViewServletDS?ShowdateId=<%= interview.getCvNo() %> '">內容</button>
+                                        <button type="button" class="btn btn-outline-primary m-0" onclick="location.href='./InterViewServletDS?UpdateId=<%= interview.getCvNo() %> '">修改</button>
+                                        <button type="button" class="btn btn-outline-danger m-0" onclick="location.href='./InterViewServletDS?DeleteId=<%= interview.getCvNo() %>'">刪除</button>
                                     </td>
                                 </tr>
-                            <% } %>
+                            <% }} %>
                             </tbody>
                         </table>
-                    </div>
-                    <div class="btn-group mt-4 me-2" role="group">
-                    <% for (int i = 1 ; i <= pageCount ; i++){ %>
-                        <button type="button" class="btn btn-primary" onclick="location.href='./InterViewServletDS?page=<%= i %>'"><%= i %></button>
-                    <% } %>    
                     </div>
                 </div>
             </div>

@@ -1,110 +1,100 @@
 
 package Bean;
 
-import java.io.*;
+import java.io.Serializable;
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-public class Interview implements Serializable {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-	private int Cv_No;
-	private java.sql.Timestamp Created_Time;
-	private Date Int_Time;
-	private String Comp_Name;
-	private String Job_Name;
-	private String Offer;
-	private String Test;
-	private String Language;
-	private Languages[] LanguageArray;
-	private String[] LanList;
+
+@Entity
+@Table(name = "Interview_Table")
+public class Interview implements Serializable {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer cvNo;
+	
+	private java.sql.Timestamp createdTime;
+	private Date intTime;
+	private String compName;
+	private String jobName;
+	private String offer;
+	private String test;
 	private String QA;
-	private String Share;
-	private int Int_Score;
-	private int Comp_Score;
-	private String USER_ID;
+	private String share;
+	private Integer compScore;
+	private String userId;
 
 	public Interview() {
-		initLanguageArray();
+		
 	}
 
-	private void initLanguageArray() {
-		LanguageArray = new Languages[10];
-		LanguageArray[0] = new Languages("國語", "N");
-		LanguageArray[1] = new Languages("英語", "N");
-		LanguageArray[2] = new Languages("日語", "N");
-		LanguageArray[3] = new Languages("韓文", "N");
-		LanguageArray[4] = new Languages("德文", "N");
-		LanguageArray[5] = new Languages("法文", "N");
-		LanguageArray[6] = new Languages("義大利文", "N");
-		LanguageArray[7] = new Languages("西班牙文", "N");
-		LanguageArray[8] = new Languages("葡萄牙文", "N");
-		LanguageArray[9] = new Languages("其他", "N");
+	public Integer getCvNo() {
+		return cvNo;
 	}
 
-	public java.sql.Timestamp getCreated_Time() {
-		return Created_Time;
+	public void setCvNo(Integer cvNo) {
+		this.cvNo = cvNo;
 	}
 
-	public void setCreated_Time(java.sql.Timestamp created_Time) {
-		Created_Time = created_Time;
+	public java.sql.Timestamp getCreatedTime() {
+		return createdTime;
 	}
 
-	public void setCreated_Time(String created_Time) throws ParseException {
-		this.Created_Time = stringToSQLDateSs(created_Time);
+	public void setCreatedTime(java.sql.Timestamp createdTime) {
+		this.createdTime = createdTime;
 	}
 
-	public Date getInt_Time() {
-		return Int_Time;
+	public void setCreatedTime(String createdTime) throws ParseException {
+		this.createdTime = stringToSQLDateSs(createdTime);
+	}
+	public Date getIntTime() {
+		return intTime;
 	}
 
-	public void setInt_Time(Date int_Time) {
-		this.Int_Time = int_Time;
+	public void setIntTime(Date intTime) {
+		this.intTime = intTime;
+	}
+	
+	public void setIntTime(String intTime) throws ParseException {
+		this.intTime = stringToSQLDate(intTime);
+	}
+	public String getCompName() {
+		return compName;
 	}
 
-	public void setInt_Time(String int_Time) throws ParseException {
-		this.Int_Time = stringToSQLDate(int_Time);
+	public void setCompName(String compName) {
+		this.compName = compName;
 	}
 
-	public String getComp_Name() {
-		return Comp_Name;
+	public String getJobName() {
+		return jobName;
 	}
 
-	public void setComp_Name(String comp_Name) {
-		Comp_Name = comp_Name;
-	}
-
-	public String getJob_Name() {
-		return Job_Name;
-	}
-
-	public void setJob_Name(String job_Name) {
-		Job_Name = job_Name;
+	public void setJobName(String jobName) {
+		this.jobName = jobName;
 	}
 
 	public String getOffer() {
-		return Offer;
+		return offer;
 	}
 
 	public void setOffer(String offer) {
-		Offer = offer;
+		this.offer = offer;
 	}
 
 	public String getTest() {
-		return Test;
+		return test;
 	}
 
 	public void setTest(String test) {
-		Test = test;
-	}
-
-	public String getLanguage() {
-		return Language;
-	}
-
-	public void setLanguage(String language) {
-		Language = language;
+		this.test = test;
 	}
 
 	public String getQA() {
@@ -116,63 +106,27 @@ public class Interview implements Serializable {
 	}
 
 	public String getShare() {
-		return Share;
+		return share;
 	}
 
 	public void setShare(String share) {
-		Share = share;
+		this.share = share;
 	}
 
-	public int getInt_Score() {
-		return Int_Score;
+	public Integer getCompScore() {
+		return compScore;
 	}
 
-	public void setInt_Score(int int_Score) {
-		Int_Score = int_Score;
+	public void setCompScore(Integer compScore) {
+		this.compScore = compScore;
 	}
 
-	public int getComp_Score() {
-		return Comp_Score;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setComp_Score(int comp_Score) {
-		Comp_Score = comp_Score;
-	}
-
-	public String getUSER_ID() {
-		return USER_ID;
-	}
-
-	public void setUSER_ID(String uSER_ID) {
-		USER_ID = uSER_ID;
-	}
-
-	public int getCv_No() {
-		return Cv_No;
-	}
-
-	public void setCv_No(int cv_No) {
-		Cv_No = cv_No;
-	}
-
-	public String execute() throws Exception {
-		return Language;
-	}
-
-	public Languages[] getLanguageArray() {
-		return LanguageArray;
-	}
-
-	public void setLanguageArray(Languages[] languageArray) {
-		LanguageArray = languageArray;
-	}
-
-	public String[] getLanList() {
-		return LanList;
-	}
-
-	public void setLanList(String[] lanList) {
-		LanList = lanList;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	private Date stringToSQLDate(String date) throws ParseException {
@@ -188,5 +142,23 @@ public class Interview implements Serializable {
 		java.sql.Timestamp sqlDate = new java.sql.Timestamp(utilDate.getTime());
 		return sqlDate;
 	}
+
+	@Override
+	public String toString() {
+		return "Interview [cvNo=" + cvNo + ", createdTime=" + createdTime + ", intTime=" + intTime + ", compName="
+				+ compName + ", jobName=" + jobName + ", offer=" + offer + ", test=" + test + ", QA=" + QA + ", share="
+				+ share + ", compScore=" + compScore + ", userId=" + userId + "]";
+	}
+
+	public void setInterviewId(int pk) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+
+
+
+	
 
 }
