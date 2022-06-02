@@ -1,10 +1,10 @@
-package DAO;
+package Service;
 
 import java.util.List;
 
 import Bean.CourseBean;
 
-public interface CourseDao {
+public interface CourseService {
 
 	boolean isDup(int pk);
 

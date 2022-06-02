@@ -14,7 +14,7 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import Bean.Course;
+import Bean.CourseBean;
 import DAO.CourseDAO;
 
 @WebServlet("/CourseServletDS")
@@ -121,7 +121,7 @@ public class CourseServletDS extends HttpServlet {
 			Iterator<FileItem> fieldsIterator = fields.iterator();
 			
 			// put data into bean
-			Course course =new Course();
+			CourseBean course =new CourseBean();
 			String OringinImgURL = null;
 			while (fieldsIterator.hasNext()) {
 				FileItem fieldItem = (FileItem) fieldsIterator.next();
@@ -135,7 +135,7 @@ public class CourseServletDS extends HttpServlet {
 					//save Img file in absolute path
 					fieldItem.write(savedFile);
 					//set ImgURL in relative path
-					course.setCoursePic("courseImg" + File.separator + savedFile.getName());
+					course.setCoursePicUrl("courseImg" + File.separator + savedFile.getName());
 				}else if (fieldName.equals("courseCategory")) {
 					course.setCourseCategory(fieldValue);
 				}else if (fieldName.equals("courseName")) {
@@ -147,7 +147,7 @@ public class CourseServletDS extends HttpServlet {
 				}else if (fieldName.equals("date")) {
 					course.setDate(Date.valueOf(fieldValue));	
 				}else if (fieldName.equals("courseVedio")) {
-					course.setCourseVedio(fieldValue);	
+					course.setCourseVedioUrl(fieldValue);	
 				}else if (fieldName.equals("score")) {
 					course.setScore(Double.valueOf(fieldValue));
 				}else if (fieldName.equals("price")) {
@@ -157,8 +157,8 @@ public class CourseServletDS extends HttpServlet {
 				}
 				
 			}
-			if (course.getCoursePic() == null) { //if img did not upload set OringinImgURL
-				course.setCoursePic(OringinImgURL);
+			if (course.getCoursePicUrl() == null) { //if img did not upload set OringinImgURL
+				course.setCoursePicUrl(OringinImgURL);
 			}
 
 			if (course.getCourseName()!=null) { //EventCreate.jsp <input:hidden name="adId" value="0">
@@ -212,7 +212,7 @@ public class CourseServletDS extends HttpServlet {
 		}
 	}
 
-	private void processCreate(HttpServletRequest request, HttpServletResponse response, CourseDAO courseDAO, Course course)
+	private void processCreate(HttpServletRequest request, HttpServletResponse response, CourseDAO courseDAO, CourseBean course)
 			throws SQLException, IOException {
 		
 		boolean createCheck = courseDAO.createCourse(course);
@@ -258,8 +258,8 @@ public class CourseServletDS extends HttpServlet {
 		String courseNo = request.getParameter("courseNo");
 
 		// 透過DAO元件Access course List
-		List<Course> courseList = courseDAO.findCourseByNo(courseNo);
-		for (Course course : courseList) {
+		List<CourseBean> courseList = courseDAO.findCourseByNo(courseNo);
+		for (CourseBean course : courseList) {
 			try {
 				if (course == null) {
 					System.out.println("ShowDetail " + courseNo + " failed");
@@ -280,8 +280,8 @@ public class CourseServletDS extends HttpServlet {
 		String courseNo = request.getParameter("courseNo");
 		
 		// 透過DAO元件Access course List
-		List<Course> courseList = courseDAO.findCourseByNo(courseNo);
-		for (Course course : courseList) {
+		List<CourseBean> courseList = courseDAO.findCourseByNo(courseNo);
+		for (CourseBean course : courseList) {
 			try {
 				if (course == null) {
 					System.out.println("UpdQueryByNo " + courseNo + " failed");
@@ -327,21 +327,21 @@ public class CourseServletDS extends HttpServlet {
 		String score = request.getParameter("score");
 		String price = request.getParameter("price");
 		
-		List<Course> courseList = courseDAO.findCourseByNo(courseNo);
+		List<CourseBean> courseList = courseDAO.findCourseByNo(courseNo);
 		try {
 			if (courseList == null) {
 				System.out.println("UpdateQ:" + courseNo + " UpdateQ failed");
 				getServletContext().getRequestDispatcher("/404.jsp").forward(request, response);
 			}
 			else {
-				for (Course course : courseList) {
+				for (CourseBean course : courseList) {
 					course.setCourseCategory(courseCategory);
 					course.setCourseName(courseName);
 					course.setCourseIntroduction(courseIntroduction);
 					course.setLecturer(lecturer);
 					course.setDate(Date.valueOf(date));
-					course.setCoursePic(coursePic);
-					course.setCourseVedio(courseVedio);
+					course.setCoursePicUrl(coursePic);
+					course.setCourseVedioUrl(courseVedio);
 					course.setScore(Double.valueOf(score));
 					course.setPrice(Integer.valueOf(price));
 					
@@ -365,7 +365,7 @@ public class CourseServletDS extends HttpServlet {
 			throws SQLException, IOException {
 
 		// 透過DAO元件Access course List
-		List<Course> courseList = courseDAO.findCourseAll();
+		List<CourseBean> courseList = courseDAO.findCourseAll();
 
 		if (courseList == null)
 			try {
@@ -395,7 +395,7 @@ public class CourseServletDS extends HttpServlet {
 
 		System.out.printf("%s|%s|%s|%s|%s|%s%n", courseNo, courseCategory, courseName, lecturer, dateMonth, date);
 
-		List<Course> courseList = courseDAO.findCourseMulti(courseNo, courseCategory, courseName, lecturer, dateMonth,
+		List<CourseBean> courseList = courseDAO.findCourseMulti(courseNo, courseCategory, courseName, lecturer, dateMonth,
 				date);
 		if (courseList == null)
 			try {
@@ -427,7 +427,7 @@ public class CourseServletDS extends HttpServlet {
 //		String courseNo = request.getParameter("courseNo");
 //
 //		// 透過DAO元件Access course List
-//		List<Course> courseList = courseDAO.findCourseByNo(courseNo);
+//		List<CourseBean> courseList = courseDAO.findCourseByNo(courseNo);
 //		if (courseList == null) {
 //			try {
 //				request.setAttribute("courseList", " 找不到此編號課程 ");
@@ -452,7 +452,7 @@ public class CourseServletDS extends HttpServlet {
 //		PrintWriter out = response.getWriter();
 //		out.println("<HTML>");
 //		out.println("<HEAD>");
-//		out.println("<TITLE>Course Form</TITLE>");
+//		out.println("<TITLE>CourseBean Form</TITLE>");
 //		out.println(" <meta charset=\"UTF-8\">");
 //
 //		out.println("</HEAD>");
@@ -469,7 +469,7 @@ public class CourseServletDS extends HttpServlet {
 //		PrintWriter out = response.getWriter();
 //		out.println("<HTML>");
 //		out.println("<HEAD>");
-//		out.println("<TITLE>Course Form</TITLE>");
+//		out.println("<TITLE>CourseBean Form</TITLE>");
 //		out.println(" <meta charset=\"UTF-8\">");
 //		out.println("</HEAD>");
 //		out.println("<BODY BGCOLOR='#FDF5E6'>");
@@ -486,7 +486,7 @@ public class CourseServletDS extends HttpServlet {
 //		String courseCategory = request.getParameter("courseCategory");
 //
 //				// 透過DAO元件Access course List
-//		List<Course> courseList = courseDAO.findCourseByCategory(courseCategory);
+//		List<CourseBean> courseList = courseDAO.findCourseByCategory(courseCategory);
 //		if (courseList == null)
 //			showError(response, " can not findCourseByCategory  ");
 //		else
@@ -505,7 +505,7 @@ public class CourseServletDS extends HttpServlet {
 //		String courseName = request.getParameter("courseName");
 //
 //		// 透過DAO元件Access course List
-//		List<Course> courseList = courseDAO.findCourseByName(courseName);
+//		List<CourseBean> courseList = courseDAO.findCourseByName(courseName);
 //		if (courseList == null)
 //			showError(response, " can not findCourseByName");
 //		else
@@ -524,7 +524,7 @@ public class CourseServletDS extends HttpServlet {
 //		String date = request.getParameter("date");
 //
 //		// 透過DAO元件Access course List
-//		List<Course> courseList = courseDAO.findCourseByDate(date);
+//		List<CourseBean> courseList = courseDAO.findCourseByDate(date);
 //		if (courseList == null)
 //			showError(response, " can not findCourseByLecturer");
 //		else
@@ -544,7 +544,7 @@ public class CourseServletDS extends HttpServlet {
 //		String lecturer = request.getParameter("lecturer");
 //
 //		// 透過DAO元件Access course List
-//		List<Course> courseList = courseDAO.findCourseByLecturer(lecturer);
+//		List<CourseBean> courseList = courseDAO.findCourseByLecturer(lecturer);
 //		if (courseList == null)
 //			showError(response, " can not findCourseByLecturer");
 //		else
