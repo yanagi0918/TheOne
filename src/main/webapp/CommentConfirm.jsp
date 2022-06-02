@@ -5,7 +5,7 @@
 
 
 <form action="./CommentsManager" method="post">
-	<jsp:useBean id="comment" class="Bean.Comment" scope="session" />
+	<jsp:useBean id="comment" class="Bean.CommentBean" scope="session" />
 
 	<div class="container-fluid pt-4 px-4">
 		<div class="col-sm-12 col-xl-10">
@@ -21,10 +21,10 @@
 
 						<table
 							class="table table-light align-middle table-bordered table-hover mb-0">
-							<!--<tr>
-				<td>編號:</td>
-								<td><jsp:getProperty name="comment" property="share_id" /></td>
-			</tr>  -->
+<!-- 							<tr> -->
+<!-- 							<td>編號:</td>  -->
+<%-- 							<td><jsp:getProperty name="comment" property="share_id" /></td> --%>
+<!-- 							</tr> -->
 							<tr>
 								<td>分享時間:</td>
 								<td><jsp:getProperty name="comment" property="ref_time" /></td>
@@ -84,13 +84,13 @@
 				</div>
 				<br>
 				<div align="center">
-					<c:if test="${comment.share_id == 0}">
+					<c:if test="${comment.share_id == null}">
 						<button type="submit" class="btn btn-primary" name="confirm"
 							value="送出" onclick="form.action='./CommentInsert'">確認</button>
 						<button type="button" class="btn btn-secondary"
 							onclick="location.href='./CommentsManager'">取消</button>
 					</c:if>
-					<c:if test="${comment.share_id != 0}">
+					<c:if test="${comment.share_id != null}">
 						<button type="button" class="btn btn-primary"
 							onclick="location.href='./CommentEdit?id=<c:out value='${comment.share_id}' />'">編輯</button>
 						<button type="button" class="btn btn-secondary" name="back"

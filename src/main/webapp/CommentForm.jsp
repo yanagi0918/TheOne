@@ -44,8 +44,16 @@
 							name="ref_time" readonly></td>
 						<th>帳號:</th>
 						<td>
-						<input class="form-control" id="user_id" type="text"
-							value="<c:out value='${comment.user_id}' />" name="user_id"></td>
+						
+						<input id="anonymous" type="radio" name="user" value="匿名" <c:if test="${(comment.user_id).contains('匿名')}"> checked</c:if>>
+						匿名
+						<input id="user" type="radio" name="user" value="會員" <c:if test="${!(comment.user_id).contains('匿名') && comment.user_id == 'null'}"> checked</c:if>>會員
+						
+						</td>
+						<td colspan="2">
+						<input style="display:none;" class="form-control" id="user_id" type="text"
+							value="<c:out value='${comment.user_id}' />" name="user_id" placeholder="請輸入帳號">
+						</td>
 					</tr>
 					<tr>
 						<th>公司名稱:</th>

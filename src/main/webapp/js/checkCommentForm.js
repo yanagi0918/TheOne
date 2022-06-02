@@ -117,7 +117,8 @@ $('#OneInput').click(function () {
 
 	$('#job_name').val('美容師')
 	$('#job_description option[value="全職"]').attr('selected', 'selected')
-
+	$('#user_id').show()
+	$('#user').attr('checked', 'checked')
 	$('#std_hour').val('10')
 	$('#real_hour').val('12')
 	$('#over_freq').val('2')
@@ -131,7 +132,7 @@ $('#OneInput').click(function () {
 })
 
 //anonymous/user show
-/*
+
 $(function () {
 	$('#anonymous').click(function () {
 		$('#user_id').val('匿名');
@@ -139,73 +140,92 @@ $(function () {
 	})
 
 	$('#user').click(function () {
+		$('#user_id').val('');
 		$('#user_id').show();
 	});
 
 })
-*/
 
-//Sorting
 
-function sortTable(n) {
-	var table,
-		rows,
-		switching,
-		i,
-		x,
-		y,
-		shouldSwitch,
-		dir,
-		switchcount = 0;
-	table = document.getElementById("myTable");
-	switching = true;
-	//Set the sorting direction to ascending:
-	dir = "asc";
-	/*Make a loop that will continue until
-	no switching has been done:*/
-	while (switching) {
-		//start by saying: no switching is done:
-		switching = false;
-		rows = table.getElementsByTagName("TR");
-		/*Loop through all table rows (except the
-		first, which contains table headers):*/
-		for (i = 1; i < rows.length - 1; i++) { //Change i=0 if you have the header th a separate table.
-			//start by saying there should be no switching:
-			shouldSwitch = false;
-			/*Get the two elements you want to compare,
-			one from current row and one from the next:*/
-			x = rows[i].getElementsByTagName("TD")[n];
-			y = rows[i + 1].getElementsByTagName("TD")[n];
-			/*check if the two rows should switch place,
-			based on the direction, asc or desc:*/
-			if (dir == "asc") {
-				if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-					//if so, mark as a switch and break the loop:
-					shouldSwitch = true;
-					break;
-				}
-			} else if (dir == "desc") {
-				if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-					//if so, mark as a switch and break the loop:
-					shouldSwitch = true;
-					break;
-				}
+
+//DashBoard Search
+$(function () {
+	(function (document) {
+
+		// 建立 LightTableFilter
+		var LightTableFilter = (function (Arr) {
+
+			var _input;
+
+			// 資料輸入事件處理函數
+			function _onInputEvent(e) {
+				_input = e.target;
+				var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+				Arr.forEach.call(tables, function (table) {
+					Arr.forEach.call(table.tBodies, function (tbody) {
+						Arr.forEach.call(tbody.rows, _filter);
+					});
+				});
 			}
-		}
-		if (shouldSwitch) {
-			/*If a switch has been marked, make the switch
-			and mark that a switch has been done:*/
-			rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-			switching = true;
-			//Each time a switch is done, increase this count by 1:
-			switchcount++;
-		} else {
-			/*If no switching has been done AND the direction is "asc",
-			set the direction to "desc" and run the while loop again.*/
-			if (switchcount == 0 && dir == "asc") {
-				dir = "desc";
-				switching = true;
+
+			// 資料篩選函數，顯示包含關鍵字的列，其餘隱藏
+			function _filter(row) {
+				var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+				row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
 			}
-		}
-	}
-}
+
+			return {
+				// 初始化函數
+				init: function () {
+					var inputs = document.getElementsByClassName('searchBar');
+					Arr.forEach.call(inputs, function (input) {
+						input.oninput = _onInputEvent;
+					});
+				}
+			};
+		})(Array.prototype);
+
+
+		// 網頁載入完成後，啟動 LightTableFilter
+		document.addEventListener('readystatechange', function () {
+			if (document.readyState === 'complete') {
+				LightTableFilter.init();
+			}
+		});
+
+	})(document);
+})
+
+//Data Table
+$(document).ready(function () {
+	var table = $('#myTable').DataTable({
+		//don't display search bar
+		searching: false,
+		//position of entire
+		dom: '<"bottom"i>rt<"bottom"flp><"clear">',
+		buttons: [
+            {
+                extend:    'copyHtml5',
+                text:      '<i class="fa fa-files-o"></i>',
+                titleAttr: 'Copy'
+            },
+            {
+                extend:    'excelHtml5',
+                text:      '<i class="fa fa-file-excel-o"></i>',
+                titleAttr: 'Excel'
+            },
+            {
+                extend:    'csvHtml5',
+                text:      '<i class="fa fa-file-text-o"></i>',
+                titleAttr: 'CSV'
+            },
+            {
+                extend:    'pdfHtml5',
+                text:      '<i class="fa fa-file-pdf-o"></i>',
+                titleAttr: 'PDF'
+            }
+        ]
+	});
+	table.buttons().container()
+		.appendTo('#example_wrapper .col-sm-6:eq(0)');
+});
