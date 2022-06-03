@@ -3,21 +3,6 @@
 <%@ page import="Bean.Company" %>
 <%@ page import="java.util.List" %>
 
-<!-- 由上讀到下，所以判斷寫在最上面 -->
-<%	String mess=(String)request.getAttribute("message");
-	if(mess==null){   //如果mess是空的(代表checkid為false)，不做任何事情
-	}else{%>          <!-- mess不是空的，checkid為true -->
-
-<script type="text/javascript">
-	alert("<%=mess%>");
-</script>
-
-<% }%>
-
-
-
-
-
 <%@include file="DashBoardHeader.jspf" %>
 
             <!-- Content Start -->
@@ -26,6 +11,9 @@
                     <div class="bg-light rounded h-100 p-4">
                         <h6 class="mb-4">新增公司</h6>
                         <form action="./CompanyServlet" method="post" onsubmit="return checkCompanyForm()">
+                        <div class="row mb-3">
+                                    <input type="hidden"  class="form-control" name="comppk" id="comppk">
+                            </div>
                             
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">帳號(統編)</label>

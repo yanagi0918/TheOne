@@ -5,31 +5,47 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import Bean.Job;
-import DAO.*;
-import DAO.impl.JobDaoImpl;
-import Service.JobService;
+
+import Bean.Company;
+import DAO.CompanyDao;
+import DAO.impl.CompanyDaoImpl;
+import Service.CompanyService;
 import util.HibernateUtils;
 
-public class JobServiceImpl implements JobService{
+public class CompanyServiceImpl implements CompanyService{
 	SessionFactory factory;
-	JobDao jobDao;
-	
-	public JobServiceImpl() {
+	CompanyDao companyDao;
+	public CompanyServiceImpl() {
 		this.factory = HibernateUtils.getSessionFactory();
-		this.jobDao = new JobDaoImpl();
+		this.companyDao = new CompanyDaoImpl();
 	}
-
 	@Override
-	public int save(Job job) {
+	public boolean isDup(int pk) {
+		boolean result = false;
+		Session session = factory.getCurrentSession();
+		Transaction tx = null;
+		try {
+			tx=session.beginTransaction();
+			result = companyDao.isDup(pk);
+			tx.commit();
+		}catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			throw new RuntimeException(e);
+		}
+		return result;
+	}
+	@Override
+	public int save(Company company) {
 		int n = 0;
 		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
-			tx = session.beginTransaction();
-			n = jobDao.save(job);
+			tx=session.beginTransaction();
+			n = companyDao.save(company);
 			tx.commit();
-		} catch (Exception e) {
+		}catch (Exception e) {
 			if (tx != null) {
 				tx.rollback();
 			}
@@ -37,91 +53,71 @@ public class JobServiceImpl implements JobService{
 		}
 		return n;
 	}
-
+		
 	@Override
-	public List<Job> getAllJobs() {
-		List<Job> jobs = null;
+	public List<Company> getAllCompanies() {
+		List<Company> companies = null;
 		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
-			tx = session.beginTransaction();
-			jobs = jobDao.getAllJobs();
+			tx=session.beginTransaction();
+			companies = companyDao.getAllCompanies();
 			tx.commit();
-		} catch (Exception e) {
+		}catch (Exception e) {
 			if (tx != null) {
 				tx.rollback();
 			}
 			throw new RuntimeException(e);
 		}
-		return jobs;
+		return companies;
 	}
-
 	@Override
-	public Job getJobByJobID(int pk) {
-		Job job = null;
+	public Company getCompany(int pk) {
+		Company company = null;
 		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
-			tx = session.beginTransaction();
-			job = jobDao.getJobByJobID(pk);
+			tx=session.beginTransaction();
+			company = companyDao.getCompany(pk);
 			tx.commit();
-		} catch (Exception e) {
+		}catch (Exception e) {
 			if (tx != null) {
 				tx.rollback();
 			}
 			throw new RuntimeException(e);
 		}
-		return job;
+		return company;
 	}
-
 	@Override
-	public void delete(int pk) {
+	public void deleteCompany(int pk) {
 		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
-			tx = session.beginTransaction();
-			jobDao.delete(pk);
+			tx=session.beginTransaction();
+			companyDao.deleteCompany(pk);
 			tx.commit();
-		} catch (Exception e) {
+		}catch (Exception e) {
 			if (tx != null) {
 				tx.rollback();
 			}
 			throw new RuntimeException(e);
 		}
 	}
-
 	@Override
-	public void update(Job job) {
+	public void updateCompany(Company company) {
 		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
-			tx = session.beginTransaction();
-			jobDao.update(job);
+			tx=session.beginTransaction();
+			companyDao.updateCompany(company);
 			tx.commit();
-		} catch (Exception e) {
+		}catch (Exception e) {
 			if (tx != null) {
 				tx.rollback();
 			}
 			throw new RuntimeException(e);
 		}
-	}
-
-	@Override
-	public List<Job> getJobByTitle(String title) {
-		List<Job> job = null;
-		Session session = factory.getCurrentSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			job = jobDao.getAllJobs();
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-			throw new RuntimeException(e);
-		}
-		return job;
+		
 	}
 
 }

@@ -30,8 +30,6 @@ public class JobController extends HttpServlet {
 		try {
 			String action = request.getServletPath();
 			
-			Job job = new Job();
-			
             switch (action) {
                 case "/new":
                     showNewForm(request, response);
@@ -49,14 +47,14 @@ public class JobController extends HttpServlet {
                     updateJobServlet(request, response);
                     break;
                 default:
-                    allJobs(request, response,job);
+                    allJobs(request, response);
                     break;
             }
         } catch (Exception ex) {
             throw new ServletException(ex);
         }
     }
-	private void allJobs(HttpServletRequest request, HttpServletResponse response,Job job) throws SQLException, IOException, ServletException {
+	private void allJobs(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		JobService jobService = new JobServiceImpl();
@@ -130,6 +128,7 @@ public class JobController extends HttpServlet {
         job.setComp_id(COMP_ID);
         JobService jobService = new JobServiceImpl();
         jobService.update(job);
+        request.setAttribute("job", job);
         response.sendRedirect("AllJobs.jsp");
 		
 	}

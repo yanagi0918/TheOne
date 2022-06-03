@@ -7,7 +7,7 @@
 <%
 String sid=request.getParameter("job_id");
 int job_id=Integer.parseInt(sid);
-Job job = JobDaoImpl.getJobByJobID(job_id);
+Job job = (Job)request.getAttribute("job");
 %>
 <style>
 .center{
