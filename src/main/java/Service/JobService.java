@@ -5,7 +5,9 @@ import java.util.List;
 import Bean.Job;
 
 public interface JobService {
-int save(Job job);
+	boolean isDup(int pk);
+	
+	int save(Job job);
 	
 	List<Job> getAllJobs();
 	

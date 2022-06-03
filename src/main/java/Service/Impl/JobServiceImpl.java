@@ -124,4 +124,22 @@ public class JobServiceImpl implements JobService{
 		return job;
 	}
 
+	@Override
+	public boolean isDup(int pk) {
+		boolean result = false;
+		Session session = factory.getCurrentSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			result = jobDao.isDup(pk);
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			throw new RuntimeException(e);
+		}
+		return result;
+	}
+
 }

@@ -29,27 +29,6 @@ public class Company implements Serializable{
 
  public Company() {}
 
-
-
-public Company(Integer comppk, Integer compid, String compwd, String corpname, String owner, String industry,
-		String contact, String comptele, String fax, String compaddress, Integer empnumber, String website,
-		String capital) {
-	super();
-	this.comppk = comppk;
-	this.compid = compid;
-	this.compwd = compwd;
-	this.corpname = corpname;
-	this.owner = owner;
-	this.industry = industry;
-	this.contact = contact;
-	this.comptele = comptele;
-	this.fax = fax;
-	this.compaddress = compaddress;
-	this.empnumber = empnumber;
-	this.website = website;
-	this.capital = capital;
-}
-
 public Integer getComppk() {
 	return comppk;
 }

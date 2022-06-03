@@ -22,6 +22,7 @@ public class JobController extends HttpServlet {
     public JobController() {
         super();
     }
+    public void init() throws ServletException{}
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	doGet(request, response);
@@ -29,32 +30,32 @@ public class JobController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String action = request.getServletPath();
-			
+			Job job  = new Job();
             switch (action) {
                 case "/new":
-                    showNewForm(request, response);
+                    showNewForm(request, response, job);
                     break;
                 case "/insert":
-                    insertServlet(request, response);
+                    insertServlet(request, response, job);
                     break;
                 case "/delete":
-                    deleteJobServlet(request, response);
+                    deleteJobServlet(request, response, job);
                     break;
                 case "/edit":
-                    showEditForm(request, response);
+                    showEditForm(request, response, job);
                     break;
                 case "/update":
-                    updateJobServlet(request, response);
+                    updateJobServlet(request, response, job);
                     break;
                 default:
-                    allJobs(request, response);
+                    allJobs(request, response, job);
                     break;
             }
         } catch (Exception ex) {
             throw new ServletException(ex);
         }
     }
-	private void allJobs(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
+	private void allJobs(HttpServletRequest request, HttpServletResponse response, Job job) throws SQLException, IOException, ServletException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		JobService jobService = new JobServiceImpl();
@@ -63,14 +64,14 @@ public class JobController extends HttpServlet {
 		request.getRequestDispatcher("AllJobs.jsp").forward(request, response);
 	}
 	
-	private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void showNewForm(HttpServletRequest request, HttpServletResponse response, Job job) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		RequestDispatcher dispatcher = request.getRequestDispatcher("JobDashBoard.jsp");
         dispatcher.forward(request, response);
 	}
 	
-	private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void showEditForm(HttpServletRequest request, HttpServletResponse response, Job job) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		int job_id = Integer.parseInt(request.getParameter("job_id"));
@@ -81,7 +82,7 @@ public class JobController extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 	
-	private void insertServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void insertServlet(HttpServletRequest request, HttpServletResponse response, Job job) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		String title = request.getParameter("TITLE").trim();
@@ -92,7 +93,6 @@ public class JobController extends HttpServlet {
         String SALARY = request.getParameter("SALARY").trim();
         String COMP_ID = request.getParameter("COMP_ID");
         
-        Job job = new Job();
         job.setTitle(title);
         job.setJob_description(JOB_DESCRIPTION);
         job.setQualification(QUALIFICATION);
@@ -105,7 +105,7 @@ public class JobController extends HttpServlet {
 		
 	}
 	
-	private void updateJobServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	private void updateJobServlet(HttpServletRequest request, HttpServletResponse response, Job job) throws ServletException, IOException{
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		String sid = request.getParameter("job_id");
@@ -118,7 +118,6 @@ public class JobController extends HttpServlet {
         String SALARY =request.getParameter("SALARY").trim();
         String COMP_ID = request.getParameter("COMP_ID");
         
-        Job job = new Job();
         job.setJob_id(job_id);
         job.setTitle(title);
         job.setJob_description(JOB_DESCRIPTION);
@@ -133,7 +132,7 @@ public class JobController extends HttpServlet {
 		
 	}
 
-	private void deleteJobServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	private void deleteJobServlet(HttpServletRequest request, HttpServletResponse response, Job job) throws ServletException, IOException{
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		String sid = request.getParameter("job_id");
