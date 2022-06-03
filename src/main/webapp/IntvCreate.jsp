@@ -19,8 +19,8 @@
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">求職者帳號</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" name="USER_ID" required
-								id="USER_ID"> <input type="hidden" class="form-control"
+							<input type="text" class="form-control" name="userId" required
+								id="userId"> <input type="hidden" class="form-control"
 								name="cvno" value="0">
 						</div>
 					</div>

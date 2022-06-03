@@ -20,7 +20,7 @@
 				<div class="row mb-3">
 					<label class="col-sm-2 col-form-label">面試內容編號</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" name="cv_no"
+						<input type="text" class="form-control" name="cvno"
 							value=<%=intvForUpdate.getCvNo()%> readonly>
 					</div>
 				</div>
