@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "Job_Table")
 public class Job implements Serializable{
@@ -20,9 +21,7 @@ public class Job implements Serializable{
 	private Integer required_number;
 	private String salary;
 	private String comp_id;
-	public Job() {
-		
-	}
+	public Job() {}
 	public Integer getJob_id() {
 		return job_id;
 	}
