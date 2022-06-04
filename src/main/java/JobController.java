@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import Bean.Job;
 import Service.JobService;
 import Service.Impl.JobServiceImpl;
-@WebServlet(name = "JobController", urlPatterns = { "/insert", "/delete", "/edit","/update"})
+@WebServlet(name = "JobController", urlPatterns = { "/JobController", "/insert", "/delete", "/edit","/update"})
 		
 public class JobController extends HttpServlet {
 	
@@ -26,9 +26,11 @@ public class JobController extends HttpServlet {
     }
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+
 			request.setCharacterEncoding("UTF-8");
 			
 			String action = request.getServletPath();
+			System.out.println(action);
             switch (action) {
                 case "/insert":
                     insertServlet(request, response);
@@ -43,6 +45,7 @@ public class JobController extends HttpServlet {
                     updateJobServlet(request, response);
                     break;
                 default:
+                	System.out.println("123");
                     allJobs(request, response);
                     break;
             }
