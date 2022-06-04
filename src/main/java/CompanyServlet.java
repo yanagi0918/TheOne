@@ -1,84 +1,55 @@
 
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 
 import Bean.Company;
-import DAO.CompanyDAO;
+import Service.CompanyService;
+import Service.Impl.CompanyServiceImpl;
 
 @WebServlet("/CompanyServlet")
 public class CompanyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	DataSource ds = null;
-	InitialContext ctxt = null;
-	Connection conn = null;
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		request.setCharacterEncoding("UTF-8");
 		try {
-
-			ctxt = new InitialContext();
-			ds = (DataSource) ctxt.lookup("java:comp/env/jdbc/FindJobDB");
-			conn = ds.getConnection();
-			CompanyDAO companyDAO = new CompanyDAO(conn);
+			request.setCharacterEncoding("UTF-8");
 			
-			// 如果dashboard傳回的updateid有值，先查出該id的所有內容，放進updatemember物件
 			if(request.getParameter("UpdateId") != null) {
-				Company UpdateCompany = companyDAO.findCompany(Integer.parseInt(request.getParameter("UpdateId")));
-				if (UpdateCompany == null) {
-					getServletContext().getRequestDispatcher("/404.jsp").forward(request, response);
-				}else {
-					   request.setAttribute("UpdateCompany", UpdateCompany); // 把key跟value放進request中，並跳轉至update頁面
-					   getServletContext().getRequestDispatcher("/CompanyUpdate.jsp").forward(request, response);
+				CompanyService companyService = new CompanyServiceImpl();
+				Company companyForUpdate = companyService.getCompany(Integer.parseInt(request.getParameter("UpdateId")));
+				if (companyForUpdate == null) {
+					request.getRequestDispatcher("CompanyUpdate.jsp").forward(request, response);
 				}
+				request.setAttribute("companyForUpdate", companyForUpdate);
+				request.getRequestDispatcher("/CompanyUpdate.jsp").forward(request, response);
+				
 			}else if (request.getParameter("DeleteId") != null) {
-					  processDelete(request, response, companyDAO);
+				int deleteId = Integer.parseInt(request.getParameter("DeleteId"));
+				processDelete(request, response, deleteId);
 			}else {
-					showData(request, response, companyDAO);
+				showData(request, response);
 			}
-
-		} catch (NamingException ne) {
-			System.out.println("Naming Service Lookup Exception");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Database Connection Error");
-		} finally {
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {
-				System.out.println("Connection Pool Error!");
-			}
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		// 填入較多資料用doPost
 		try {
+			request.setCharacterEncoding("UTF-8");
 
-			ctxt = new InitialContext();
-			ds = (DataSource) ctxt.lookup("java:comp/env/jdbc/FindJobDB");
-			conn = ds.getConnection();
-			CompanyDAO companyDAO = new CompanyDAO(conn);
-
-			// put data into bean
 			Company company = new Company();
+			company.setComppk(Integer.parseInt(request.getParameter("comppk")));
 			company.setCompid(Integer.parseInt(request.getParameter("compid")));
 			company.setCompwd(request.getParameter("compwd"));
 			company.setCorpname(request.getParameter("corpname"));
@@ -92,88 +63,53 @@ public class CompanyServlet extends HttpServlet {
 			company.setWebsite(request.getParameter("website"));
 			company.setCapital(request.getParameter("capital"));
 			
-			
-			//
-			
-
-			if (request.getParameter("update123") != null ) {
-				processUpdate(request, response, companyDAO, company);
-	/*		}else if(companyDAO.findAll().contains(request.getParameter("compid"))) {
-				getServletContext().getRequestDispatcher("/CompanyCreate.jsp").forward(request, response);*/
+			if (company.getComppk() == 0) {
+				processCreate(request, response,company);
 			}else{
-				processCreate(request, response, companyDAO, company);
+				processUpdate(request, response,company);
 			}
-
-		} catch (NamingException | SQLException | NullPointerException | NumberFormatException| ParseException e) {
+		} catch (SQLException | ParseException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void showData(HttpServletRequest request, HttpServletResponse response, CompanyDAO companyDAO)
+	private void showData(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-		response.setContentType("text/html;charset=UTF-8");
-		List<Company> company = companyDAO.findAll();
-
-		if (company != null) {
-			request.setAttribute("company", company); // 把company放進request，取名叫"company"，讓其他jsp或Servlet可用
-			getServletContext().getRequestDispatcher("/CompanyDashBoard.jsp").forward(request, response);
-		} else {
-			System.out.println("該不會在這裡?");
-			getServletContext().getRequestDispatcher("/404.jsp").forward(request, response);
+		CompanyService companyService = new CompanyServiceImpl();
+		List<Company> companies = companyService.getAllCompanies();
+		if (companies != null) {
+			System.out.println("123");
 		}
-		companyDAO.closeConn();
+			request.setAttribute("companies", companies);
+			request.getRequestDispatcher("CompanyDashBoard.jsp").forward(request, response);
 	}
 
 	
 	// CREATE
-	private void processCreate(HttpServletRequest request, HttpServletResponse response, CompanyDAO companyDAO ,Company company)
+	private void processCreate(HttpServletRequest request, HttpServletResponse response,Company company)
 			throws SQLException, IOException, ParseException, ServletException {
-		
-		//不能用物件中是否包含物件來檢查
-		boolean CheckId= companyDAO.findCompid(company.getCompid());
-		
-		if (companyDAO.createCompany(company)) {
-			response.sendRedirect("./CompanyServlet");
-			
-		}else if (CheckId) {
-			System.out.println("重複的公司統編:" + String.valueOf(company.getCompid()));
-			String message = "公司統編不可重複";
-			request.setAttribute("message", message);
-			getServletContext().getRequestDispatcher("/CompanyCreate.jsp").forward(request, response);
-			
-		}else{
-				getServletContext().getRequestDispatcher("/404.jsp").forward(request, response);
-			}
-		
-		companyDAO.closeConn();
+		CompanyService companyService = new CompanyServiceImpl();
+		companyService.save(company);
+		response.sendRedirect("./CompanyServlet");
 		}
 	
 	
 
-	// Update
-	private void processUpdate(HttpServletRequest request, HttpServletResponse response, CompanyDAO companyDAO, Company company)
-			throws SQLException, IOException, ServletException {
-		
-		if (companyDAO.updateCompany(company)) { 
-			response.sendRedirect("./CompanyServlet");
-		} else {
-			getServletContext().getRequestDispatcher("/404.jsp").forward(request, response);
-		}
-		companyDAO.closeConn();
+	private void processUpdate(HttpServletRequest request, HttpServletResponse response, Company company)
+			throws SQLException, IOException, ParseException, ServletException {
+		CompanyService companyService = new CompanyServiceImpl();
+		companyService.updateCompany(company);
+		response.sendRedirect("./CompanyServlet");
 	}
 
 	// DELETE
-	private void processDelete(HttpServletRequest request, HttpServletResponse response, CompanyDAO companyDAO)
+	private void processDelete(HttpServletRequest request, HttpServletResponse response, int deleteId)
 			throws SQLException, IOException {
-
-		int DeleteId = Integer.parseInt(request.getParameter("DeleteId"));
-
-		if (companyDAO.deleteCompany(DeleteId)) {
-			response.sendRedirect("./CompanyServlet");
-		}
-		companyDAO.closeConn();
+		CompanyService companyService = new CompanyServiceImpl();
+		companyService.deleteCompany(deleteId);
+		response.sendRedirect("./CompanyServlet");
 	}
 
 

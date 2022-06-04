@@ -40,12 +40,12 @@ public class JobServiceImpl implements JobService{
 
 	@Override
 	public List<Job> getAllJobs() {
-		List<Job> job = null;
+		List<Job> jobs = null;
 		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			job = jobDao.getAllJobs();
+			jobs = jobDao.getAllJobs();
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null) {
@@ -53,7 +53,7 @@ public class JobServiceImpl implements JobService{
 			}
 			throw new RuntimeException(e);
 		}
-		return job;
+		return jobs;
 	}
 
 	@Override
@@ -122,6 +122,24 @@ public class JobServiceImpl implements JobService{
 			throw new RuntimeException(e);
 		}
 		return job;
+	}
+
+	@Override
+	public boolean isDup(int pk) {
+		boolean result = false;
+		Session session = factory.getCurrentSession();
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			result = jobDao.isDup(pk);
+			tx.commit();
+		} catch (Exception e) {
+			if (tx != null) {
+				tx.rollback();
+			}
+			throw new RuntimeException(e);
+		}
+		return result;
 	}
 
 }

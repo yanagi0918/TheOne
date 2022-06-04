@@ -65,4 +65,5 @@ public class Job implements Serializable{
 	public void setComp_id(String comp_id) {
 		this.comp_id = comp_id;
 	}
+	
 }

@@ -30,11 +30,9 @@
 		<mapping class="Bean.EventBean" />
 		<mapping class="Bean.Order" />
 		<mapping class="Bean.CommentBean" />
-<<<<<<< HEAD
 		<mapping class="Bean.Interview" />
-=======
 		<mapping class="Bean.Job" />
->>>>>>> company
+		<mapping class="Bean.Company" />
 		
 		
 	</session-factory>

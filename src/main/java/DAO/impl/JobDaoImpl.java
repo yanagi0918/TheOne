@@ -22,11 +22,10 @@ public class JobDaoImpl implements JobDao{
 	@Override
 	public List<Job> getAllJobs() {
 		Session session = factory.getCurrentSession();
-		List<Job> job = null;
+		List<Job> jobs = null;
 		String hql = "FROM Job";
-		job = session.createQuery(hql,Job.class)
-					.getResultList();
-		return job;
+		jobs = session.createQuery(hql,Job.class).getResultList();
+		return jobs;
 	}
 
 	@Override
@@ -58,6 +57,16 @@ public class JobDaoImpl implements JobDao{
 		job = session.createQuery(hql,Job.class)
 				.getResultList();
 		return job;
+	}
+	@Override
+	public boolean isDup(int pk) {
+		Session session = factory.getCurrentSession();
+		Job job = (Job) session.get(Job.class, pk);
+		if(job !=null) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 }
