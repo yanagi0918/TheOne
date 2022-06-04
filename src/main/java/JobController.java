@@ -1,5 +1,3 @@
-
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -14,66 +12,61 @@ import javax.servlet.http.HttpServletResponse;
 import Bean.Job;
 import Service.JobService;
 import Service.Impl.JobServiceImpl;
-@WebServlet(name = "JobController", urlPatterns = { "/new", "/insert", "/delete", "/edit","/update"})
+@WebServlet(name = "JobController", urlPatterns = { "/JobController", "/insert", "/delete", "/edit","/update"})
 		
 public class JobController extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 
-    public JobController() {
-        super();
-    }
-    public void init() throws ServletException{}
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	doGet(request, response);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	doPost(request, response);
     }
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void init() throws ServletException{
+    }
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+
+			request.setCharacterEncoding("UTF-8");
+			
 			String action = request.getServletPath();
-			Job job  = new Job();
+			System.out.println(action);
             switch (action) {
-                case "/new":
-                    showNewForm(request, response, job);
-                    break;
                 case "/insert":
-                    insertServlet(request, response, job);
+                    insertServlet(request, response);
                     break;
                 case "/delete":
-                    deleteJobServlet(request, response, job);
+                    deleteJobServlet(request, response);
                     break;
                 case "/edit":
-                    showEditForm(request, response, job);
+                    showEditForm(request, response);
                     break;
                 case "/update":
-                    updateJobServlet(request, response, job);
+                    updateJobServlet(request, response);
                     break;
                 default:
-                    allJobs(request, response, job);
+                	System.out.println("123");
+                    allJobs(request, response);
                     break;
             }
         } catch (Exception ex) {
-            throw new ServletException(ex);
+            ex.printStackTrace();
         }
     }
-	private void allJobs(HttpServletRequest request, HttpServletResponse response, Job job) throws SQLException, IOException, ServletException {
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;charset=UTF-8");
+	private void allJobs(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
 		JobService jobService = new JobServiceImpl();
-		List<Job> jobs = jobService.getAllJobs();
-		request.setAttribute("jobs", jobs);
-		request.getRequestDispatcher("AllJobs.jsp").forward(request, response);
+		List<Job> allJobs = jobService.getAllJobs();
+		if(allJobs !=null) {
+			System.out.println("get");
+			request.setAttribute("allJobs", allJobs);
+			request.getRequestDispatcher("AllJobs.jsp").forward(request, response);
+		}else {
+			System.out.println("none");
+		}
 	}
 	
-	private void showNewForm(HttpServletRequest request, HttpServletResponse response, Job job) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;charset=UTF-8");
-		RequestDispatcher dispatcher = request.getRequestDispatcher("JobDashBoard.jsp");
-        dispatcher.forward(request, response);
-	}
-	
-	private void showEditForm(HttpServletRequest request, HttpServletResponse response, Job job) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;charset=UTF-8");
+	private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int job_id = Integer.parseInt(request.getParameter("job_id"));
 		JobService jobService = new JobServiceImpl();
 		Job existingJob = jobService.getJobByJobID(job_id);
@@ -82,32 +75,23 @@ public class JobController extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 	
-	private void insertServlet(HttpServletRequest request, HttpServletResponse response, Job job) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;charset=UTF-8");
-		String title = request.getParameter("TITLE").trim();
-        String JOB_DESCRIPTION = request.getParameter("JOB_DESCRIPTION").trim();
-        String QUALIFICATION = request.getParameter("QUALIFICATION").trim();
-        String sid = request.getParameter("REQUIRED_NUMBER").trim();
+	private void insertServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String title = request.getParameter("title").trim();
+        String JOB_DESCRIPTION = request.getParameter("job_description").trim();
+        String QUALIFICATION = request.getParameter("qualification").trim();
+        String sid = request.getParameter("required_number").trim();
         int REQUIRED_NUMBER = Integer.parseInt(sid);
-        String SALARY = request.getParameter("SALARY").trim();
-        String COMP_ID = request.getParameter("COMP_ID");
+        String SALARY = request.getParameter("salary").trim();
+        String COMP_ID = request.getParameter("comp_id");
         
-        job.setTitle(title);
-        job.setJob_description(JOB_DESCRIPTION);
-        job.setQualification(QUALIFICATION);
-        job.setRequired_number(REQUIRED_NUMBER);
-        job.setSalary(SALARY);
-        job.setComp_id(COMP_ID);
+        Job job = new Job(title, JOB_DESCRIPTION, QUALIFICATION, REQUIRED_NUMBER, SALARY, COMP_ID);
         JobService jobService = new JobServiceImpl();
         jobService.save(job);
         response.sendRedirect("AllJobs.jsp");
 		
 	}
 	
-	private void updateJobServlet(HttpServletRequest request, HttpServletResponse response, Job job) throws ServletException, IOException{
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;charset=UTF-8");
+	private void updateJobServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String sid = request.getParameter("job_id");
         int job_id=Integer.parseInt(sid);
         String title = request.getParameter("TITLE").trim();
@@ -118,13 +102,7 @@ public class JobController extends HttpServlet {
         String SALARY =request.getParameter("SALARY").trim();
         String COMP_ID = request.getParameter("COMP_ID");
         
-        job.setJob_id(job_id);
-        job.setTitle(title);
-        job.setJob_description(JOB_DESCRIPTION);
-        job.setQualification(QUALIFICATION);
-        job.setRequired_number(REQUIRED_NUMBER);
-        job.setSalary(SALARY);
-        job.setComp_id(COMP_ID);
+        Job job = new Job(job_id, title, JOB_DESCRIPTION, QUALIFICATION, REQUIRED_NUMBER, SALARY, COMP_ID);
         JobService jobService = new JobServiceImpl();
         jobService.update(job);
         request.setAttribute("job", job);
@@ -132,12 +110,10 @@ public class JobController extends HttpServlet {
 		
 	}
 
-	private void deleteJobServlet(HttpServletRequest request, HttpServletResponse response, Job job) throws ServletException, IOException{
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;charset=UTF-8");
+	private void deleteJobServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		JobService jobService = new JobServiceImpl();
 		String sid = request.getParameter("job_id");
 		int job_id = Integer.parseInt(sid);
-		JobService jobService = new JobServiceImpl();
 		jobService.delete(job_id);
 		response.sendRedirect("AllJobs.jsp");
 	}

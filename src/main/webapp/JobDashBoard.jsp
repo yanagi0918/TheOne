@@ -31,21 +31,21 @@ color:lightgray;
  <div class="row mb-3">
 <label class="col-sm-2 col-form-label">統一編號:</label>
 <div class="col-sm-8">
-<input type="text"  name="COMP_ID" maxlength="8" id="COMP_ID" class="form-control" required autofocus/>
+<input type="text"  name=comp_id maxlength="8" id="COMP_ID" class="form-control" required autofocus/>
 </div>
 </div>
 
 <div class="row mb-3">
 <label class="col-sm-2 col-form-label">職缺名稱:</label>
 <div class="col-sm-8">
-<input type="text" name="TITLE" class="form-control" required/> 
+<input type="text" name="title" class="form-control" required/> 
 </div>
 </div>
 
 <div class="row mb-3">
 <label class="col-sm-2 col-form-label">職缺性質:</label>
 <div class="col-sm-8">
-<select name="JOB_DESCRIPTION" class="form-select">
+<select name="job_description" class="form-select">
 <option>全職</option>
 <option>兼職</option>
 <option>工讀</option>
@@ -57,21 +57,21 @@ color:lightgray;
 <div class="row mb-3">
 <label class="col-sm-2 col-form-label">職缺條件:</label>
 <div class="col-sm-8">
-<input type="text" name="QUALIFICATION" class="form-control" required/>
+<input type="text" name="qualification" class="form-control" required/>
 </div>
 </div>
 
 <div class="row mb-3">
 <label class="col-sm-2 col-form-label">需要人數:</label>
 <div class="col-sm-8">
-<input type="text" name="REQUIRED_NUMBER" class="form-control" required/> 
+<input type="text" name="required_number" class="form-control" required/> 
 </div>
 </div>
 
 <div class="row mb-3">
 <label class="col-sm-2 col-form-label">每月薪資:</label>  
 <div class="col-sm-8">
-<select name="SALARY" class="form-select">
+<select name="salary" class="form-select">
 <option>面議</option>
 <option>25000以下</option>
 <option>25001~30000</option>
