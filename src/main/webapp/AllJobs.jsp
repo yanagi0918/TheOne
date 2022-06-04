@@ -37,19 +37,7 @@
 		</thead>
         <tbody>
         <c:forEach var="job" items="${allJobs}">
-<%-- 		<% 
-                            List<Job> allJobs = (List<Job>) request.getAttribute("allJobs");
-                            if(allJobs != null){
-                            for(Job j : allJobs) {
-                            %>
---%>    
 		<tr>
-<%-- 			<td><%= j.getTitle() %></td> --%>
-<%-- 			<td><%= j.getJob_description() %></td> --%>
-<%-- 			<td><%= j.getQualification() %></td> --%>
-<%-- 			<td><%= j.getRequired_number() %></td> --%>
-<%-- 			<td><%= j.getSalary() %></td> --%>
-<%-- 			<td><%= j.getComp_id() %></td> --%>
 			<td><c:out value="${job.title}" /></td>
 			<td><c:out value="${job.job_description}" /></td>
 			<td><c:out value="${job.qualification}" /></td>
@@ -57,15 +45,12 @@
 			<td><c:out value="${job.salary}" /></td>
 			<td><c:out value="${job.comp_id}" /></td>
 			<td>
-			<a href='update?job_id=<c:out value="${job.job_id}" />' class="btn btn-outline-primary m-0">更新</a>
+			<a href='edit?job_id=<c:out value="${job.job_id}" />' class="btn btn-outline-primary m-0">更新</a>
 			<a href='delete?job_id=<c:out value="${job.job_id}" />' class="btn btn-outline-danger m-0" onclick="return deleteForm()">刪除</a>
 			</td>	
 			
 		</tr>
 		</c:forEach>
-		<%-- 
-		<% }} %>
-		--%> 
 		</tbody>
 	</table>
 	</div>
