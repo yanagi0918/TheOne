@@ -45,7 +45,6 @@ public class JobController extends HttpServlet {
                     updateJobServlet(request, response);
                     break;
                 default:
-                	System.out.println("123");
                     allJobs(request, response);
                     break;
             }
@@ -70,7 +69,7 @@ public class JobController extends HttpServlet {
 		int job_id = Integer.parseInt(request.getParameter("job_id"));
 		JobService jobService = new JobServiceImpl();
 		Job existingJob = jobService.getJobByJobID(job_id);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("JobDashBoard.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("UpdateJob.jsp");
 		request.setAttribute("job", existingJob);
 		dispatcher.forward(request, response);
 	}
@@ -87,26 +86,25 @@ public class JobController extends HttpServlet {
         Job job = new Job(title, JOB_DESCRIPTION, QUALIFICATION, REQUIRED_NUMBER, SALARY, COMP_ID);
         JobService jobService = new JobServiceImpl();
         jobService.save(job);
-        response.sendRedirect("AllJobs.jsp");
+        response.sendRedirect("JobController");
 		
 	}
 	
 	private void updateJobServlet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String sid = request.getParameter("job_id");
         int job_id=Integer.parseInt(sid);
-        String title = request.getParameter("TITLE").trim();
-        String JOB_DESCRIPTION = request.getParameter("JOB_DESCRIPTION").trim();
-        String QUALIFICATION = request.getParameter("QUALIFICATION").trim();
-        String sid2 = request.getParameter("REQUIRED_NUMBER").trim();
+        String title = request.getParameter("title").trim();
+        String JOB_DESCRIPTION = request.getParameter("job_description").trim();
+        String QUALIFICATION = request.getParameter("qualification").trim();
+        String sid2 = request.getParameter("required_number").trim();
         int REQUIRED_NUMBER = Integer.parseInt(sid2);
-        String SALARY =request.getParameter("SALARY").trim();
-        String COMP_ID = request.getParameter("COMP_ID");
+        String SALARY =request.getParameter("salary").trim();
+        String COMP_ID = request.getParameter("comp_id");
         
         Job job = new Job(job_id, title, JOB_DESCRIPTION, QUALIFICATION, REQUIRED_NUMBER, SALARY, COMP_ID);
         JobService jobService = new JobServiceImpl();
         jobService.update(job);
-        request.setAttribute("job", job);
-        response.sendRedirect("AllJobs.jsp");
+        response.sendRedirect("JobController");
 		
 	}
 
@@ -115,7 +113,7 @@ public class JobController extends HttpServlet {
 		String sid = request.getParameter("job_id");
 		int job_id = Integer.parseInt(sid);
 		jobService.delete(job_id);
-		response.sendRedirect("AllJobs.jsp");
+		response.sendRedirect("JobController");
 	}
 
 }
