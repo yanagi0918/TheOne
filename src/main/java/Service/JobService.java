@@ -17,5 +17,5 @@ public interface JobService {
 	
 	void update(Job job);
 	
-	List<Job> getJobByTitle(String title);
+//	List<Job> getJobByTitle(String title);
 }

@@ -80,7 +80,7 @@ public class CompanyServlet extends HttpServlet {
 		CompanyService companyService = new CompanyServiceImpl();
 		List<Company> companies = companyService.getAllCompanies();
 		if (companies != null) {
-			System.out.println("123");
+			System.out.println("get");
 		}
 			request.setAttribute("companies", companies);
 			request.getRequestDispatcher("CompanyDashBoard.jsp").forward(request, response);
