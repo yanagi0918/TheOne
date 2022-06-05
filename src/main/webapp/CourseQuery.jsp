@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
-<%@ page import="Bean.Course"%>
+<%@ page import="Bean.CourseBean"%>
 <%@include file="DashBoardHeader.jspf"%>
 
 <style>
@@ -20,30 +20,29 @@
 				<div class="d-flex align-items-center justify-content-between mb-4">
 <!-- -----------------------------------------Query form start----------------------------------------------------------------------- -->
 					<h5 class="mb-0">
-						課程資訊查詢 <i>(單選or複選查詢)</i>
+						課程資訊查詢
 					</h5>
 					<button type="button" class="btn btn-primary mb-0"
 						onclick="location.href='./CourseCreate.jsp'">新增課程</button>
 				</div>
 
-				<FORM ACTION="./CourseServletDS" method="get">
+				<FORM ACTION="./CourseController" method="get">
 
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">課程編號</label>
 						<div class="col-sm-8">
 							<input type="text" class="form-control" name="courseNo"
-								maxlength="10" placeholder="1~40">
+								maxlength="10" placeholder="編號">
 						</div>
 					</div>
-
-					<div class="row mb-3">
-						<label class="col-sm-2 col-form-label">上架時間</label>
-						<div class="col-sm-8">
-							<input type="date" class="form-control" name="date"
-								maxlength="15">
-						</div>
+					
+					<div>
+						<button type="submit" class="btn btn-primary" name="findByNo"
+							value="查詢">編號查詢</button>
 					</div>
-
+					
+					<hr>
+	
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">課程分類</label>
 						<div class="col-sm-8">
@@ -76,23 +75,12 @@
 						</div>
 					</div>
 
-					<div class="row mb-3">
-						<label class="col-sm-2 col-form-label">上架月份</label>
-						<div class="col-sm-8">
-							<input type="text" class="form-control" name="dateMonth"
-								maxlength="5" placeholder="11">
-						</div>
-					</div>
 
 					<div>
 						<button type="submit" class="btn btn-primary" name="findByMulti"
-							value="查詢">查詢</button>
+							value="查詢">模糊查詢</button>
 
-<!-- 						<button type="submit" class="btn btn-primary" name="findAll" -->
-<!-- 							value="檢視所有課程">檢視所有課程</button> -->
-
-						<button type="reset" class="btn btn-primary" name="reset"
-							>清空</button>
+						<button type="reset" class="btn btn-primary" name="reset">清空</button>
 					</div>
 				</FORM>
 <!-- -----------------------------------------Query form end----------------------------------------------------------------------- -->
@@ -114,38 +102,11 @@
 								<th scope="col">價錢</th>
 							</tr>
 						</thead>
-<!-- 						<tbody> -->
-<%-- 							<% List<Course> courseList = (List<Course>) request.getAttribute("courseList"); %> --%>
-<%-- 							<% for (Course course : courseList) {%> --%>
-<!-- 							<tr> -->
-<%-- 								<td><%= course.getCourseNo()%></td> --%>
-<%-- 								<td><%= course.getCourseCategory()%></td> --%>
-<%-- 								<td><%= course.getCourseName()%></td> --%>
-<%-- 								<td><%= course.getCourseIntroduction()%></td> --%> 
-<%-- 								<td><%= course.getLecturer()%></td> --%>
-<%-- 								<td><%= course.getDate()%></td> --%>
-<%-- 								<td><%= course.getCoursePic()%></td> --%> 
-<%-- 								<td><%= course.getCourseVedio()%></td> --%> 
-<%-- 								<td><%= course.getScore()%></td> --%>
-<%-- 								<td><%= course.getPrice()%></td> --%>
-
-<!-- 								<td> -->
-<!-- 									<button type="button" class="btn btn-outline-success m-0" -->
-<%-- 										onclick="location.href='./CourseServletDS?courseNo=<%=course.getCourseNo()%>&detailForm=詳細'">詳細</button> --%>
-
-<!-- 									<button type="button" class="btn btn-outline-primary m-0" -->
-<%-- 										onclick="location.href='./CourseServletDS?courseNo=<%=course.getCourseNo()%>&UptdByCourseNO=更新查詢'">更新</button> --%>
-									
-<!-- 									<button type="button" class="btn btn-outline-danger m-0" -->
-<%-- 										onclick="javascript:if(confirm('確認要刪除嗎?'))location.href='./CourseServletDS?courseNo=<%= course.getCourseNo()%>&DELETE=刪除'">刪除</button> --%>
-<!-- 								</td> -->
-<%-- 								<% } %> --%>
-<!-- 							</tr> -->
 
 							<c:forEach var="course" items="${courseList}">
 							<tr>
 								<td><c:out value="${course.courseNo}"/> </td>
-								<td><c:out value="${course.courseCategory}"/> </td>
+					 			<td><c:out value="${course.courseCategory}"/> </td>
 								<td><c:out value="${course.courseName}"/> </td>
 								<td><c:out value="${course.lecturer}"/> </td>
 								<td><c:out value="${course.date}"/> </td>
@@ -154,13 +115,14 @@
 								
 								<td>
 									<button type="button" class="btn btn-outline-success m-0"
-										onclick="location.href='./CourseServletDS?courseNo=${course.courseNo}&detailForm=詳細'">詳細</button>
+										onclick="location.href='./CourseController?courseNo=${course.courseNo}&detailForm=詳細'">詳細</button>
 
 									<button type="button" class="btn btn-outline-primary m-0"
-										onclick="location.href='./CourseServletDS?courseNo=${course.courseNo}&UptdByCourseNO=更新查詢'">更新</button>
+										onclick="location.href='./CourseController?courseNo=${course.courseNo}&UptdByCourseNO=更新查詢'">更新</button>
 									
 									<button type="button" class="btn btn-outline-danger m-0"
-										onclick="javascript:if(confirm('確認要刪除嗎?'))location.href='./CourseServletDS?courseNo=${course.courseNo}&DELETE=刪除'">刪除</button>
+										onclick="javascript:if(confirm('確認要刪除嗎?'))location.href='./CourseController?courseNo=${course.courseNo}&DELETE=刪除'">刪除</button>
+<%-- 								亦可		onclick="if(confirm('確認要刪除嗎?'))location.href='./CourseController?courseNo=${course.courseNo}&DELETE=刪除'">刪除</button> --%>
 								</td>
 							</tr>
 							</c:forEach>

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page import="Bean.Course"%>
+<%@ page import="Bean.CourseBean"%>
 <%@include file="DashBoardHeader.jspf"%>
 
 
@@ -14,9 +14,9 @@
 					<h6 class="mb-0">更新課程資訊</h6>
 				</div>
 <!-- 					<div class="table-responsive"> -->
-					<FORM ACTION="./CourseServletDS" method="post">
+					<FORM ACTION="./CourseController" method="post">
 
-							<% Course course = (Course) request.getAttribute("course");%>
+							<% CourseBean course = (CourseBean) request.getAttribute("CourseBean");%>
 						<div class="row mb-3">
 							<label class="col-sm-2 col-form-label">課程編號</label>
 							<div class="col-sm-8">
@@ -29,8 +29,8 @@
 						<div class="row mb-3">
 							<label class="col-sm-2 col-form-label">課程分類</label>
 							<div class="col-sm-8">
-							<input type="text" class="form-control" name="courseCategory"
-									value="${course.courseCategory}" readonly="readonly">
+							<input type="text" class="form-control" name="courseCategory" 
+							value="<%=course.getCourseCategory()%>" readonly="readonly">
 <!-- 								<select name="courseCategory" > -->
 <!-- 									<option value="英文證照"  -->
 <%-- 									<c:if test="${course.courseCategory=='英文證照'}">selected </c:if>>英文證照 --%>
@@ -71,9 +71,6 @@
 							<div class="col-sm-8">
 							<textarea name="courseIntroduction" class="form-control" placeholder="課程介紹..." cols="62" rows="5" readonly="readonly"><%=course.getCourseIntroduction()%></textarea>
 
-<!-- 							<input type="text" class="form-control" -->
-<!-- 									name="courseIntroduction" -->
-<%-- 									value="<%=course.getCourseIntroduction()%>"> --%>
 							</div>
 						</div>
 
@@ -97,8 +94,11 @@
 						<div class="row mb-3">
 							<label class="col-sm-2 col-form-label">圖片位置</label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" name="coursePic"
-									value="<%=course.getCoursePic()%>" readonly="readonly">
+								<img class="img-fluid mx-auto mb-4" id="preview_img" src="<%=course.getCoursePicUrl()%>"
+								alt="請選擇課程圖" style="width: 320px; height: 200px;"> 
+							
+<!-- 								<input type="text" class="form-control" name="coursePic" -->
+<%-- 									value="<%=course.getCoursePicUrl()%>" readonly="readonly"> --%>
 							</div>
 						</div>
 
@@ -106,7 +106,7 @@
 							<label class="col-sm-2 col-form-label">影片位置</label>
 							<div class="col-sm-8">
 								<input type="text" class="form-control" name="courseVedio"
-									value="<%=course.getCourseVedio()%>" readonly="readonly">
+									value="<%=course.getCourseVedioUrl()%>" readonly="readonly">
 							</div>
 						</div>
 
@@ -129,13 +129,13 @@
 						<div>
 <!-- 							<button type="submit" class="btn btn-primary" name="updateConfirm" value="確認更改" onclick="javascript:return upd();">確認更改</button> -->
 							<button type="button" class="btn btn-outline-primary m-0"
-										onclick="location.href='./CourseServletDS?courseNo=<%=course.getCourseNo()%>&UptdByCourseNO=更新查詢'">更新</button>
+										onclick="location.href='./CourseController?courseNo=<%=course.getCourseNo()%>&UptdByCourseNO=更新查詢'">更新</button>
 										
 <!-- 							<button type="reset" class="btn btn-primary" name="reset" -->
 <!-- 								value="回復原始資料">回復原始資料</button> -->
 
 							<button type="button" class="btn btn-primary"
-								onclick="location.href='./CourseServletDS'">取消</button>
+								onclick="location.href='./CourseController'">取消</button>
 						</div>
 					</FORM>
 				</div>
