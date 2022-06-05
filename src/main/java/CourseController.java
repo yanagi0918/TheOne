@@ -35,9 +35,6 @@ public class CourseController extends HttpServlet {
 			} else if (request.getParameter("findByNo") != null) { 
 				processFindCourseByNo(request, response);
 
-//			} else if (request.getParameter("updateConfirm") != null) { // updateConfirm exist & do Update
-//				processUpdate(request, response);
-
 			} else if (request.getParameter("DELETE") != null) { // DeleteId exist & do delete
 				processDeleteByNo(request, response);
 
@@ -58,7 +55,6 @@ public class CourseController extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		try {
-			// 如果要編碼值為UTF-8
 			request.setCharacterEncoding("UTF-8");
 
 			// Create a factory for uploading stream (檔案上傳)
@@ -109,43 +105,18 @@ public class CourseController extends HttpServlet {
 				} else if (fieldName.equals("OringinImgURL")) {
 					OringinImgURL = fieldValue;
 				}
-
 			}
 			if (courseBean.getCoursePicUrl() == null) { // if img did not upload set OringinImgURL
 				courseBean.setCoursePicUrl(OringinImgURL);
 			}
 
-			if (courseBean.getCourseNo() == 0) { // EventCreate.jsp <input:hidden name="adId" value="0">
+			if (courseBean.getCourseNo() == 0) { // courseCreate.jsp <input:hidden name="courseNo" value="0">
 				processCreate(request, response, courseBean);
-				System.out.println("create");
 			}
 			else {
 				processUpdate(request, response, courseBean);
-				System.out.println("upd");
 			}
 			
-			
-//			if (request.getParameter("UptdByCourseNO") != null) { // get UptdByCourseNO & deliver event to update page and show Update course
-//				processUpdQueryByNo(request, response, courseDAO);
-//
-//			} else if (request.getParameter("updateConfirm") != null) { // updateConfirm exist & do Update
-//				processUpdate(request, response, courseDAO);
-//
-//			} else if (request.getParameter("DELETE") != null) { // DeleteId exist & do delete
-//				processDeleteByNo(request, response, courseDAO);
-//
-//			} else if (request.getParameter("findByMulti") != null) { // findByMulti exist & do multi query
-//				processMultiQuery(request, response, courseDAO);
-//
-//			} else if (request.getParameter("insert") != null) { // create exist & do create
-//				processCreate(request, response, courseDAO);
-//			
-//			} else if (request.getParameter("detailForm") != null) { // create exist & do create
-//				processShowDetail(request, response, courseDAO);
-//
-//			} else {
-//				processQueryByAll(request, response, courseDAO);
-//			}
 		} catch (NamingException ne) {
 			System.out.println("Naming Service Lookup Exception");
 		} catch (SQLException e) {
@@ -243,63 +214,17 @@ public class CourseController extends HttpServlet {
 	
 	private void processUpdate(HttpServletRequest request, HttpServletResponse response, CourseBean courseBean)
 			throws SQLException, IOException {
-		
-		CourseService courseService = new CourseServicelmpl();
-		//CourseBean courseBean = courseService.getCourse(Integer.valueOf(request.getParameter("courseNo").trim()));
-		try {
-//			if (courseBean == null) {
-//				System.out.println("UpdateQ failed");
-//				getServletContext().getRequestDispatcher("/404.jsp").forward(request, response);
-//			}
-//			else {
-//				courseBean.setCourseCategory(request.getParameter("courseCategory").trim());
-//				courseBean.setCourseName(request.getParameter("courseName").trim());
-//				courseBean.setCourseIntroduction(request.getParameter("courseIntroduction").trim());
-//				courseBean.setLecturer(request.getParameter("lecturer").trim());
-//				courseBean.setDate(Date.valueOf(request.getParameter("date").trim()));
-//				courseBean.setCoursePicUrl(request.getParameter("coursePic").trim());
-//				courseBean.setCourseVedioUrl( request.getParameter("courseVedio").trim());
-//				courseBean.setScore(Double.valueOf(request.getParameter("score").trim()));
-//				courseBean.setPrice(Integer.valueOf(request.getParameter("price").trim()));
 
-				boolean updateCourseCheck = courseService.updateCourse(courseBean);
-				System.out.println(updateCourseCheck);
-				System.out.println("Update:" + courseBean.getCourseNo() + " Update success");
-				response.sendRedirect("./CourseController");
-//			}
+		CourseService courseService = new CourseServicelmpl();
+		try {
+			boolean updateCourseCheck = courseService.updateCourse(courseBean);
+			System.out.println(updateCourseCheck);
+			System.out.println("Update:" + courseBean.getCourseNo() + " Update success");
+			response.sendRedirect("./CourseController");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-//	private void processUpdate(HttpServletRequest request, HttpServletResponse response)
-//			throws SQLException, IOException {
-//		
-//		CourseService courseService = new CourseServicelmpl();
-//		CourseBean courseBean = courseService.getCourse(Integer.valueOf(request.getParameter("courseNo").trim()));
-//		try {
-//			if (courseBean == null) {
-//				System.out.println("UpdateQ failed");
-//				getServletContext().getRequestDispatcher("/404.jsp").forward(request, response);
-//			}
-//			else {
-//				courseBean.setCourseCategory(request.getParameter("courseCategory").trim());
-//				courseBean.setCourseName(request.getParameter("courseName").trim());
-//				courseBean.setCourseIntroduction(request.getParameter("courseIntroduction").trim());
-//				courseBean.setLecturer(request.getParameter("lecturer").trim());
-//				courseBean.setDate(Date.valueOf(request.getParameter("date").trim()));
-//				courseBean.setCoursePicUrl(request.getParameter("coursePic").trim());
-//				courseBean.setCourseVedioUrl( request.getParameter("courseVedio").trim());
-//				courseBean.setScore(Double.valueOf(request.getParameter("score").trim()));
-//				courseBean.setPrice(Integer.valueOf(request.getParameter("price").trim()));
-//				
-//				courseService.updateCourse(courseBean);
-//				System.out.println("Update:" + courseBean.getCourseNo() + " Update success");
-//				response.sendRedirect("./CourseController");
-//			}
-//		} catch (ServletException | IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
 
 	private void processQueryByAll(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
