@@ -16,7 +16,8 @@
 				<FORM ACTION="./CourseController" method="get"
 					onsubmit="return checkCourseForm()">
 
-					<% CourseBean course = (CourseBean) request.getAttribute("course");%>
+					<% CourseBean course = (CourseBean) request.getAttribute("courseBean");%>
+					
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">課程編號</label>
 						<div class="col-sm-8">
@@ -57,97 +58,87 @@
 					</div>
 
 
-<<<<<<< Updated upstream
-	
-						<div class="row mb-3">
-							<label class="col-sm-2 col-form-label">課程名稱</label>
-							<div class="col-sm-8">
-<!-- 							<input type="hidden" class="form-control" name="courseName" value="update"> -->
-								<input type="text" class="form-control" name="courseName"
-									value="<%=course.getCourseName()%>" id="courseIntroduction">
-							</div>
-=======
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">課程名稱</label>
 						<div class="col-sm-8">
-							<!-- 							<input type="hidden" class="form-control" name="courseName" value="update"> -->
+							<!-- <input type="hidden" class="form-control" name="courseName" value="update"> -->
 							<input type="text" class="form-control" name="courseName"
 								value="<%=course.getCourseName()%>" id="courseIntroduction">
->>>>>>> Stashed changes
 						</div>
 					</div>
 
 					<div class="row mb-3">
-						<label class="col-sm-2 col-form-label">課程介紹</label>
-						<div class="col-sm-8">
-							<textarea name="courseIntroduction" class="form-control"
-								placeholder="課程介紹..." cols="62" rows="5"><%=course.getCourseIntroduction()%></textarea>
+							<label class="col-sm-2 col-form-label">課程介紹</label>
+							<div class="col-sm-8">
+								<textarea name="courseIntroduction" class="form-control"
+									placeholder="課程介紹..." cols="62" rows="5"><%=course.getCourseIntroduction()%></textarea>
 
-							<!-- 							<input type="text" class="form-control" -->
-							<!-- 									name="courseIntroduction" -->
-							<%-- 									value="<%=course.getCourseIntroduction()%>"> --%>
+								<!-- 							<input type="text" class="form-control" -->
+								<!-- 									name="courseIntroduction" -->
+								<%-- 									value="<%=course.getCourseIntroduction()%>"> --%>
+							</div>
 						</div>
-					</div>
 
-					<div class="row mb-3">
-						<label class="col-sm-2 col-form-label">講師</label>
-						<div class="col-sm-8">
-							<input type="text" class="form-control" name="lecturer"
-								value="<%=course.getLecturer()%>" id="lecturer">
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label">講師</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" name="lecturer"
+									value="<%=course.getLecturer()%>" id="lecturer">
+							</div>
 						</div>
-					</div>
 
-					<div class="row mb-3">
-						<label class="col-sm-2 col-form-label">上架時間</label>
-						<div class="col-sm-8">
-							<input type="date" class="form-control" name="date"
-								value="<%=course.getDate()%>" id="date">
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label">上架時間</label>
+							<div class="col-sm-8">
+								<input type="date" class="form-control" name="date"
+									value="<%=course.getDate()%>" id="date">
+							</div>
 						</div>
-					</div>
 
 
-					<div class="row mb-3">
-						<label class="col-sm-2 col-form-label">圖片位置</label>
-						<div class="col-sm-8">
-							<input type="text" class="form-control" name="coursePic"
-								value="<%=course.getCoursePic()%>" id="coursePic">
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label">圖片位置</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" name="coursePic"
+									value="<%=course.getCoursePicUrl()%>" id="coursePic">
+							</div>
 						</div>
-					</div>
 
-					<div class="row mb-3">
-						<label class="col-sm-2 col-form-label">影片位置</label>
-						<div class="col-sm-8">
-							<input type="text" class="form-control" name="courseVedio"
-								value="<%=course.getCourseVedio()%>" id="courseVedio">
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label">影片位置</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" name="courseVedio"
+									value="<%=course.getCourseVedioUrl()%>" id="courseVedio">
+							</div>
 						</div>
-					</div>
 
-					<div class="row mb-3">
-						<label class="col-sm-2 col-form-label">評分</label>
-						<div class="col-sm-8">
-							<input type="text" class="form-control" name="score"
-								value="<%=course.getScore()%>" placeholder="0~9.9" id="score">
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label">評分</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" name="score"
+									value="<%=course.getScore()%>" placeholder="0~9.9" id="score">
+							</div>
 						</div>
-					</div>
 
-					<div class="row mb-3">
-						<label class="col-sm-2 col-form-label">價錢</label>
-						<div class="col-sm-8">
-							<input type="text" class="form-control" name="price"
-								value="<%=course.getPrice()%>" id="price">
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label">價錢</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" name="price"
+									value="<%=course.getPrice()%>" id="price">
+							</div>
 						</div>
-					</div>
 
-					<div>
-						<button type="submit" class="btn btn-primary" name="updateConfirm"
-							value="確認更改" onclick="javascript:return upd();">確認更改</button>
+						<div>
+							<button type="submit" class="btn btn-primary"
+								name="updateConfirm" value="確認更改"
+								onclick="javascript:return upd();">確認更改</button>
 
-						<button type="reset" class="btn btn-primary" name="reset"
-							value="回復原始資料">回復原始資料</button>
+							<button type="reset" class="btn btn-primary" name="reset"
+								value="回復原始資料">回復原始資料</button>
 
-						<button type="button" class="btn btn-primary"
-							onclick="location.href='./CourseController'">取消</button>
-					</div>
+							<button type="button" class="btn btn-primary"
+								onclick="location.href='./CourseController'">取消</button>
+						</div>
 				</FORM>
 			</div>
 		</div>

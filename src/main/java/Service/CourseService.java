@@ -12,12 +12,11 @@ public interface CourseService {
 
 	List<CourseBean> getAllCourses();
 	
-	List<CourseBean> getCourseByMultiQuery(String courseNo, String courseCategory, String courseName, String lecturer,
-			String dateMonth, String date);
+	List<CourseBean> getCourseByMultiQuery(String courseCategory, String courseName, String lecturer);
 
 	CourseBean getCourse(int pk);
 
-	void deleteCourse(int pk);
+	boolean deleteCourse(int pk);
 
-	void updateCourse(CourseBean courseBean);
+	boolean updateCourse(CourseBean courseBean);
 }

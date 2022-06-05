@@ -20,7 +20,7 @@
 				<div class="d-flex align-items-center justify-content-between mb-4">
 <!-- -----------------------------------------Query form start----------------------------------------------------------------------- -->
 					<h5 class="mb-0">
-						課程資訊查詢 <i>(單選or複選查詢)</i>
+						課程資訊查詢
 					</h5>
 					<button type="button" class="btn btn-primary mb-0"
 						onclick="location.href='./CourseCreate.jsp'">新增課程</button>
@@ -35,15 +35,14 @@
 								maxlength="10" placeholder="1~40">
 						</div>
 					</div>
-
-					<div class="row mb-3">
-						<label class="col-sm-2 col-form-label">上架時間</label>
-						<div class="col-sm-8">
-							<input type="date" class="form-control" name="date"
-								maxlength="15">
-						</div>
+					
+					<div>
+						<button type="submit" class="btn btn-primary" name="findByNo"
+							value="查詢">編號查詢</button>
 					</div>
-
+					
+					<hr>
+	
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">課程分類</label>
 						<div class="col-sm-8">
@@ -76,23 +75,12 @@
 						</div>
 					</div>
 
-					<div class="row mb-3">
-						<label class="col-sm-2 col-form-label">上架月份</label>
-						<div class="col-sm-8">
-							<input type="text" class="form-control" name="dateMonth"
-								maxlength="5" placeholder="11">
-						</div>
-					</div>
 
 					<div>
 						<button type="submit" class="btn btn-primary" name="findByMulti"
-							value="查詢">查詢</button>
+							value="查詢">模糊查詢</button>
 
-<!-- 						<button type="submit" class="btn btn-primary" name="findAll" -->
-<!-- 							value="檢視所有課程">檢視所有課程</button> -->
-
-						<button type="reset" class="btn btn-primary" name="reset"
-							>清空</button>
+						<button type="reset" class="btn btn-primary" name="reset">清空</button>
 					</div>
 				</FORM>
 <!-- -----------------------------------------Query form end----------------------------------------------------------------------- -->
@@ -118,7 +106,7 @@
 							<c:forEach var="course" items="${courseList}">
 							<tr>
 								<td><c:out value="${course.courseNo}"/> </td>
-								<td><c:out value="${course.courseCategory}"/> </td>
+					 			<td><c:out value="${course.courseCategory}"/> </td>
 								<td><c:out value="${course.courseName}"/> </td>
 								<td><c:out value="${course.lecturer}"/> </td>
 								<td><c:out value="${course.date}"/> </td>

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page import="Bean.Course"%>
+<%@ page import="Bean.CourseBean"%>
 <%@include file="DashBoardHeader.jspf"%>
 
 
@@ -16,7 +16,7 @@
 <!-- 					<div class="table-responsive"> -->
 					<FORM ACTION="./CourseController" method="post">
 
-							<% Course course = (Course) request.getAttribute("course");%>
+							<% CourseBean course = (CourseBean) request.getAttribute("CourseBean");%>
 						<div class="row mb-3">
 							<label class="col-sm-2 col-form-label">課程編號</label>
 							<div class="col-sm-8">
@@ -29,8 +29,8 @@
 						<div class="row mb-3">
 							<label class="col-sm-2 col-form-label">課程分類</label>
 							<div class="col-sm-8">
-							<input type="text" class="form-control" name="courseCategory"
-									value="${course.courseCategory}" readonly="readonly">
+							<input type="text" class="form-control" name="courseCategory" 
+							value="<%=course.getCourseCategory()%>" readonly="readonly">
 <!-- 								<select name="courseCategory" > -->
 <!-- 									<option value="英文證照"  -->
 <%-- 									<c:if test="${course.courseCategory=='英文證照'}">selected </c:if>>英文證照 --%>
@@ -98,7 +98,7 @@
 							<label class="col-sm-2 col-form-label">圖片位置</label>
 							<div class="col-sm-8">
 								<input type="text" class="form-control" name="coursePic"
-									value="<%=course.getCoursePic()%>" readonly="readonly">
+									value="<%=course.getCoursePicUrl()%>" readonly="readonly">
 							</div>
 						</div>
 
@@ -106,7 +106,7 @@
 							<label class="col-sm-2 col-form-label">影片位置</label>
 							<div class="col-sm-8">
 								<input type="text" class="form-control" name="courseVedio"
-									value="<%=course.getCourseVedio()%>" readonly="readonly">
+									value="<%=course.getCourseVedioUrl()%>" readonly="readonly">
 							</div>
 						</div>
 

@@ -15,18 +15,17 @@ import util.HibernateUtils;
 public class CourseServicelmpl implements CourseService {
 
 	SessionFactory factory;
-	Session session;
 	CourseDao courseDao;
 	
 	public CourseServicelmpl() {
-		factory = HibernateUtils.getSessionFactory();
-		session = factory.getCurrentSession();
-		courseDao = new CourseDaolmpl();
+		this.factory = HibernateUtils.getSessionFactory();
+		this.courseDao = new CourseDaolmpl();
 	}
 
 	@Override
 	public boolean isDup(int pk) {
 		boolean checkResult = false;
+		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
@@ -44,6 +43,7 @@ public class CourseServicelmpl implements CourseService {
 	@Override
 	public int save(CourseBean courseBean) {
 		int n = 0;
+		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
@@ -61,6 +61,7 @@ public class CourseServicelmpl implements CourseService {
 	@Override
 	public List<CourseBean> getAllCourses() {
 		List<CourseBean> courseBeans = null;
+		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
@@ -76,13 +77,14 @@ public class CourseServicelmpl implements CourseService {
 	}
 
 	@Override
-	public List<CourseBean> getCourseByMultiQuery(String courseNo, String courseCategory, String courseName,
-			String lecturer, String dateMonth, String date) {
+	public List<CourseBean> getCourseByMultiQuery(String courseCategory, String courseName,
+			String lecturer) {
 		List<CourseBean> courseBeans = null;
+		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			courseBeans = courseDao.getCourseByMultiQuery(courseNo, courseCategory, courseName, lecturer, dateMonth, date);
+			courseBeans = courseDao.getCourseByMultiQuery(courseCategory, courseName, lecturer );
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null) {
@@ -96,6 +98,7 @@ public class CourseServicelmpl implements CourseService {
 	@Override
 	public CourseBean getCourse(int pk) {
 		CourseBean courseBean = null;
+		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
@@ -111,11 +114,13 @@ public class CourseServicelmpl implements CourseService {
 	}
 
 	@Override
-	public void deleteCourse(int pk) {
+	public boolean deleteCourse(int pk) {
+		boolean checkResult = false;
+		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			courseDao.deleteCourse(pk);
+			checkResult = courseDao.deleteCourse(pk);
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null) {
@@ -123,14 +128,17 @@ public class CourseServicelmpl implements CourseService {
 			}
 			throw new RuntimeException(e);
 		}
+		return checkResult;
 	}
 
 	@Override
-	public void updateCourse(CourseBean courseBean) {
+	public boolean updateCourse(CourseBean courseBean) {
+		boolean checkResult = false;
+		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			courseDao.updateCourse(courseBean);
+			checkResult = courseDao.updateCourse(courseBean);
 			tx.commit();
 		} catch (Exception e) {
 			if (tx != null) {
@@ -138,5 +146,6 @@ public class CourseServicelmpl implements CourseService {
 			}
 			throw new RuntimeException(e);
 		}
+		return checkResult;
 	}
 }

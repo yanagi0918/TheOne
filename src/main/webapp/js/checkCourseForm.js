@@ -49,7 +49,7 @@ $('#correctInput').click(function () {
     $('#courseCategory').val('求職技巧')
     $('#courseIntroduction').val('畢業季將近，即將踏入社會的準畢業生們開始尋找自己未來的出路，積極查找各種工作資訊，許多公司也紛紛開出職缺，想趁著畢業求職潮廣招人才。面對各種夢幻職缺，你知道企業面試官們最在意哪些地方嗎？')
     $('#lecturer').val('王大陸')
-    $('#date').val('2022-06-01')
+    $('#date').val('2022-08-01')
     $('#coursePic').val('url')
     $('#courseVedio').val('url')
     $('#score').val('9.9')

@@ -11,7 +11,7 @@
 }
 </style>
 
-<<<<<<< Updated upstream
+
 <script>
 	function create() {
 		var msg = "您真的確定要新增嗎？\n\n請確認！";
@@ -30,8 +30,7 @@
 // 		  }
 // 		}
 </script>
-=======
->>>>>>> Stashed changes
+
 
 <BODY>
 	<div class="container-fluid pt-4 px-4">
@@ -46,7 +45,7 @@
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">課程名稱</label>
 						<div class="col-sm-8">
-						<input type="hidden" class="form-control" name="courseName" value="create">
+<!-- 						 <input type="hidden" class="form-control" name="courseid" value="0" id="courseid2"> -->
 							<input type="text" class="form-control" name="courseName"
 								maxlength="20" required id="courseName">
 						</div>
