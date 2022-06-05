@@ -105,6 +105,8 @@ public class CourseController extends HttpServlet {
 					course.setScore(Double.valueOf(fieldValue));
 				} else if (fieldName.equals("price")) {
 					course.setPrice(Integer.valueOf(fieldValue));
+				} else if (fieldName.equals("courseNo")) {
+					course.setCourseNo(Integer.valueOf(fieldValue));
 				} else if (fieldName.equals("OringinImgURL")) {
 					OringinImgURL = fieldValue;
 				}
@@ -114,10 +116,8 @@ public class CourseController extends HttpServlet {
 				course.setCoursePicUrl(OringinImgURL);
 			}
 
-			if (course.getCourseName() != null) { // EventCreate.jsp <input:hidden name="adId" value="0">
+			if (course.getCourseNo() == 0) { // EventCreate.jsp <input:hidden name="adId" value="0">
 				processCreate(request, response, course);
-				System.out.println(course.getCourseName());
-				// course.getCourseName();
 			}
 //			else{
 //				processUpdate(request, response, courseDAO, course);

@@ -11,7 +11,6 @@
 }
 </style>
 
-
 <script>
 	function create() {
 		var msg = "您真的確定要新增嗎？\n\n請確認！";
@@ -22,7 +21,7 @@
 		}
 	}
 	
-	//另一種上傳圖片同步顯示的分法	
+//  另一種上傳圖片同步顯示的方法	
 // 	imgInput.onchange = evt => {
 // 		  const [file] = imgInp.files
 // 		  if (file) {
@@ -45,7 +44,7 @@
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">課程名稱</label>
 						<div class="col-sm-8">
-<!-- 						 <input type="hidden" class="form-control" name="courseid" value="0" id="courseid2"> -->
+						 <input type="hidden" class="form-control" name="courseNo" value="0" id="courseNo">
 							<input type="text" class="form-control" name="courseName"
 								maxlength="20" required id="courseName">
 						</div>
