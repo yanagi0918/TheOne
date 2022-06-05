@@ -22,7 +22,6 @@ public class CompanyServlet extends HttpServlet {
 
 		try {
 			request.setCharacterEncoding("UTF-8");
-			
 			if(request.getParameter("UpdateId") != null) {
 				CompanyService companyService = new CompanyServiceImpl();
 				Company companyForUpdate = companyService.getCompany(Integer.parseInt(request.getParameter("UpdateId")));
@@ -35,6 +34,9 @@ public class CompanyServlet extends HttpServlet {
 			}else if (request.getParameter("DeleteId") != null) {
 				int deleteId = Integer.parseInt(request.getParameter("DeleteId"));
 				processDelete(request, response, deleteId);
+				
+			}else if (request.getParameter("detailForm") != null) {
+				processShowDetail(request, response);
 			}else {
 				showData(request, response);
 			}
@@ -42,6 +44,7 @@ public class CompanyServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -112,7 +115,14 @@ public class CompanyServlet extends HttpServlet {
 		response.sendRedirect("./CompanyServlet");
 	}
 
-
-	
+	private void processShowDetail(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException{
+		Company company = new Company();		
+		CompanyService companyService = new CompanyServiceImpl();
+		int comppk = Integer.parseInt(request.getParameter("detailForm"));
+		company=companyService.getCompany(comppk);
+		request.setAttribute("company", company);
+			request.getRequestDispatcher("CompanyDetail.jsp").forward(request, response);
+	}
 	
 }

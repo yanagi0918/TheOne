@@ -23,15 +23,15 @@
 <!-- 		</div> -->
 <!-- 	</form> -->
 	<div class="table-responsive">
-	<table class="table align-middle table-bordered table-hover mb-0">
+	<table class="table align-middle table-bordered table-hover mb-0 order-table" id="myTable">
 	<thead>
 		<tr class="text-dark">
-			<th scope="col">職缺名稱</th>
-			<th scope="col">職缺性質</th>
-			<th scope="col">職缺條件</th>
-			<th scope="col">需求人數</th>
-			<th scope="col">每月薪資</th>
-			<th scope="col">統一編號</th>
+			<th scope="col" onclick="javascript:sortTable(0)">職缺名稱</th>
+			<th scope="col" onclick="javascript:sortTable(1)">職缺性質</th>
+			<th scope="col" onclick="javascript:sortTable(2)">職缺條件</th>
+			<th scope="col" onclick="javascript:sortTable(3)">需求人數</th>
+			<th scope="col" onclick="javascript:sortTable(4)">每月薪資</th>
+			<th scope="col" onclick="javascript:sortTable(5)">統一編號</th>
 			<th scope="col">動作</th>
 		</tr>
 		</thead>
