@@ -135,7 +135,7 @@
 					<div>
 <!-- 						<button type="submit" class="btn btn-primary" name="inset" -->
 <!-- 							value="新增課程" onclick="create()">確認新增</button> -->
-						<button type="submit" class="btn btn-primary" name="inset" id="inset1" 
+						<button type="submit" class="btn btn-primary" name="insert" id="inset1" 
 						value="新增課程" >確認新增</button>
 						<button type="reset" class="btn btn-primary" name="reset"
 							value="清空輸入">清空輸入</button>

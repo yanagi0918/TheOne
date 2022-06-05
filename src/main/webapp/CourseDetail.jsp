@@ -71,9 +71,6 @@
 							<div class="col-sm-8">
 							<textarea name="courseIntroduction" class="form-control" placeholder="課程介紹..." cols="62" rows="5" readonly="readonly"><%=course.getCourseIntroduction()%></textarea>
 
-<!-- 							<input type="text" class="form-control" -->
-<!-- 									name="courseIntroduction" -->
-<%-- 									value="<%=course.getCourseIntroduction()%>"> --%>
 							</div>
 						</div>
 
@@ -97,8 +94,11 @@
 						<div class="row mb-3">
 							<label class="col-sm-2 col-form-label">圖片位置</label>
 							<div class="col-sm-8">
-								<input type="text" class="form-control" name="coursePic"
-									value="<%=course.getCoursePicUrl()%>" readonly="readonly">
+								<img class="img-fluid mx-auto mb-4" id="preview_img" src="<%=course.getCoursePicUrl()%>"
+								alt="請選擇課程圖" style="width: 320px; height: 200px;"> 
+							
+<!-- 								<input type="text" class="form-control" name="coursePic" -->
+<%-- 									value="<%=course.getCoursePicUrl()%>" readonly="readonly"> --%>
 							</div>
 						</div>
 

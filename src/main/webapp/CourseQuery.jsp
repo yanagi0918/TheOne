@@ -32,7 +32,7 @@
 						<label class="col-sm-2 col-form-label">課程編號</label>
 						<div class="col-sm-8">
 							<input type="text" class="form-control" name="courseNo"
-								maxlength="10" placeholder="1~40">
+								maxlength="10" placeholder="編號">
 						</div>
 					</div>
 					

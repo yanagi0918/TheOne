@@ -17,7 +17,6 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import Bean.CourseBean;
 import Service.CourseService;
 import Service.Impl.CourseServicelmpl;
-import javassist.expr.NewArray;
 
 @WebServlet("/CourseController")
 public class CourseController extends HttpServlet {
@@ -36,8 +35,8 @@ public class CourseController extends HttpServlet {
 			} else if (request.getParameter("findByNo") != null) { 
 				processFindCourseByNo(request, response);
 
-			} else if (request.getParameter("updateConfirm") != null) { // updateConfirm exist & do Update
-				processUpdate(request, response);
+//			} else if (request.getParameter("updateConfirm") != null) { // updateConfirm exist & do Update
+//				processUpdate(request, response);
 
 			} else if (request.getParameter("DELETE") != null) { // DeleteId exist & do delete
 				processDeleteByNo(request, response);
@@ -74,7 +73,7 @@ public class CourseController extends HttpServlet {
 			Iterator<FileItem> fieldsIterator = fields.iterator();
 
 			// put data into bean
-			CourseBean course = new CourseBean();
+			CourseBean courseBean = new CourseBean();
 			String OringinImgURL = null;
 			while (fieldsIterator.hasNext()) {
 				FileItem fieldItem = (FileItem) fieldsIterator.next();
@@ -88,40 +87,42 @@ public class CourseController extends HttpServlet {
 					// save Img file in absolute path
 					fieldItem.write(savedFile);
 					// set ImgURL in relative path
-					course.setCoursePicUrl("courseImg" + File.separator + savedFile.getName());
+					courseBean.setCoursePicUrl("courseImg" + File.separator + savedFile.getName());
 				} else if (fieldName.equals("courseCategory")) {
-					course.setCourseCategory(fieldValue);
+					courseBean.setCourseCategory(fieldValue);
 				} else if (fieldName.equals("courseName")) {
-					course.setCourseName(fieldValue);
+					courseBean.setCourseName(fieldValue);
 				} else if (fieldName.equals("courseIntroduction")) {
-					course.setCourseIntroduction(fieldValue);
+					courseBean.setCourseIntroduction(fieldValue);
 				} else if (fieldName.equals("lecturer")) {
-					course.setLecturer(fieldValue);
+					courseBean.setLecturer(fieldValue);
 				} else if (fieldName.equals("date")) {
-					course.setDate(Date.valueOf(fieldValue));
+					courseBean.setDate(Date.valueOf(fieldValue));
 				} else if (fieldName.equals("courseVedio")) {
-					course.setCourseVedioUrl(fieldValue);
+					courseBean.setCourseVedioUrl(fieldValue);
 				} else if (fieldName.equals("score")) {
-					course.setScore(Double.valueOf(fieldValue));
+					courseBean.setScore(Double.valueOf(fieldValue));
 				} else if (fieldName.equals("price")) {
-					course.setPrice(Integer.valueOf(fieldValue));
+					courseBean.setPrice(Integer.valueOf(fieldValue));
 				} else if (fieldName.equals("courseNo")) {
-					course.setCourseNo(Integer.valueOf(fieldValue));
+					courseBean.setCourseNo(Integer.valueOf(fieldValue));
 				} else if (fieldName.equals("OringinImgURL")) {
 					OringinImgURL = fieldValue;
 				}
 
 			}
-			if (course.getCoursePicUrl() == null) { // if img did not upload set OringinImgURL
-				course.setCoursePicUrl(OringinImgURL);
+			if (courseBean.getCoursePicUrl() == null) { // if img did not upload set OringinImgURL
+				courseBean.setCoursePicUrl(OringinImgURL);
 			}
 
-			if (course.getCourseNo() == 0) { // EventCreate.jsp <input:hidden name="adId" value="0">
-				processCreate(request, response, course);
+			if (courseBean.getCourseNo() == 0) { // EventCreate.jsp <input:hidden name="adId" value="0">
+				processCreate(request, response, courseBean);
+				System.out.println("create");
 			}
-//			else{
-//				processUpdate(request, response, courseDAO, course);
-//			}
+			else {
+				processUpdate(request, response, courseBean);
+				System.out.println("upd");
+			}
 			
 			
 //			if (request.getParameter("UptdByCourseNO") != null) { // get UptdByCourseNO & deliver event to update page and show Update course
@@ -240,35 +241,65 @@ public class CourseController extends HttpServlet {
 		
 	}
 	
-	private void processUpdate(HttpServletRequest request, HttpServletResponse response)
+	private void processUpdate(HttpServletRequest request, HttpServletResponse response, CourseBean courseBean)
 			throws SQLException, IOException {
 		
 		CourseService courseService = new CourseServicelmpl();
-		CourseBean courseBean = courseService.getCourse(Integer.valueOf(request.getParameter("courseNo").trim()));
+		//CourseBean courseBean = courseService.getCourse(Integer.valueOf(request.getParameter("courseNo").trim()));
 		try {
-			if (courseBean == null) {
-				System.out.println("UpdateQ failed");
-				getServletContext().getRequestDispatcher("/404.jsp").forward(request, response);
-			}
-			else {
-				courseBean.setCourseCategory(request.getParameter("courseCategory").trim());
-				courseBean.setCourseName(request.getParameter("courseName").trim());
-				courseBean.setCourseIntroduction(request.getParameter("courseIntroduction").trim());
-				courseBean.setLecturer(request.getParameter("lecturer").trim());
-				courseBean.setDate(Date.valueOf(request.getParameter("date").trim()));
-				courseBean.setCoursePicUrl(request.getParameter("coursePic").trim());
-				courseBean.setCourseVedioUrl( request.getParameter("courseVedio").trim());
-				courseBean.setScore(Double.valueOf(request.getParameter("score").trim()));
-				courseBean.setPrice(Integer.valueOf(request.getParameter("price").trim()));
+//			if (courseBean == null) {
+//				System.out.println("UpdateQ failed");
+//				getServletContext().getRequestDispatcher("/404.jsp").forward(request, response);
+//			}
+//			else {
+//				courseBean.setCourseCategory(request.getParameter("courseCategory").trim());
+//				courseBean.setCourseName(request.getParameter("courseName").trim());
+//				courseBean.setCourseIntroduction(request.getParameter("courseIntroduction").trim());
+//				courseBean.setLecturer(request.getParameter("lecturer").trim());
+//				courseBean.setDate(Date.valueOf(request.getParameter("date").trim()));
+//				courseBean.setCoursePicUrl(request.getParameter("coursePic").trim());
+//				courseBean.setCourseVedioUrl( request.getParameter("courseVedio").trim());
+//				courseBean.setScore(Double.valueOf(request.getParameter("score").trim()));
+//				courseBean.setPrice(Integer.valueOf(request.getParameter("price").trim()));
 
-				courseService.updateCourse(courseBean);
+				boolean updateCourseCheck = courseService.updateCourse(courseBean);
+				System.out.println(updateCourseCheck);
 				System.out.println("Update:" + courseBean.getCourseNo() + " Update success");
 				response.sendRedirect("./CourseController");
-			}
-		} catch (ServletException | IOException e) {
+//			}
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+//	private void processUpdate(HttpServletRequest request, HttpServletResponse response)
+//			throws SQLException, IOException {
+//		
+//		CourseService courseService = new CourseServicelmpl();
+//		CourseBean courseBean = courseService.getCourse(Integer.valueOf(request.getParameter("courseNo").trim()));
+//		try {
+//			if (courseBean == null) {
+//				System.out.println("UpdateQ failed");
+//				getServletContext().getRequestDispatcher("/404.jsp").forward(request, response);
+//			}
+//			else {
+//				courseBean.setCourseCategory(request.getParameter("courseCategory").trim());
+//				courseBean.setCourseName(request.getParameter("courseName").trim());
+//				courseBean.setCourseIntroduction(request.getParameter("courseIntroduction").trim());
+//				courseBean.setLecturer(request.getParameter("lecturer").trim());
+//				courseBean.setDate(Date.valueOf(request.getParameter("date").trim()));
+//				courseBean.setCoursePicUrl(request.getParameter("coursePic").trim());
+//				courseBean.setCourseVedioUrl( request.getParameter("courseVedio").trim());
+//				courseBean.setScore(Double.valueOf(request.getParameter("score").trim()));
+//				courseBean.setPrice(Integer.valueOf(request.getParameter("price").trim()));
+//				
+//				courseService.updateCourse(courseBean);
+//				System.out.println("Update:" + courseBean.getCourseNo() + " Update success");
+//				response.sendRedirect("./CourseController");
+//			}
+//		} catch (ServletException | IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	private void processQueryByAll(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
@@ -320,5 +351,9 @@ public class CourseController extends HttpServlet {
 		if (!uploadDir.exists()) {
 			uploadDir.mkdir();
 		}
+		System.out.println(uploadDir.getPath());
+		System.out.println(uploadDir.getParentFile());
+		uploadDir.getPath();
+		uploadDir.getParentFile();
 	}
 }

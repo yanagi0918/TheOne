@@ -13,8 +13,7 @@
 					<h6 class="mb-0">更新課程資訊</h6>
 				</div>
 				<!-- 					<div class="table-responsive"> -->
-				<FORM ACTION="./CourseController" method="get"
-					onsubmit="return checkCourseForm()">
+				<FORM ACTION="./CourseController" method="post" enctype="multipart/form-data" onsubmit="return checkCourseForm()">
 
 					<% CourseBean course = (CourseBean) request.getAttribute("courseBean");%>
 					
@@ -95,14 +94,23 @@
 							</div>
 						</div>
 
-
-						<div class="row mb-3">
-							<label class="col-sm-2 col-form-label">圖片位置</label>
-							<div class="col-sm-8">
-								<input type="text" class="form-control" name="coursePic"
-									value="<%=course.getCoursePicUrl()%>" id="coursePic">
-							</div>
+					<div class="row mb-3">
+						<label class="col-sm-2 col-form-label">課程圖</label>
+						<div class="col-sm-8 text-center">
+							<img class="img-fluid mx-auto mb-4" id="preview_img" src="#"
+								alt="請選擇課程圖" style="width: 320px; height: 200px;"> 
+							<input class="form-control" type="file" name="imgURL" id="imgInput" 
+							accept="image/jpeg, image/png">
 						</div>
+					</div>
+
+<!-- 						<div class="row mb-3"> -->
+<!-- 							<label class="col-sm-2 col-form-label">圖片位置</label> -->
+<!-- 							<div class="col-sm-8"> -->
+<!-- 								<input type="text" class="form-control" name="coursePic" -->
+<%-- 									value="<%=course.getCoursePicUrl()%>" id="coursePic"> --%>
+<!-- 							</div> -->
+<!-- 						</div> -->
 
 						<div class="row mb-3">
 							<label class="col-sm-2 col-form-label">影片位置</label>
