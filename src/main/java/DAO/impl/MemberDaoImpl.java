@@ -14,6 +14,7 @@ public class MemberDaoImpl implements MemberDao {
 		this.factory = HibernateUtils.getSessionFactory();
 	}
 	
+	
 	@Override
 	public boolean isDup(int pk) {
 		Session session = factory.getCurrentSession();
@@ -54,7 +55,10 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public Member checkAccount(String userid) {
 		Session session = factory.getCurrentSession();
-		Member account = session.get(Member.class, userid);
+		String hql = "FROM Member WHERE userid = :userid";
+		Member account = session.createQuery(hql,Member.class)
+		                        .setParameter("userid", userid)
+		                        .getSingleResult(); //DB找不到這邊會丟例外
 		return account;
 		
 	}
