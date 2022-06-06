@@ -92,7 +92,7 @@
 
 
 						<div class="row mb-3">
-							<label class="col-sm-2 col-form-label">圖片位置</label>
+							<label class="col-sm-2 col-form-label">課程圖</label>
 							<div class="col-sm-8">
 								<img class="img-fluid mx-auto mb-4" id="preview_img" src="<%=course.getCoursePicUrl()%>"
 								alt="請選擇課程圖" style="width: 320px; height: 200px;"> 

@@ -130,7 +130,7 @@ public class CourseController extends HttpServlet {
 
 	private void processCreate(HttpServletRequest request, HttpServletResponse response, CourseBean course)
 			throws SQLException, IOException {
-		
+
 		CourseService courseService = new CourseServicelmpl();
 		int coursePk = courseService.save(course);
 		try {
@@ -148,7 +148,7 @@ public class CourseController extends HttpServlet {
 
 	private void processDeleteByNo(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
-		
+
 		String courseNo = request.getParameter("courseNo").trim();
 		CourseService courseService = new CourseServicelmpl();
 		boolean deletetCheck = courseService.deleteCourse(Integer.valueOf(courseNo));
@@ -167,26 +167,26 @@ public class CourseController extends HttpServlet {
 
 	private void processShowDetail(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
-		
+
 		String courseNo = request.getParameter("courseNo").trim();
 		CourseService courseService = new CourseServicelmpl();
 		CourseBean courseBean = courseService.getCourse(Integer.valueOf(courseNo));
-			try {
-				if (courseBean == null) {
-					System.out.println("ShowDetail " + courseNo + " failed");
-					getServletContext().getRequestDispatcher("/404.jsp").forward(request, response);
-				} else {
-					request.setAttribute("CourseBean", courseBean);
-					getServletContext().getRequestDispatcher("/CourseDetail.jsp").forward(request, response);
-				}
-			} catch (ServletException | IOException e) {
-				e.printStackTrace();
+		try {
+			if (courseBean == null) {
+				System.out.println("ShowDetail " + courseNo + " failed");
+				getServletContext().getRequestDispatcher("/404.jsp").forward(request, response);
+			} else {
+				request.setAttribute("CourseBean", courseBean);
+				getServletContext().getRequestDispatcher("/CourseDetail.jsp").forward(request, response);
 			}
+		} catch (ServletException | IOException e) {
+			e.printStackTrace();
 		}
+	}
 	
 	private void processFindCourseByNo(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
-		
+
 		String courseNo = request.getParameter("courseNo");
 		System.out.println(courseNo);
 		CourseService courseService = new CourseServicelmpl();
@@ -196,10 +196,10 @@ public class CourseController extends HttpServlet {
 				System.out.println("UpdQueryByNo " + courseNo + " failed");
 				getServletContext().getRequestDispatcher("/404.jsp").forward(request, response);
 			} else {
-				if (request.getParameter("UptdByCourseNO")!=null) {
+				if (request.getParameter("UptdByCourseNO") != null) {
 					request.setAttribute("courseBean", courseBean);
 					getServletContext().getRequestDispatcher("/CourseUpdCheck.jsp").forward(request, response);
-				}else {
+				} else {
 					List<CourseBean> courseList = new ArrayList<CourseBean>();
 					courseList.add(courseBean);
 					request.setAttribute("courseList", courseList);
@@ -209,7 +209,6 @@ public class CourseController extends HttpServlet {
 		} catch (ServletException | IOException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	private void processUpdate(HttpServletRequest request, HttpServletResponse response, CourseBean courseBean)
@@ -246,11 +245,11 @@ public class CourseController extends HttpServlet {
 
 	private void processMultiQuery(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
-		
+
 		String courseCategory = request.getParameter("courseCategory");
 		String courseName = request.getParameter("courseName");
 		String lecturer = request.getParameter("lecturer");
-		
+
 		System.out.printf("%s|%s|%s%n", courseCategory, courseName, lecturer);
 
 		CourseService courseService = new CourseServicelmpl();
@@ -260,11 +259,8 @@ public class CourseController extends HttpServlet {
 				System.out.println("QueryMulti failed");
 				getServletContext().getRequestDispatcher("/404.jsp").forward(request, response);
 			} else {
-				for (CourseBean courseBean : courseList) {
-					System.out.println(courseBean.getCourseNo());
-				}
 				request.setAttribute("courseList", courseList);
-				request.getRequestDispatcher("/CourseQuery.jsp").forward(request, response);
+				getServletContext().getRequestDispatcher("/CourseQuery.jsp").forward(request, response);
 			}
 		} catch (ServletException | IOException e) {
 			e.printStackTrace();
@@ -277,8 +273,5 @@ public class CourseController extends HttpServlet {
 			uploadDir.mkdir();
 		}
 		System.out.println(uploadDir.getPath());
-		System.out.println(uploadDir.getParentFile());
-		uploadDir.getPath();
-		uploadDir.getParentFile();
 	}
 }
