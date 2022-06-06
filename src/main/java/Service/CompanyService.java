@@ -5,7 +5,7 @@ import java.util.List;
 import Bean.Company;
 
 public interface CompanyService {
-boolean isDup(int pk);
+boolean isDup(int compid);
 	
 	int save(Company company);
 	
