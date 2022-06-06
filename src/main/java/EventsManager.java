@@ -116,7 +116,12 @@ public class EventsManager extends HttpServlet {
 	private void showData(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		EventService eventService = new EventServiceImpl();
-		List<EventBean> events = eventService.getAllEvents();
+		List<EventBean> events = null;
+		try {
+			events = eventService.getAllEvents();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		request.setAttribute("events", events);
 		request.getRequestDispatcher("EventsDashBoard.jsp").forward(request, response);
 	}
@@ -124,21 +129,33 @@ public class EventsManager extends HttpServlet {
 	private void processDelete(HttpServletRequest request, HttpServletResponse response, int deleteId)
 			throws SQLException, IOException, ParseException, ServletException {
 		EventService eventService = new EventServiceImpl();
-		eventService.deleteEvent(deleteId);
+		try {
+			eventService.deleteEvent(deleteId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		response.sendRedirect("./EventsManager");
 	}
 
 	private void processCreate(HttpServletRequest request, HttpServletResponse response, EventBean event)
 			throws SQLException, IOException, ParseException, ServletException {
 		EventService eventService = new EventServiceImpl();
-		eventService.save(event);
+		try {
+			eventService.save(event);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		response.sendRedirect("./EventsManager");
 	}
 
 	private void processUpdate(HttpServletRequest request, HttpServletResponse response, EventBean event)
 			throws SQLException, IOException, ParseException, ServletException {
 		EventService eventService = new EventServiceImpl();
-		eventService.updateEvent(event);
+		try {
+			eventService.updateEvent(event);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		response.sendRedirect("./EventsManager");
 	}
 
