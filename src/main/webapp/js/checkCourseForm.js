@@ -1,83 +1,80 @@
-$(document).ready(function () {
-	 $('#table_id').DataTable(
-	 {
-  columnDefs: [
-    { orderable: false, targets: 7 }
-  ]
-} 
-	 )
+//DataTable
+$(document).ready(function() {
+	$('#table_id').DataTable(
+		{
+			columnDefs: [
+				{ orderable: false, targets: 7 }
+			]
+		}
+	)
 });
 
-
+//form check
 function checkCourseForm() {
-    let checkResult = true;
+	let checkResult = true;
 
-    let scoreRegex = /^[\d.]+$/; 
-    //let scoreRegex = /[0-9]+(.[0-9])/; 
-    if (!scoreRegex.test($("#score").val())) {
-    Swal.fire({
+	let scoreRegex = /^[\d.]+$/;
+	//let scoreRegex = /[0-9]+(.[0-9])/; 
+	if (!scoreRegex.test($("#score").val())) {
+		Swal.fire({
 			title: '提示!',
 			text: "\"評分\"只能輸入有效數字(0.0 ~ 9.9)",
 			icon: 'warning',
-    	})
-        //alert("\"評分\"只能輸入有效數字(0.0 ~ 9.9)")
-        checkResult = false;
-        return checkResult;
-    }
-    
-    let score = $("#score").val();
-    if (score >=10) {
-    	Swal.fire({
+		})
+		checkResult = false;
+		return checkResult;
+	}
+
+	let score = $("#score").val();
+	if (score >= 10) {
+		Swal.fire({
 			title: '提示!',
 			text: "\"評分\"只能輸入有效數字(0.0 ~ 9.9)，需小於10",
 			icon: 'warning',
-    	})
+		})
+		checkResult = false;
+	}
     
-		//alert("\"評分\"只能輸入有效數字(0.0 ~ 9.9)，需小於10");
-        checkResult = false;
-    }
-    
-     let priceRegex = /^\d+$/; 
-    if (!priceRegex.test($("#price").val())) {
-    	Swal.fire({
+	let priceRegex = /^\d+$/;
+	if (!priceRegex.test($("#price").val())) {
+		Swal.fire({
 			title: '提示!',
 			text: "\"價格\"只能輸入有效數字",
 			icon: 'warning',
-    	})
-    
-    //    alert("\"價格\"只能輸入有效數字");
-        checkResult = false;
-        return checkResult;
-    }
-    
-    let postDate = new Date($("#date").val());
-    let nowDate = new Date();
-    if (postDate < nowDate) {
-    	Swal.fire({
+		})
+		checkResult = false;
+		return checkResult;
+	}
+
+	let postDate = new Date($("#date").val());
+	let nowDate = new Date();
+	if (postDate < nowDate) {
+		Swal.fire({
 			title: '提示!',
 			text: "\"上架日期\"不可在今日之前",
 			icon: 'warning',
-    	})
-    	
-	//	alert("\"上架日期\"不可在今日之前");
+		})
         checkResult = false;
     }
 	return checkResult;
  } 
  
-  $("#imgInput").change(function() {
-		readURL(this);
-	});
-	function readURL(input) {
-		if (input.files && input.files[0]) {
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$("#preview_img").attr('src', e.target.result);
-			}
-			reader.readAsDataURL(input.files[0]);
-		}
-	}
+ //圖片上傳同步顯示
+$("#imgInput").change(function() {
+	readURL(this);
+});
 
+function readURL(input) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			$("#preview_img").attr('src', e.target.result);
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
+}
+
+//一鍵輸入
 $('#correctInput').click(function () {
     $('#courseName').val('面試必勝10招')
     $('#courseCategory').val('求職技巧')
