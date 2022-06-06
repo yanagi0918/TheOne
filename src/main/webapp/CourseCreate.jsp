@@ -62,7 +62,7 @@
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">課程介紹</label>
 						<div class="col-sm-8">
-							<textarea name="courseIntroduction" class="form-control" id="courseIntroduction" placeholder="介紹最多50個字" maxlength="50" cols="62" rows="5" required></textarea>
+							<textarea name="courseIntroduction" class="form-control" id="courseIntroduction" placeholder="介紹最多100個字" maxlength="100" cols="62" rows="5" required></textarea>
 <!-- 							<input type="text" class="form-control" name="courseIntroduction" -->
 <!-- 								placeholder="介紹最多50個字" maxlength="50" required -->
 <!-- 								id="courseIntroduction"> -->
@@ -153,7 +153,6 @@
 			} else
 				return false
 		}
-		
 		
 		document.getElementById("score").addEventListener("blur", function() {
 			let scoreRegex = /^[\d.]+$/;
