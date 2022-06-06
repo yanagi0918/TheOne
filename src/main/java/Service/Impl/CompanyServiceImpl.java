@@ -20,13 +20,13 @@ public class CompanyServiceImpl implements CompanyService{
 		this.companyDao = new CompanyDaoImpl();
 	}
 	@Override
-	public boolean isDup(int pk) {
+	public boolean isDup(int compid) {
 		boolean result = false;
 		Session session = factory.getCurrentSession();
 		Transaction tx = null;
 		try {
 			tx=session.beginTransaction();
-			result = companyDao.isDup(pk);
+			result = companyDao.isDup(compid);
 			tx.commit();
 		}catch (Exception e) {
 			if (tx != null) {

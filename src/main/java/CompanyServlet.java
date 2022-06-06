@@ -2,7 +2,10 @@
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -94,9 +97,24 @@ public class CompanyServlet extends HttpServlet {
 	private void processCreate(HttpServletRequest request, HttpServletResponse response,Company company)
 			throws SQLException, IOException, ParseException, ServletException {
 		CompanyService companyService = new CompanyServiceImpl();
-		companyService.save(company);
-		response.sendRedirect("./CompanyServlet");
+		//設定輸入錯誤
+		Map<String, String> errorMsg = new HashMap<String, String>();
+		request.setAttribute("error", errorMsg);
+		//讀取資料
+		int compid = (Integer.parseInt(request.getParameter("compid")));
+		String compwd = request.getParameter("compwd");
+		
+		//判斷帳號
+		if(companyService.isDup(compid)) {
+			errorMsg.put("compid", "帳號重複，請重新輸入新帳號");
+			request.getRequestDispatcher("CompanyCreate.jsp").forward(request,response);
+			return;
+		}else {
+			companyService.save(company);
+			response.sendRedirect("./CompanyServlet");
 		}
+		
+	}
 	
 	
 

@@ -146,13 +146,15 @@ public class MemberServlet extends HttpServlet {
 		
 		MemberService memberService = new MemberServiceImpl();
 		List<Member> members = memberService.getAllMembers();
+		System.out.println(members);
+		request.setAttribute("members", members);
+		getServletContext().getRequestDispatcher("/MemberDashBoard.jsp").forward(request, response);
 
-		if (members != null) {
-			request.setAttribute("members", members); // 搜尋所有的資料，把key跟value放進request
-			getServletContext().getRequestDispatcher("/MemberDashBoard.jsp").forward(request, response);
-		} else {
-			getServletContext().getRequestDispatcher("/404.jsp").forward(request, response);
-		}
+//		if (members != null) {
+//			request.setAttribute("members", members); // 搜尋所有的資料，把key跟value放進request
+//		} else {
+//			getServletContext().getRequestDispatcher("/404.jsp").forward(request, response);
+//		}
 	}
 
 	
@@ -212,7 +214,7 @@ public class MemberServlet extends HttpServlet {
 	}
 
 	public void init() throws ServletException {
-		File uploadDir = new File(getServletContext().getRealPath(File.separator + "eventsImg"));
+		File uploadDir = new File(getServletContext().getRealPath(File.separator + "membersImg"));
 		if (!uploadDir.exists()) {
 			uploadDir.mkdir();
 		}

@@ -100,14 +100,14 @@ public class MemberServiceImpl implements MemberService {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
-			account = memberDao.checkAccount(userid);
+			account = memberDao.checkAccount(userid);  //呼叫memberDao.checkAccount得到他的回傳值(Member)
 			tx.commit();
 			
 		} catch (Exception e) {
 			if (tx != null) {
 				tx.rollback();
 			}
-			throw new RuntimeException(e);
+			return null;  //如果memberDao.checkAccount得到例外，這邊就會return null
 		}
 		return account;
 	}

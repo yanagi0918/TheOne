@@ -30,6 +30,7 @@
                             <%
                             //int pageCount = (int) request.getAttribute("pageCount");
                             List<Member> members = (List<Member>) request.getAttribute("members");
+                            if(members != null){
                             for(Member m : members) {
                             %>
                                 <tr>
@@ -44,7 +45,7 @@
                                         <button type="button" class="btn btn-outline-danger m-0" onclick="javascript:if(confirm('確定要刪除嗎?'))location.href='./MemberServlet?DeleteId=<%= m.getIdNumber() %>'">刪除會員</button>
                                     </td>
                                 </tr>
-                            <% } %>
+                            <% }} %>
                             </tbody>
                         </table>
                     </div>
