@@ -28,7 +28,7 @@
 		<div class="table-responsive">
 			<table
 				class="table align-middle table-bordered table-hover mb-0 order-table"
-				id="commentTable">
+				id="commentTable" style="width:100%">
 				<thead>
 					<tr class="text-dark">
 						<th scope="col">編號</th>
@@ -38,7 +38,7 @@
 						<th scope="col">職位</th>
 						<th scope="col">職位評分</th>
 						<!-- 
-						<th scope="col">職務型態</th>
+						<th scope="col">職務型態</th> dataTables_paginate paging_simple_numbers
 						<th scope="col">表定工時</th>
 						<th scope="col">實際工時</th>
 						<th scope="col">加班頻率</th>

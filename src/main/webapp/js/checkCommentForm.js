@@ -1,5 +1,5 @@
 //Form rule
-$(function () {
+$(function() {
 
 	$('#form').validate({
 		rules: {
@@ -78,7 +78,7 @@ $(function () {
 //Star rating js
 $.raty.path = 'img';
 
-$(function () {
+$(function() {
 
 	$('#compScore').raty({
 		targetScore: '#comp_score',
@@ -115,7 +115,7 @@ $(function () {
 
 
 //One key input js
-$('#OneInput').click(function () {
+$('#OneInput').click(function() {
 	$('#user_id').val('A123456789')
 	$('#comp_name').val('狗來富寵物廣場')
 	$('#ref_time').val('2000-01-01')
@@ -137,13 +137,13 @@ $('#OneInput').click(function () {
 
 //anonymous/user show
 
-$(function () {
-	$('#anonymous').click(function () {
+$(function() {
+	$('#anonymous').click(function() {
 		$('#user_id').val('匿名');
 		$('#user_id').hide();
 	})
 
-	$('#user').click(function () {
+	$('#user').click(function() {
 		$('#user_id').val('');
 		$('#user_id').show();
 	});
@@ -153,11 +153,11 @@ $(function () {
 
 
 //DashBoard Search
-$(function () {
-	(function (document) {
+$(function() {
+	(function(document) {
 
 		// 建立 LightTableFilter
-		var LightTableFilter = (function (Arr) {
+		var LightTableFilter = (function(Arr) {
 
 			var _input;
 
@@ -165,8 +165,8 @@ $(function () {
 			function _onInputEvent(e) {
 				_input = e.target;
 				var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
-				Arr.forEach.call(tables, function (table) {
-					Arr.forEach.call(table.tBodies, function (tbody) {
+				Arr.forEach.call(tables, function(table) {
+					Arr.forEach.call(table.tBodies, function(tbody) {
 						Arr.forEach.call(tbody.rows, _filter);
 					});
 				});
@@ -180,9 +180,9 @@ $(function () {
 
 			return {
 				// 初始化函數
-				init: function () {
+				init: function() {
 					var inputs = document.getElementsByClassName('searchBar');
-					Arr.forEach.call(inputs, function (input) {
+					Arr.forEach.call(inputs, function(input) {
 						input.oninput = _onInputEvent;
 					});
 				}
@@ -191,7 +191,7 @@ $(function () {
 
 
 		// 網頁載入完成後，啟動 LightTableFilter
-		document.addEventListener('readystatechange', function () {
+		document.addEventListener('readystatechange', function() {
 			if (document.readyState === 'complete') {
 				LightTableFilter.init();
 			}
@@ -201,35 +201,18 @@ $(function () {
 })
 
 //Data Table
-$(document).ready(function () {
+$(document).ready(function() {
 	var table = $('#commentTable').DataTable({
 		//don't display search bar
 		searching: false,
+		//remove column 3,5,7 sorter
+		columnDefs: [{ 
+			orderable: false, 
+			targets: [3,5,7] }
+		],
 		//position of entire
 		dom: '<"bottom"i>rt<"bottom"flp><"clear">',
-		buttons: [
-            {
-                extend:    'copyHtml5',
-                text:      '<i class="fa fa-files-o"></i>',
-                titleAttr: 'Copy'
-            },
-            {
-                extend:    'excelHtml5',
-                text:      '<i class="fa fa-file-excel-o"></i>',
-                titleAttr: 'Excel'
-            },
-            {
-                extend:    'csvHtml5',
-                text:      '<i class="fa fa-file-text-o"></i>',
-                titleAttr: 'CSV'
-            },
-            {
-                extend:    'pdfHtml5',
-                text:      '<i class="fa fa-file-pdf-o"></i>',
-                titleAttr: 'PDF'
-            }
-        ]
+	
 	});
-	table.buttons().container()
-		.appendTo('#example_wrapper .col-sm-6:eq(0)');
+	
 });
