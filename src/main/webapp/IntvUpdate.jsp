@@ -128,7 +128,7 @@
 							<c:if test="${intvForUpdate.getCompScore()== '10'}">checked="checked"</c:if>>10
 					</div>
 				</div>
-				<button type="submit" class="btn btn-primary" name="Update" id=insert
+				<button type="button" class="btn btn-primary" name="Update" id="btn-submit"
 					value="confirm">確認修改</button>
 				<button type="button" class="btn btn-primary"
 					onclick="location.href='./InterViewServletDS'">取消</button>
@@ -137,12 +137,5 @@
 		</div>
 	</div>
 </div>
-<script>
-		document.getElementById("insert").onclick = function() {
-			if (confirm("您真的確定要修改嗎？\n\n確定送出")) {
-				return true
-			} else
-				return false
-		}</script>
 <!-- Content End -->
 <%@include file="DashBoardFooter.jspf"%>
