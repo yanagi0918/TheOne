@@ -13,7 +13,7 @@
 		<div class="bg-light rounded h-100 p-4">
 			<h6 class="mb-4">修改紀錄</h6>
 			<form action="./InterViewServletDS" method="post"
-				onsubmit="return checkForm2()">
+				onsubmit="return checkInterviewForm()">
 				<% Interview intvForUpdate = (Interview) request.getAttribute("intvForUpdate"); %>
 				<div class="row mb-3">
 					<label class="col-sm-2 col-form-label">面試內容編號</label>
@@ -128,7 +128,7 @@
 							<c:if test="${intvForUpdate.getCompScore()== '10'}">checked="checked"</c:if>>10
 					</div>
 				</div>
-				<button type="submit" class="btn btn-primary" name="Update"
+				<button type="submit" class="btn btn-primary" name="Update" id=insert
 					value="confirm">確認修改</button>
 				<button type="button" class="btn btn-primary"
 					onclick="location.href='./InterViewServletDS'">取消</button>
@@ -137,5 +137,12 @@
 		</div>
 	</div>
 </div>
+<script>
+		document.getElementById("insert").onclick = function() {
+			if (confirm("您真的確定要修改嗎？\n\n確定送出")) {
+				return true
+			} else
+				return false
+		}</script>
 <!-- Content End -->
 <%@include file="DashBoardFooter.jspf"%>

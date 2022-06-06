@@ -46,6 +46,7 @@
 	<script src="js/checkCommentForm.js"></script>
 	<script src="js/checkCompanyForm.js"></script>
 	<script src="js/checkCourseForm.js"></script>
+	<script src="js/checkInterviewForm.js"></script>
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
