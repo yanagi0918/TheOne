@@ -1,7 +1,13 @@
-
 $(document).ready(function () {
-	 $('#table_id').DataTable();
+	 $('#table_id').DataTable(
+	 {
+  columnDefs: [
+    { orderable: false, targets: 7 }
+  ]
+} 
+	 )
 });
+
 
 function checkCourseForm() {
     let checkResult = true;

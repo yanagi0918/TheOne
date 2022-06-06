@@ -9,6 +9,10 @@
 	font-style: italic;
 	color: lightgray;
 }
+
+#divScore{
+float:left;
+}
 </style>
 
 <script>
@@ -111,12 +115,11 @@
 
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">評分</label>
-						<div class="col-sm-6">
+						<div class="col-sm-8" id="divScore">
 							<input type="text" class="form-control" name="score"
 								maxlength="5" placeholder="0~9.9" id="score" required>
-								
-						 <span id="score_check" ></span>
 						</div>
+						 <span id="score_check" ></span>
 					</div>
 
 					<div class="row mb-3">

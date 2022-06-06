@@ -96,6 +96,7 @@
 								<th scope="col">上架時間</th>
 								<th scope="col">評分</th>
 								<th scope="col">價錢</th>
+								<th scope="col"></th>
 							</tr>
 						</thead>
 						<tbody>
