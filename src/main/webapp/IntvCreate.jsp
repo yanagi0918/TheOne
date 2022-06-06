@@ -8,14 +8,15 @@
 <%@include file="DashBoardHeader.jspf"%>
 
 <!-- Content Start -->
+
 <body>
 
 	<div class="container-fluid pt-4 px-4">
 		<div class="col-sm-12 col-xl-10">
 			<div class="bg-light rounded h-100 p-4">
 				<h6 class="mb-4">新增紀錄</h6>
-				<form action="./InterViewServletDS" method="post"
-					onsubmit="return checkForm2()">
+				<form action="./InterViewServletDS" method="post" onsubmit="return checkInterviewForm()">
+					
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">求職者帳號</label>
 						<div class="col-sm-8">
@@ -27,7 +28,7 @@
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">面試時間</label>
 						<div class="col-sm-8">
-							<input type="date" class="form-control" name="intTime" required>
+							<input type="date" class="form-control" name="intTime" id=intTime required>
 							<input type="hidden" class="form-control" name="createdTime">
 						</div>
 					</div>
@@ -103,7 +104,7 @@
 							<input type="radio" name="compScore" value="10" >10
 						</div>
 					</div>
-					<button type="submit" class="btn btn-primary" name="create"
+					<button type="submit" class="btn btn-primary" name="create" id=insert
 						value="confirm">確認新增</button>
 					<button type="button" class="btn btn-primary"
 						onclick="location.href='./InterViewServletDS'">取消</button>
@@ -112,6 +113,13 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		document.getElementById("insert").onclick = function() {
+			if (confirm("您真的確定要新增嗎？\n\n確定送出")) {
+				return true
+			} else
+				return false
+		}</script>
 </body>
 <!-- Content End -->
 

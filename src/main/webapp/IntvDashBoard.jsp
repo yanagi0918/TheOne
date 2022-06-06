@@ -37,8 +37,8 @@
                                     <td><%= interview.getCompScore() %></td>
                                     <td>
                                          <button type="button" class="btn btn-outline-primary m-0" onclick="location.href='./InterViewServletDS?ShowdateId=<%= interview.getCvNo() %> '">內容</button>
-                                        <button type="button" class="btn btn-outline-primary m-0" onclick="location.href='./InterViewServletDS?UpdateId=<%= interview.getCvNo() %> '">修改</button>
-                                        <button type="button" class="btn btn-outline-danger m-0" onclick="location.href='./InterViewServletDS?DeleteId=<%= interview.getCvNo() %>'">刪除</button>
+                                        <button type="button" class="btn btn-outline-primary m-0 btn-intvUpdate" onclick="location.href='./InterViewServletDS?UpdateId=<%= interview.getCvNo() %> '">修改</button>
+                                        <button type="button" class="btn btn-outline-danger m-0 btn-intvDelete" onclick="javascript:if(confirm('確定要刪除嗎?'))location.href='./InterViewServletDS?DeleteId=<%= interview.getCvNo() %>'">刪除</button>
                                     </td>
                                 </tr>
                             <% }} %>
