@@ -19,13 +19,15 @@
                                 <label class="col-sm-2 col-form-label">帳號(統編)</label>
                                 <div class="col-sm-8">
                                     <input type="text"  class="form-control"  maxlength="8" name="compid" required id="compid">
+                                    <font color='red' size='4'>${error.compid}</font>
                                 </div>
                             </div>
                             
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">密碼</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" maxlength="15" name="compwd" required id="compwd" placeholder="(15個英文字元內)">
+                                    <input type="password" class="form-control" maxlength="15" name="compwd" required id="compwd" placeholder="(至少6個字元,15個字元內)">
+                                    <font color='red' size='4'>${error.compwd}</font>
                                 </div>
                             </div>
                             
@@ -60,14 +62,14 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">聯絡電話</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" maxlength="11" name="comptele" id="comptele" placeholder="(02-87654321)">
+                                    <input type="text" class="form-control" maxlength="10" name="comptele" id="comptele" placeholder="請輸入負責人手機或是公司電話(去除括弧及刪節號)">
                                 </div>
                             </div>
                         
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">傳真號碼</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" maxlength="11" name="fax" id="fax" placeholder="(02-12345678)">
+                                    <input type="text" class="form-control" maxlength="11" name="fax" id="fax" placeholder="選填">
                                 </div>
                             </div>
                             
@@ -88,21 +90,22 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">公司網站</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="website" id="website">
+                                    <input type="text" class="form-control" name="website" id="website" placeholder="選填">
                                 </div>
                             </div>
                             
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">資本額</label>
                                 <div class="col-sm-8 text-center">
-                                <input type="text" class="form-control" maxlength="10"  name="capital" required id="capital" placeholder="(請輸入單位，如1250萬)">  
+                                <input type="text" class="form-control" maxlength="10"  name="capital" required id="capital" placeholder="(請輸入公司資本額，如1250萬)">  
                                 </div>
                             </div>
                             
                             <button type="submit" class="btn btn-primary" name="create" value="confirm">確認新增</button>
+                            <button type="reset" class="btn btn-primary">還原</button>
                             <button type="button" class="btn btn-primary" onclick="location.href='./CompanyServlet'">取消</button>
                       	    <button type="button" class="btn btn-primary" id="wrongInput">輸入錯誤範例</button>
-                            <button type="button" class="btn btn-primary" id="correctInput">一鍵輸入</button>        
+                            <button type="button" class="btn btn-primary" id="correctInput">一鍵輸入</button>      
                         </form>
                     </div>
                 </div>

@@ -16,10 +16,13 @@ public class CompanyDaoImpl implements CompanyDao{
 		this.factory = HibernateUtils.getSessionFactory();
 	}
 	@Override
-	public boolean isDup(int pk) {
+	public boolean isDup(int compid) {
 		Session session = factory.getCurrentSession();
-		Company company = (Company) session.get(Company.class, pk);
-		if (company != null) {
+		String hql = "FROM Company cp WHERE cp.compid = :compid";
+		List<Company> companies = session.createQuery(hql , Company.class)
+				.setParameter("compid", compid)
+				.getResultList();
+		if (companies.size() >0) {
 			return true;
 		} else {
 			return false;

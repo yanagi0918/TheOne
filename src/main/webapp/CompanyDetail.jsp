@@ -98,7 +98,6 @@
                                 <input type="text" class="form-control" maxlength="10"  name="capital"  id="capital" value="<%=company.getCapital()%>" readonly="readonly">  
                                 </div>
                             </div>
-                            
                             <button type="button" class="btn btn-primary" onclick="location.href='./CompanyServlet'">返回</button>
                         </form>
                     </div>
