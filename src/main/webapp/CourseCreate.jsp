@@ -9,17 +9,14 @@
 	font-style: italic;
 	color: lightgray;
 }
+
+#divScore{
+float:left;
+}
 </style>
 
 <script>
-	function create() {
-		var msg = "您真的確定要新增嗎？\n\n請確認！";
-		if (confirm(msg) == true) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+
 	
 //  另一種上傳圖片同步顯示的方法	
 // 	imgInput.onchange = evt => {
@@ -69,7 +66,7 @@
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">課程介紹</label>
 						<div class="col-sm-8">
-							<textarea name="courseIntroduction" class="form-control" id="courseIntroduction" placeholder="介紹最多50個字" maxlength="50" cols="62" rows="5" required></textarea>
+							<textarea name="courseIntroduction" class="form-control" id="courseIntroduction" placeholder="介紹最多100個字" maxlength="100" cols="62" rows="5" required></textarea>
 <!-- 							<input type="text" class="form-control" name="courseIntroduction" -->
 <!-- 								placeholder="介紹最多50個字" maxlength="50" required -->
 <!-- 								id="courseIntroduction"> -->
@@ -118,10 +115,11 @@
 
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">評分</label>
-						<div class="col-sm-8">
+						<div class="col-sm-8" id="divScore">
 							<input type="text" class="form-control" name="score"
 								maxlength="5" placeholder="0~9.9" id="score" required>
 						</div>
+						 <span id="score_check" ></span>
 					</div>
 
 					<div class="row mb-3">
@@ -129,6 +127,8 @@
 						<div class="col-sm-8">
 							<input type="text" class="form-control" name="price"
 								maxlength="5" required id="price">
+								
+								
 						</div>
 					</div>
 
@@ -149,6 +149,7 @@
 	</div>
 
 	<script>
+	
 		document.getElementById("inset1").onclick = function() {
 			if (confirm("您真的確定要新增嗎？\n\n請確認！")) {
 				return true
@@ -156,21 +157,34 @@
 				return false
 		}
 		
-// 		document.getElementById("inset1").addEventListener("click", function() {
-// 			if (confirm("您真的確定要新增嗎？\n\n請確認！")) {
-// 				return true
-// 			} else
-// 				return false
-// 		})
-		
-// 		function create() {
-// 			var msg = "您真的確定要新增嗎？\n\n請確認！";
-// 			if (confirm(msg) == true) {
-// 				return true;
-// 			} else {
-// 				return false;
-// 			}
-// 		}
+		document.getElementById("score").addEventListener("blur", function() {
+			let scoreRegex = /^[\d.]+$/;
+			let scoreValue = document.getElementById("score").value;
+			let checkBoolean = scoreRegex.test(scoreValue);
+			if (checkBoolean) {
+				document.getElementById("score_check").innerHTML = "<img width='30' height='30' src='img/right.jpg'/>"
+				return true
+			} else {
+				document.getElementById("score_check").innerHTML = "<img width='30' height='30' src='img/wrong.jpg'/>"
+				return false
+			}
+		})
+
+		// 		document.getElementById("inset1").addEventListener("click", function() {
+		// 			if (confirm("您真的確定要新增嗎？\n\n請確認！")) {
+		// 				return true
+		// 			} else
+		// 				return false
+		// 		})
+
+		// 		function create() {
+		// 			var msg = "您真的確定要新增嗎？\n\n請確認！";
+		// 			if (confirm(msg) == true) {
+		// 				return true;
+		// 			} else {
+		// 				return false;
+		// 			}
+		// 		})
 	</script>
 </BODY>
 

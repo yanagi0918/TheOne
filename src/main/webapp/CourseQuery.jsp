@@ -5,6 +5,7 @@
 <%@ page import="Bean.CourseBean"%>
 <%@include file="DashBoardHeader.jspf"%>
 
+
 <style>
 ::placeholder {
 	font-style: italic;
@@ -15,8 +16,6 @@
 <BODY>
 	<div class="container-fluid pt-4 px-4">
 		<div class="bg-light text-center rounded p-4">
-<!-- 		<div class="col-sm-12 col-xl-10"> -->
-<!-- 			<div class="bg-light rounded h-100 p-4"> -->
 				<div class="d-flex align-items-center justify-content-between mb-4">
 <!-- -----------------------------------------Query form start----------------------------------------------------------------------- -->
 					<h5 class="mb-0">
@@ -87,22 +86,20 @@
 				<hr>
 <!-- -----------------------------------------show form result start----------------------------------------------------------------------- -->
 				<div class="table-responsive">
-					<table class="table align-middle table-bordered table-hover mb-0">
+					<table id="table_id" class="table align-middle table-bordered table-hover mb-0 order-column">
 						<thead>
 							<tr class="text-dark">
 								<th scope="col">編號</th>
 								<th scope="col">類別</th>
 								<th scope="col">名稱</th>
-<!-- 								<th scope="col">介紹</th> -->
 								<th scope="col">講師</th>
 								<th scope="col">上架時間</th>
-<!-- 								<th scope="col">picUrl</th> -->
-<!-- 								<th scope="col">videUrl</th> -->
 								<th scope="col">評分</th>
 								<th scope="col">價錢</th>
+								<th scope="col"></th>
 							</tr>
 						</thead>
-
+						<tbody>
 							<c:forEach var="course" items="${courseList}">
 							<tr>
 								<td><c:out value="${course.courseNo}"/> </td>
