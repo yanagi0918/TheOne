@@ -6,8 +6,13 @@ $(function () {
 			user: {
 				required: true,
 			},
-
 			user_id: {
+				required: true,
+			},
+			ref_time: {
+				required: true,
+			},
+			comp_name: {
 				required: true,
 			},
 			job_name: {
@@ -56,6 +61,7 @@ $(function () {
 				digits: true,
 				min: 0,
 			},
+
 		},
 		messages: {
 			job_description: {
@@ -112,9 +118,7 @@ $(function () {
 $('#OneInput').click(function () {
 	$('#user_id').val('A123456789')
 	$('#comp_name').val('狗來富寵物廣場')
-	//$(':input #comp_score').val('5');
-	//$('#compScore').attr('data-score', '5')
-
+	$('#ref_time').val('2000-01-01')
 	$('#job_name').val('美容師')
 	$('#job_description option[value="全職"]').attr('selected', 'selected')
 	$('#user_id').show()
@@ -198,7 +202,7 @@ $(function () {
 
 //Data Table
 $(document).ready(function () {
-	var table = $('#myTable').DataTable({
+	var table = $('#commentTable').DataTable({
 		//don't display search bar
 		searching: false,
 		//position of entire

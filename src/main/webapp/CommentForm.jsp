@@ -14,7 +14,7 @@
 </style>
 
 <div class="container-fluid pt-4 px-4">
-	<div class="col-sm-12 col-xl-10">
+	<div class="col-sm-12 col-xl-11">
 		<div class="bg-light rounded h-100 p-4">
 			<h6 class="mb-4">
 				<c:if test="${comment != null}">編輯評論</c:if>
@@ -41,7 +41,7 @@
 					<tr>
 						<th>新增時間:</th>
 						<td><input class="form-control" type="text" value="<%=str%>"
-							name="ref_time" readonly></td>
+							name="create_time" readonly></td>
 						<th>帳號:</th>
 						<td>
 						
@@ -59,7 +59,7 @@
 						<th>公司名稱:</th>
 						<td><input class="form-control" id="comp_name" type="text"
 							value="<c:out value='${comment.comp_name}' />" name="comp_name"
-							placeholder="請輸入公司名稱" required></td>
+							placeholder="請輸入公司名稱"></td>
 						<th>公司評分:</th>
 						<td>
 							<div id="compScore"
@@ -70,6 +70,8 @@
 									value="<c:out value='${comment.comp_score}' />">
 							</div>
 						</td>
+						<th>參考時間:</th>
+						<td><input class="form-control" id="ref_time" type="date" name="ref_time" max="<%=str%>"></td>
 					</tr>
 					<tr>
 						<th>職位:</th>

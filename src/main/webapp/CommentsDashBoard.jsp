@@ -4,7 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ include file="DashBoardHeader.jspf"%>
 
 <div class="container-fluid pt-4 px-4">
@@ -28,15 +28,15 @@
 		<div class="table-responsive">
 			<table
 				class="table align-middle table-bordered table-hover mb-0 order-table"
-				id="myTable">
+				id="commentTable">
 				<thead>
 					<tr class="text-dark">
-						<th scope="col" onclick="javascript:sortTable(0)">編號</th>
-						<th scope="col" onclick="javascript:sortTable(1)">新增時間</th>
-						<th scope="col" onclick="javascript:sortTable(2)">公司名稱</th>
-						<th scope="col" onclick="javascript:sortTable(3)">公司評分</th>
-						<th scope="col" onclick="javascript:sortTable(4)">職位</th>
-						<th scope="col" onclick="javascript:sortTable(6)">職位評分</th>
+						<th scope="col">編號</th>
+						<th scope="col">參考時間</th>
+						<th scope="col">公司名稱</th>
+						<th scope="col">公司評分</th>
+						<th scope="col">職位</th>
+						<th scope="col">職位評分</th>
 						<!-- 
 						<th scope="col">職務型態</th>
 						<th scope="col">表定工時</th>
@@ -52,13 +52,23 @@
 						<th scope="col">心得分享</th>
 						<th scope="col">動作</th>
 					</tr>
+					<tr>
+						<th class= "sub-search">編號</th>
+						<th class= "sub-search">參考時間</th>
+						<th class= "sub-search">公司名稱</th>
+						<th class= "sub-search">公司評分</th>
+						<th class= "sub-search">職位</th>
+						<th class= "sub-search">職位評分</th>
+						<th class= "sub-search">心得分享</th>
+						<th class= "sub-search">動作</th>
+					</tr>
 				</thead>
 				<tbody>
 
 					<c:forEach var="comment" items="${listComment}">
 						<tr>
 							<td><c:out value="${comment.share_id}" /></td>
-							<td><c:out value="${comment.ref_time}" /></td>
+							<td><fmt:formatDate value="${comment.ref_time}" pattern="yyyy-MM" /></td>
 							<td><c:out value="${comment.comp_name}" /></td>
 							<td class="listComp"
 								data-score="<c:out value='${comment.comp_score}' />"></td>

@@ -17,6 +17,7 @@ public class CommentBean implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer share_id;
 	private Date ref_time;
+	private Date create_time;
 	private String comp_name;
 	private Integer comp_score;
 	private String job_name;
@@ -36,11 +37,12 @@ public class CommentBean implements Serializable {
 	public CommentBean() {
 	}
 
-	public CommentBean(Integer share_id, Date ref_time, String comp_name, Integer comp_score, String job_name, Integer job_score,
+	public CommentBean(Integer share_id, Date ref_time,  Date create_time, String comp_name, Integer comp_score, String job_name, Integer job_score,
 			String job_description, Integer std_hour, Integer real_hour, Integer over_freq, Float seniority, Float total_seniority,
 			Integer monthly_salary, Integer yearly_salary, Integer bonus_count, String share, String user_id) {
 		this.share_id = share_id;
 		this.ref_time = ref_time;
+		this.create_time = create_time;
 		this.comp_name = comp_name;
 		this.comp_score = comp_score;
 		this.job_name = job_name;
@@ -59,10 +61,11 @@ public class CommentBean implements Serializable {
 
 	}
 
-	public CommentBean(Date ref_time, String comp_name, Integer comp_score, String job_name, Integer job_score,
+	public CommentBean(Date ref_time, Date create_time, String comp_name, Integer comp_score, String job_name, Integer job_score,
 			String job_description, Integer std_hour, Integer real_hour, Integer over_freq, Float seniority, Float total_seniority,
 			Integer monthly_salary, Integer yearly_salary, Integer bonus_count, String share, String user_id) {
 		this.ref_time = ref_time;
+		this.create_time = create_time;
 		this.comp_name = comp_name;
 		this.comp_score = comp_score;
 		this.job_name = job_name;
@@ -100,7 +103,14 @@ public class CommentBean implements Serializable {
 	public void setRef_time(Date ref_time) {
 		this.ref_time = ref_time;
 	}
+	
+	public Date getCreate_time() {
+		return create_time;
+	}
 
+	public void setCreate_time(Date create_time) {
+		this.create_time = create_time;
+	}
 	public String getComp_name() {
 		return comp_name;
 	}
@@ -223,7 +233,7 @@ public class CommentBean implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CommentBean [share_id=" + share_id + ", ref_time=" + ref_time + ", comp_name" + comp_name + ", comp_score"
+		return "CommentBean [share_id=" + share_id + ", ref_time=" + ref_time + ", create_time=" + create_time + ", comp_name" + comp_name + ", comp_score"
 				+ comp_score + ", job_name" + job_name + ", job_score" + job_score + ", job_description"
 				+ job_description + ", std_hour" + std_hour + ", real_hour" + real_hour + ", over_freq" + over_freq
 				+ ", seniority" + seniority + ", total_seniority" + total_seniority + ", monthly_salary"
