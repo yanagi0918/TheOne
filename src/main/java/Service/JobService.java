@@ -1,10 +1,10 @@
-package DAO;
+package Service;
 
 import java.util.List;
 
 import Bean.Job;
 
-public interface JobDao {
+public interface JobService {
 	boolean isDup(int pk);
 	
 	int save(Job job);

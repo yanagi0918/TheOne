@@ -1,110 +1,105 @@
-<%@ page import="org.apache.jasper.tagplugins.jstl.core.ForEach" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="Bean.Company" %>
-<%@ page import="java.util.List" %>
-
-
-<%@include file="DashBoardHeader.jspf" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
+<%@ page import="Bean.Company"%>
+<%@include file="DashBoardHeader.jspf"%>
 
             <!-- Content Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="col-sm-12 col-xl-10">
                     <div class="bg-light rounded h-100 p-4">
-                        <h6 class="mb-4">修改公司資訊</h6>
-                        <form action="./CompanyServlet" method="post" onsubmit="return checkCompanyForm()">
-                        <% Company companyForUpdate = (Company) request.getAttribute("companyForUpdate"); %>
-                        	<div class="row mb-3">
-                                    <input type="hidden"  class="form-control" name="comppk" required id="comppk" value="<%=companyForUpdate.getComppk()%>">
+                        <h6 class="mb-4">資料內容</h6>
+                        <FORM ACTION="./CompanyServlet" method="post">
+                        <% Company company = (Company) request.getAttribute("company");%>
+                        <div class="row mb-3">
+                                    <input type="hidden"  class="form-control" name="comppk" id="comppk" value="<%=company.getComppk()%>" readonly="readonly">
                             </div>
+                            
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">帳號(統編)</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="compid" value="<%= companyForUpdate.getCompid() %>" readonly id="compid">
+                                    <input type="text"  class="form-control"  maxlength="8" name="compid"  id="compid" value="<%=company.getCompid()%>" readonly="readonly">
                                 </div>
                             </div>
                             
-                             <div class="row mb-3">
+                            <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">密碼</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" maxlength="15" name="compwd" value="<%= companyForUpdate.getCompwd() %>"  required id="compwd" placeholder="(15個英文字元內)">
+                                    <input type="text" class="form-control" maxlength="15" name="compwd"  id="compwd" value="<%=company.getCompwd()%>" readonly="readonly">
                                 </div>
                             </div>
                             
-                             <div class="row mb-3">
+                            <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">公司名稱</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" maxlength="15" name="corpname" value="<%= companyForUpdate.getCorpname() %>" required id="corpname">
+                                    <input type="text" class="form-control" name="corpname"  id="corpname" value="<%=company.getCorpname()%>" readonly="readonly">
                                 </div>
                             </div>
                             
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">負責人</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" maxlength="15" name="owner" value="<%= companyForUpdate.getOwner() %>" id="owner">
+                                    <input type="text" class="form-control" name="owner" id="owner" value="<%=company.getOwner()%>" readonly="readonly">
                                 </div>
                             </div>
                             
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">產業</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" maxlength="10" name="industry" value="<%= companyForUpdate.getIndustry() %>" required id="industry">
+                                    <input type="text" class="form-control" name="industry"  id="industry" value="<%=company.getIndustry()%>" readonly="readonly">
                                 </div>
                             </div>
                             
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">聯絡人</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" maxlength="5" name="contact" value="<%= companyForUpdate.getContact() %>" required id="contact">
+                                    <input type="text" class="form-control" name="contact"  id="contact" value="<%=company.getContact()%>" readonly="readonly">
                                 </div>
                             </div>
                             
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">聯絡電話</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" maxlength="11" name="comptele" value="<%= companyForUpdate.getComptele() %>" id="comptele" placeholder="(02-87654321)">
+                                    <input type="text" class="form-control" name="comptele" id="comptele" value="<%=company.getComptele()%>" readonly="readonly">
                                 </div>
                             </div>
                         
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">傳真號碼</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" maxlength="11" name="fax" value="<%= companyForUpdate.getFax() %>" id="fax" placeholder="(02-12345678)">
+                                    <input type="text" class="form-control" name="fax" id="fax" value="<%=company.getFax()%>" readonly="readonly">
                                 </div>
                             </div>
                             
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">公司地址</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" maxlength="30" name="compaddress" value="<%= companyForUpdate.getCompaddress() %>" required id="compaddress">
+                                    <input type="text" class="form-control" name="compaddress"  id="compaddress" value="<%=company.getCompaddress()%>" readonly="readonly">
                                 </div>
                             </div>
                             
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">員工人數</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" maxlength="7" name="empnumber" value="<%= companyForUpdate.getEmpnumber() %>" id="empnumber" placeholder="(請輸入阿拉伯整數，如2500)">
+                                    <input type="text" class="form-control" name="empnumber"  required id="empnumber" value="<%=company.getEmpnumber()%>" readonly="readonly">
                                 </div>
                             </div>
                             
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">公司網站</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="website" value="<%= companyForUpdate.getWebsite() %>" id="website">
+                                    <input type="text" class="form-control" name="website" id="website" value="<%=company.getWebsite()%>" readonly="readonly">
                                 </div>
                             </div>
                             
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">資本額</label>
                                 <div class="col-sm-8 text-center">
-                                <input type="text" class="form-control" maxlength="10"  name="capital" value="<%= companyForUpdate.getCapital() %>" id="capital" placeholder="(請加上單位，如1250萬)">  
+                                <input type="text" class="form-control" maxlength="10"  name="capital"  id="capital" value="<%=company.getCapital()%>" readonly="readonly">  
                                 </div>
                             </div>
                             
-                            
-                            <button type="submit" class="btn btn-primary" name="update" value="confirm">確認修改</button>
-                            <button type="button" class="btn btn-primary" onclick="location.href='./CompanyServlet'">取消</button>
-                     <!--   <button type="button" class="btn btn-primary" id="wrongInput">錯誤輸入</button>
-                            <button type="button" class="btn btn-primary" id="correctInput">正確輸入</button>     -->
+                            <button type="button" class="btn btn-primary" onclick="location.href='./CompanyServlet'">返回</button>
                         </form>
                     </div>
                 </div>

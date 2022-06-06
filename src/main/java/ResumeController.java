@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.JobDao;
 import DAO.ResumeDao;
+import DAO.impl.JobDaoImpl;
 import Bean.Job;
 import Bean.Resume;
 
@@ -86,7 +86,7 @@ public class ResumeController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		int resume_id = Integer.parseInt(request.getParameter("resume_id"));
-		Job existingJob = JobDao.getJobByJobID(resume_id);
+		Job existingJob = JobDaoImpl.getJobByJobID(resume_id);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("ResumeDashBoard.jsp");
 		request.setAttribute("resume", existingJob);
 		dispatcher.forward(request, response);

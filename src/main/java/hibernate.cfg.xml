@@ -33,6 +33,9 @@
 		<mapping class="Bean.Interview" />
 		<mapping class="Bean.Member" />
 		<mapping class="Bean.Resume" />
+		<mapping class="Bean.Job" />
+		<mapping class="Bean.Company" />
+		<mapping class="Bean.CourseBean" />
 		
 	</session-factory>
 </hibernate-configuration>
