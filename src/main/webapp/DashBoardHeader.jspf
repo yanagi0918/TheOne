@@ -71,7 +71,7 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="bi bi-person-circle me-2"></i><b>求職者</b></a>
                         <div class="dropdown-menu bg-transparent border-0">
 							<a href="./MemberServlet" class="dropdown-item">會員管理</a>
-							<a href="AllResumes.jsp" class="dropdown-item">履歷管理</a>
+							<a href="./ResumeServlet" class="dropdown-item">履歷管理</a>
                         </div>
                     </div>
                     <div class="nav-item dropdown">

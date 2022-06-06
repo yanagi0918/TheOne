@@ -31,7 +31,8 @@
 		<mapping class="Bean.Order" />
 		<mapping class="Bean.CommentBean" />
 		<mapping class="Bean.Interview" />
-		
+		<mapping class="Bean.Member" />
+		<mapping class="Bean.Resume" />
 		
 	</session-factory>
 </hibernate-configuration>

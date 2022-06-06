@@ -1,21 +1,15 @@
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Iterator;
 import java.util.List;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -23,15 +17,12 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import Bean.Member;
-import DAO.MemberDAO;
+import Service.MemberService;
+import Service.Impl.MemberServiceImpl;
 
 @WebServlet("/MemberServlet")
 public class MemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	DataSource ds = null;
-	InitialContext ctxt = null;
-	Connection conn = null;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -39,39 +30,29 @@ public class MemberServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		try {
 
-			ctxt = new InitialContext();
-			ds = (DataSource) ctxt.lookup("java:comp/env/jdbc/FindJobDB");
-			conn = ds.getConnection();
-			
-			MemberDAO memberDAO = new MemberDAO(conn);
 			// 如果dashboard傳回的updateid有值，先查出該id的所有內容，放進updatemember物件
 			if (request.getParameter("UpdateId") != null) {
-				Member UpdateMember = memberDAO.findMember(request.getParameter("UpdateId"));
+				
+				MemberService memberService = new MemberServiceImpl();
+				Member UpdateMember = memberService.getMember(Integer.parseInt(request.getParameter("UpdateId")));
+				
 				if (UpdateMember == null) {
 					getServletContext().getRequestDispatcher("/404.jsp").forward(request, response);
 				}
 				request.setAttribute("UpdateMember", UpdateMember); // 把key跟value放進request中，並跳轉至update頁面
 				getServletContext().getRequestDispatcher("/MemberUpdate.jsp").forward(request, response);
 			} else if (request.getParameter("DeleteId") != null) {
-				processDelete(request, response, memberDAO);
+				int deleteId = Integer.parseInt(request.getParameter("DeleteId"));
+				processDelete(request, response, deleteId);
 			} else { // 如果dashboard沒傳回updateid或是deleteid的話，直接呈現所有query
-				showData(request, response, memberDAO);
+				showData(request, response);
 			}
 
-		} catch (NamingException ne) {
-			System.out.println("Naming Service Lookup Exception");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Database Connection Error");
-		} finally {
-			try {
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {
-				System.out.println("Connection Pool Error!");
-			}
 		}
 	}
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -79,19 +60,13 @@ public class MemberServlet extends HttpServlet {
 		// 填入較多資料用doPost
 		try {
 
-			ctxt = new InitialContext();
-			ds = (DataSource) ctxt.lookup("java:comp/env/jdbc/FindJobDB");
-			conn = ds.getConnection();
-			MemberDAO memberDAO = new MemberDAO(conn);
-			
 			String update123 = null;
-			
-
 			// 建立上傳檔案的factory、以及可裝upload資訊的物件
 			DiskFileItemFactory factory = new DiskFileItemFactory();
 			factory.setSizeThreshold(4096);
 			ServletFileUpload upload = new ServletFileUpload(factory);
 			upload.setSizeMax(4194304);
+			
 			List<FileItem> fields = upload.parseRequest(request);
 			Iterator<FileItem> fieldsIterator = fields.iterator();
 
@@ -115,6 +90,8 @@ public class MemberServlet extends HttpServlet {
 					member.setImage("membersImg" + File.separator + savedFile.getName());
 
 				//判斷其他資料內容，不是圖片的話就把值set進去member中，取值都在這邊做	
+				} else if (fieldName.equals("idNumber")) {
+					member.setIdNumber(Integer.parseInt(fieldValue));
 				} else if (fieldName.equals("userid")) {
 					member.setUserid(fieldValue);
 				} else if (fieldName.equals("pwd")) {
@@ -124,7 +101,7 @@ public class MemberServlet extends HttpServlet {
 				} else if (fieldName.equals("gender")) {
 					member.setGender(fieldValue);
 				} else if (fieldName.equals("birth")) {
-					member.setBirth(fieldValue);
+					member.setBirth(Member.strToDate(fieldValue));
 				} else if (fieldName.equals("tele")) {
 					member.setTele(fieldValue);
 				} else if (fieldName.equals("phone")) {
@@ -144,19 +121,16 @@ public class MemberServlet extends HttpServlet {
 			if (member.getImage() == null) { // 如果沒有上傳照片，就使用預設圖片
 				member.setImage(OringinImgURL);
 			}
-				
-			// if (event.getAdId() == 0) //這邊是指 預設adId的值為0，如果沒有該廣告id就進入新增方法
-		
 			
 			if (update123 != null) {
-				processUpdate(request, response, memberDAO, member);
+				processUpdate(request, response, member);
 			}
 			else{
-				processCreate(request, response, memberDAO, member);
+				processCreate(request, response, member);
 			}
 			
 
-		} catch (NamingException | SQLException | ParseException e) {
+		} catch ( SQLException | ParseException e) {
 			e.printStackTrace();
 		} catch (FileUploadException e) {
 			e.printStackTrace();
@@ -165,10 +139,13 @@ public class MemberServlet extends HttpServlet {
 		}
 	}
 
-	private void showData(HttpServletRequest request, HttpServletResponse response, MemberDAO memberDAO)
+	private void showData(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		response.setContentType("text/html;charset=UTF-8");
-		List<Member> members = memberDAO.findAll();
+		
+		
+		MemberService memberService = new MemberServiceImpl();
+		List<Member> members = memberService.getAllMembers();
 
 		if (members != null) {
 			request.setAttribute("members", members); // 搜尋所有的資料，把key跟value放進request
@@ -176,73 +153,63 @@ public class MemberServlet extends HttpServlet {
 		} else {
 			getServletContext().getRequestDispatcher("/404.jsp").forward(request, response);
 		}
-		memberDAO.closeConn();
 	}
-
-//	// Query單筆
-//	private void processQuery(HttpServletRequest request, HttpServletResponse response, MemberDAO memberDAO)
-//			throws SQLException, IOException, ServletException {
-//
-//		String userid = request.getParameter("userid");
-//		Member member = memberDAO.findMember(userid);
-//
-//		if (member != null) {
-//			showData(request, response, memberDAO);
-//			// showForm(response, member );
-//		} else {
-//			getServletContext().getRequestDispatcher("/404.jsp").forward(request, response);
-//		}
-//	}
 
 	
 	// CREATE
-	private void processCreate(HttpServletRequest request, HttpServletResponse response, MemberDAO memberDAO ,Member member)
+	private void processCreate(HttpServletRequest request, HttpServletResponse response, Member member)
 			throws SQLException, IOException, ParseException, ServletException {
+	
+		MemberService memberService = new MemberServiceImpl();
+		memberService.save(member);
+		response.sendRedirect("./MemberServlet");
 		
+		
+		
+	/*	原版本有controllor驗證，需要重寫
 		boolean CheckId= memberDAO.findUserid(member.getUserid());
-		
-		
 		if (memberDAO.createMember(member)) {
 			response.sendRedirect("./MemberServlet");
-		
 		}else if(CheckId){
 			System.out.println("重複的身分證字號:" + member.getUserid() );
 			String message = "身分證字號不可與他人重複";
 			request.setAttribute("message", message);
 			getServletContext().getRequestDispatcher("/MemberCreate.jsp").forward(request, response);
-		
-		
 		} else {
 			getServletContext().getRequestDispatcher("/404.jsp").forward(request, response);
 		}
-		memberDAO.closeConn();
+	*/	
+		
 	}
 
 	// Update
-	private void processUpdate(HttpServletRequest request, HttpServletResponse response, MemberDAO memberDAO, Member member)
+	private void processUpdate(HttpServletRequest request, HttpServletResponse response, Member member)
 			throws SQLException, IOException, ServletException {
+	
+		MemberService memberService = new MemberServiceImpl();
+		memberService.updateMember(member);
+		response.sendRedirect("./MemberServlet");
 		
+	/*	
 		if (memberDAO.updateMember(member)) { 
 			response.sendRedirect("./MemberServlet");
 		} else {
 			getServletContext().getRequestDispatcher("/404.jsp").forward(request, response);
 		}
-		memberDAO.closeConn();
+	*/
+		
 	}
 
 	// DELETE
-	private void processDelete(HttpServletRequest request, HttpServletResponse response, MemberDAO memberDAO)
+	private void processDelete(HttpServletRequest request, HttpServletResponse response, int deleteId)
 			throws SQLException, IOException {
 
-		String DeleteId = request.getParameter("DeleteId");
-
-		if (memberDAO.deleteMember(DeleteId)) {
-			response.sendRedirect("./MemberServlet");
-		}
-		memberDAO.closeConn();
+		
+		MemberService memberService = new MemberServiceImpl();
+		memberService.deleteMember(deleteId);
+		response.sendRedirect("./MemberServlet");
+		
 	}
-
-
 
 	public void init() throws ServletException {
 		File uploadDir = new File(getServletContext().getRealPath(File.separator + "eventsImg"));

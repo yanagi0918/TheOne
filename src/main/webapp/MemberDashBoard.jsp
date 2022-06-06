@@ -17,6 +17,7 @@
                         <table class="table align-middle table-bordered table-hover mb-0">
                             <thead>
                                 <tr class="text-dark">
+                                	<th scope="col">會員編號</th>
                                     <th scope="col">帳號(身分證)</th>
                                     <th scope="col">密碼</th>
                                     <th scope="col">姓名</th>
@@ -32,14 +33,15 @@
                             for(Member m : members) {
                             %>
                                 <tr>
+                                    <td><%= m.getIdNumber() %></td>
                                     <td><%= m.getUserid() %></td>
                                     <td><%= m.getPwd() %></td>
                                     <td><%= m.getUsername() %></td>
                                     <td><%= m.getGender() %></td>
                                     <td><%= m.getPoint() %></td>
                                     <td>
-                                        <button type="button" class="btn btn-outline-primary m-0" onclick="location.href='./MemberServlet?UpdateId=<%= m.getUserid() %>'">修改會員</button>
-                                        <button type="button" class="btn btn-outline-danger m-0" onclick="javascript:if(confirm('確定要刪除嗎?'))location.href='./MemberServlet?DeleteId=<%= m.getUserid() %>'">刪除會員</button>
+                                        <button type="button" class="btn btn-outline-primary m-0" onclick="location.href='./MemberServlet?UpdateId=<%= m.getIdNumber() %>'">修改會員</button>
+                                        <button type="button" class="btn btn-outline-danger m-0" onclick="javascript:if(confirm('確定要刪除嗎?'))location.href='./MemberServlet?DeleteId=<%= m.getIdNumber() %>'">刪除會員</button>
                                     </td>
                                 </tr>
                             <% } %>

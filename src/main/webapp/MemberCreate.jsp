@@ -4,16 +4,18 @@
 <%@ page import="java.util.List" %>
 
 <!-- 由上讀到下，所以判斷寫在最上面 -->
-<%	String mess=(String)request.getAttribute("message");
+<%-- 
+	<%	String mess=(String)request.getAttribute("message"); 
 	if(mess==null){   //如果mess是空的(代表checkid為false)，不做任何事情
 	}else{%>          <!-- mess不是空的，checkid為true -->
+
 
 <script type="text/javascript">
 	alert("<%=mess%>");
 </script>
 
 <% }%>
-
+--%>
 
 <%@include file="DashBoardHeader.jspf" %>
 
@@ -27,6 +29,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">帳號(身分證)</label>
                                 <div class="col-sm-8">
+<!--                                 	<input type="hidden" class="form-control" name="idNumber" value="0" id="idNumber"> -->
                                     <input type="text"  class="form-control"  maxlength="10" name="userid" required id="userid" placeholder="(英文首字大小寫皆可)">
                                 </div>
                             </div>

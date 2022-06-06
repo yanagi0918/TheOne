@@ -1,11 +1,10 @@
-package DAO;
+package Service;
 
 import java.util.List;
 
 import Bean.Member;
 
-public interface MemberDao {
-
+public interface MemberService {
 	boolean isDup(int pk);
 
 	int save(Member member);
@@ -13,18 +12,13 @@ public interface MemberDao {
 	List<Member> getAllMembers();
 
 	Member getMember(int pk);
+	
+	Member checkAccount(String account);
+	Member checkPassword(String password);
+	
 
 	void deleteMember(int pk);
 
 	void updateMember(Member member);
 
-	
-	Member checkAccount(String userid);
-
-
-	Member checkPassword(String pwd);
-
-
-
-	
 }

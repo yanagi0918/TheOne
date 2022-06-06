@@ -1,9 +1,9 @@
-package DAO;
+package Service;
 
 import java.util.List;
 import Bean.Resume;
 
-public interface ResumeDao {
+public interface ResumeService {
 
 	boolean isDup(int pk);  //判斷是否重複
 
@@ -16,6 +16,5 @@ public interface ResumeDao {
 	void deleteResume(int pk); //刪除履歷
 
 	void updateResume(Resume resume);  //更新履歷
-	
 	
 }
