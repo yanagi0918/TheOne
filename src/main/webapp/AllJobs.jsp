@@ -12,23 +12,18 @@
 <div class="bg-light text-center rounded p-4">
 	<form action="JobDashBoard.jsp" method="post">
 	<div class="d-flex align-items-center justify-content-between mb-4">
-	<h1>所有職缺</h1>
+	<h2>所有職缺</h2>
+	
 		 <input type="submit" value="新增職缺" class="btn btn-primary mb-0">
     </div>                    
 	</form>
-<!-- 	<form action="SelectJob.jsp" method="get"> -->
-<!-- 	<div class="d-flex align-items-center justify-content-between mb-4"> -->
-<!-- 		 <input type="text" name="TITLE" class="form-control" autofocus> -->
-<!-- 		<input type="submit" value="以職缺名稱快速查詢" class="btn btn-primary mb-0" > -->
-<!-- 		</div> -->
-<!-- 	</form> -->
 	<div class="table-responsive">
-	<table class="table align-middle table-bordered table-hover mb-0 order-table" id="myTable">
+	<table class="table align-middle table-bordered table-hover mb-0 order-table" id="lee">
 	<thead>
 		<tr class="text-dark">
-			<th scope="col" onclick="javascript:sortTable(0)">職缺名稱</th>
-			<th scope="col" onclick="javascript:sortTable(1)">職缺性質</th>
-			<th scope="col" onclick="javascript:sortTable(2)">職缺條件</th>
+			<th scope="col">職缺名稱</th>
+			<th scope="col">職缺性質</th>
+			<th scope="col">職缺條件</th>
 			<th scope="col" onclick="javascript:sortTable(3)">需求人數</th>
 			<th scope="col" onclick="javascript:sortTable(4)">每月薪資</th>
 			<th scope="col" onclick="javascript:sortTable(5)">統一編號</th>

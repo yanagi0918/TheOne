@@ -11,9 +11,10 @@ function checkCompanyForm() {
 		return checkJobForm;
 	}
 	
-	if($("#compwd").val().length<6){
+	let pwdRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/;
+	if (!pwdRegex.test($("#compwd").val())) {
 	Swal.fire('Warning!',
-			'密碼少於6位數!',
+			'密碼格式錯誤!',
 			'warning');
 		checkJobForm = false;
 		return checkJobForm;
@@ -61,7 +62,7 @@ $('#wrongInput').click(function() {
 
 $('#correctInput').click(function() {
 	$('#compid').val('87654321')
-	$('#compwd').val('abc123zzz')
+	$('#compwd').val('Aabc123zzz')
 	$('#corpname').val('啃得機')
 	$('#owner').val('啃先生')
 	$('#industry').val('服務業')
@@ -73,3 +74,20 @@ $('#correctInput').click(function() {
 	$('#website').val('www.giigle.com')
 	$('#capital').val('1200萬')
 })
+$(document).ready( function () {
+    $('#lee').DataTable();
+} );
+
+
+//密碼顯示或是隱藏
+
+	 function ShowPwd() {
+            var x = document.getElementById("compwd");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+
+	}
+	

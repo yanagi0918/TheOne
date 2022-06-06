@@ -10,18 +10,19 @@
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-light text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">公司資訊</h6>
+                        <h2 class="mb-0">公司資訊</h2>
+                        
                         <button type="button" class="btn btn-primary mb-0" onclick="location.href='./CompanyCreate.jsp'">新增公司</button>
                     </div>
                     <div class="table-responsive">
-                        <table class="table align-middle table-bordered table-hover mb-0 order-table" id="myTable">
+                        <table class="table align-middle table-bordered table-hover mb-0 order-table" id="lee">
                             <thead>
                                 <tr class="text-dark">
-                                    <th scope="col" onclick="javascript:sortTable(0)">帳號(統編)</th>
-                                    <th scope="col" onclick="javascript:sortTable(1)">公司名稱</th>
-                                    <th scope="col" onclick="javascript:sortTable(2)">產業</th>
-                                    <th scope="col" onclick="javascript:sortTable(3)">聯絡人</th>
-                                    <th scope="col" onclick="javascript:sortTable(4)">電話</th>
+                                    <th scope="col">帳號(統編)</th>
+                                    <th scope="col">公司名稱</th>
+                                    <th scope="col">產業</th>
+                                    <th scope="col">聯絡人</th>
+                                    <th scope="col">電話</th>
                                     <th scope="col">動作</th>
                                 </tr>
                             </thead>

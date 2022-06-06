@@ -17,5 +17,4 @@ public interface JobDao {
 	
 	void update(Job job);
 	
-//	List<Job> getJobByTitle(String title);
 }
