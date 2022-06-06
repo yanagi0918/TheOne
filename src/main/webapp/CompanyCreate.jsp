@@ -26,8 +26,8 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">密碼</label>
                                 <div class="col-sm-8">
-                                    <input type="password" class="form-control" maxlength="15" name="compwd" required id="compwd" placeholder="(至少6個字元,15個字元內)">
-                                    <font color='red' size='4'>${error.compwd}</font>
+                                    <input type="password" class="form-control" maxlength="15" name="compwd" required id="compwd" placeholder="(最少六個字符，至少一個大寫字母，一個小寫字母和一個數字)">
+                                	<input type="checkbox" onclick="ShowPwd()">顯示密碼
                                 </div>
                             </div>
                             

@@ -107,24 +107,6 @@ public class JobServiceImpl implements JobService{
 		}
 	}
 
-//	@Override
-//	public List<Job> getJobByTitle(String title) {
-//		List<Job> job = null;
-//		Session session = factory.getCurrentSession();
-//		Transaction tx = null;
-//		try {
-//			tx = session.beginTransaction();
-//			job = jobDao.getAllJobs();
-//			tx.commit();
-//		} catch (Exception e) {
-//			if (tx != null) {
-//				tx.rollback();
-//			}
-//			throw new RuntimeException(e);
-//		}
-//		return job;
-//	}
-
 	@Override
 	public boolean isDup(int pk) {
 		boolean result = false;
