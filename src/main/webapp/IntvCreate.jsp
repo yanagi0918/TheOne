@@ -20,8 +20,8 @@
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">求職者帳號</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" name="userId" required
-								id="userId"> <input type="hidden" class="form-control"
+							<input type="text" class="form-control" name="userId" required placeholder="帳號為身份證字號"
+								id="userId "> <input type="hidden" class="form-control"
 								name="cvno" value="0">
 						</div>
 					</div>
@@ -104,7 +104,7 @@
 							<input type="radio" name="compScore" value="10" >10
 						</div>
 					</div>
-					<button type="submit" class="btn btn-primary" name="create" id=insert
+					<button type="button" class="btn btn-primary" name="create" id="btn-submit"
 						value="confirm">確認新增</button>
 					<button type="button" class="btn btn-primary"
 						onclick="location.href='./InterViewServletDS'">取消</button>
@@ -113,13 +113,7 @@
 			</div>
 		</div>
 	</div>
-	<script>
-		document.getElementById("insert").onclick = function() {
-			if (confirm("您真的確定要新增嗎？\n\n確定送出")) {
-				return true
-			} else
-				return false
-		}</script>
+	
 </body>
 <!-- Content End -->
 
