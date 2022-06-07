@@ -69,7 +69,8 @@
 					<div class="row mb-3">
 							<label class="col-sm-2 col-form-label">課程介紹</label>
 							<div class="col-sm-8">
-								<textarea name="courseIntroduction" class="form-control"
+								<textarea name="courseIntroduction" class="form-control" 
+									
 									placeholder="課程介紹..." cols="62" rows="5"><%=course.getCourseIntroduction()%></textarea>
 
 								<!-- 							<input type="text" class="form-control" -->

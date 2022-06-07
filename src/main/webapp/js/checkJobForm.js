@@ -9,3 +9,6 @@ function checkJobForm() {
 		return checkJobForm;
 	}
 }
+$(document).ready( function () {
+    $('#lee').DataTable();
+} );

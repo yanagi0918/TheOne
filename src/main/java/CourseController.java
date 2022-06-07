@@ -187,7 +187,7 @@ public class CourseController extends HttpServlet {
 	private void processFindCourseByNo(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
 
-		String courseNo = request.getParameter("courseNo");
+		String courseNo = request.getParameter("courseNo").trim();
 		System.out.println(courseNo);
 		CourseService courseService = new CourseServicelmpl();
 		CourseBean courseBean = courseService.getCourse(Integer.valueOf(courseNo));

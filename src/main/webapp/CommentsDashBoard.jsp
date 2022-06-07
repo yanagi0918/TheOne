@@ -26,14 +26,8 @@
 				onclick="location.href='./CommentNew'">新增評論</button>
 		</div>
 		<div class="table-responsive">
-			<table
-<<<<<<< Updated upstream
-				class="table align-middle table-bordered table-hover mb-0 order-table"
+			<table class="table align-middle table-bordered table-hover mb-0 order-table"
 				id="commentTable" style="width:100%">
-=======
-				class="table align-middle mb-0 order-table cell-border hover"
-				id="myTable">
->>>>>>> Stashed changes
 				<thead>
 					<tr class="text-dark">
 						<th scope="col">編號</th>

@@ -93,7 +93,6 @@ public class CompanyServlet extends HttpServlet {
 	}
 
 	
-	// CREATE
 	private void processCreate(HttpServletRequest request, HttpServletResponse response,Company company)
 			throws SQLException, IOException, ParseException, ServletException {
 		CompanyService companyService = new CompanyServiceImpl();
@@ -102,11 +101,10 @@ public class CompanyServlet extends HttpServlet {
 		request.setAttribute("error", errorMsg);
 		//讀取資料
 		int compid = (Integer.parseInt(request.getParameter("compid")));
-		String compwd = request.getParameter("compwd");
 		
-		//判斷帳號
+		//判斷帳號是否重複
 		if(companyService.isDup(compid)) {
-			errorMsg.put("compid", "帳號重複，請重新輸入新帳號");
+			errorMsg.put("compid", "帳號(統編)重複，請重新輸入新帳號");
 			request.getRequestDispatcher("CompanyCreate.jsp").forward(request,response);
 			return;
 		}else {
@@ -116,8 +114,6 @@ public class CompanyServlet extends HttpServlet {
 		
 	}
 	
-	
-
 	private void processUpdate(HttpServletRequest request, HttpServletResponse response, Company company)
 			throws SQLException, IOException, ParseException, ServletException {
 		CompanyService companyService = new CompanyServiceImpl();
@@ -125,7 +121,6 @@ public class CompanyServlet extends HttpServlet {
 		response.sendRedirect("./CompanyServlet");
 	}
 
-	// DELETE
 	private void processDelete(HttpServletRequest request, HttpServletResponse response, int deleteId)
 			throws SQLException, IOException {
 		CompanyService companyService = new CompanyServiceImpl();

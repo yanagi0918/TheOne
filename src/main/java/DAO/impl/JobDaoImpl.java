@@ -49,15 +49,6 @@ public class JobDaoImpl implements JobDao{
 		session.saveOrUpdate(job);
 	}
 
-//	@Override
-//	public List<Job> getJobByTitle(String title) {
-//		Session session = factory.getCurrentSession();
-//		List<Job> job = null;
-//		String hql = "FROM Job WHERE title=:title";
-//		job = session.createQuery(hql,Job.class)
-//				.getResultList();
-//		return job;
-//	}
 	@Override
 	public boolean isDup(int pk) {
 		Session session = factory.getCurrentSession();

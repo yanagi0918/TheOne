@@ -214,5 +214,5 @@ $(document).ready(function() {
 		dom: '<"bottom"i>rt<"bottom"flp><"clear">',
 	
 	});
-	
+
 });

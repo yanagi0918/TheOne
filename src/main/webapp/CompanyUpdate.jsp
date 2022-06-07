@@ -99,12 +99,8 @@
                                 <input type="text" class="form-control" maxlength="10"  name="capital" value="<%= companyForUpdate.getCapital() %>" id="capital" placeholder="(請加上單位，如1250萬)">  
                                 </div>
                             </div>
-                            
-                            
-                            <button type="submit" class="btn btn-primary" name="update" value="confirm">確認修改</button>
+                            <button type="submit" class="btn btn-primary" name="update" value="confirm">修改</button>
                             <button type="button" class="btn btn-primary" onclick="location.href='./CompanyServlet'">取消</button>
-                     <!--   <button type="button" class="btn btn-primary" id="wrongInput">錯誤輸入</button>
-                            <button type="button" class="btn btn-primary" id="correctInput">正確輸入</button>     -->
                         </form>
                     </div>
                 </div>
