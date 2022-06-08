@@ -12,8 +12,8 @@
 		<div class="d-flex align-items-center justify-content-between mb-4">
 			<h6 class="mb-0">公司職位評論</h6>
 			<div class="form-control-sm w-75 rounded-pill bg-white">
-				<span class="float-start mx-1 my-2 rounded-circle"> 
-				<i class="fa-solid fa-magnifying-glass"></i>
+				<span class="float-start mx-1 my-2 rounded-circle"> <i
+					class="fa-solid fa-magnifying-glass"></i>
 				</span>
 				<div class="">
 					<input
@@ -26,40 +26,29 @@
 				onclick="location.href='./CommentNew'">新增評論</button>
 		</div>
 		<div class="table-responsive">
-			<table class="table align-middle table-bordered table-hover mb-0 order-table"
-				id="commentTable" style="width:100%">
+			<table
+				class="table align-middle table-bordered mb-0 compact cell-border hover"
+				id="commentTable" style="width: 100%">
 				<thead>
-					<tr class="text-dark">
-						<th scope="col">編號</th>
-						<th scope="col">參考時間</th>
-						<th scope="col">公司名稱</th>
-						<th scope="col">公司評分</th>
-						<th scope="col">職位</th>
-						<th scope="col">職位評分</th>
-						<!-- 
-						<th scope="col">職務型態</th> dataTables_paginate paging_simple_numbers
-						<th scope="col">表定工時</th>
-						<th scope="col">實際工時</th>
-						<th scope="col">加班頻率</th>
-						<th scope="col">服務年資</th>
-						<th scope="col">總年資</th>
-						<th scope="col">月薪</th>
-						<th scope="col">年薪</th>
-						<th scope="col">獎金次數</th>
-						<th scope="col">帳號</th>
-						 -->
-						<th scope="col">心得分享</th>
-						<th scope="col">動作</th>
-					</tr>
+<!-- 					<tr class="text-dark" id="filterboxrow"> -->
+<!-- 						<th>編號</th> -->
+<!-- 						<th>參考時間</th> -->
+<!-- 						<th scope="col">公司名稱</th> -->
+<!-- 						<th scope="col">公司評分</th> -->
+<!-- 						<th scope="col">職位</th> -->
+<!-- 						<th scope="col">職位評分</th> -->
+<!-- 						<th scope="col"></th> -->
+<!-- 						<th scope="col"></th> -->
+<!-- 					</tr> -->
 					<tr>
-						<th class= "sub-search">編號</th>
-						<th class= "sub-search">參考時間</th>
-						<th class= "sub-search">公司名稱</th>
-						<th class= "sub-search">公司評分</th>
-						<th class= "sub-search">職位</th>
-						<th class= "sub-search">職位評分</th>
-						<th class= "sub-search">心得分享</th>
-						<th class= "sub-search">動作</th>
+						<th>編號</th>
+						<th>參考時間</th>
+						<th>公司名稱</th>
+						<th>公司評分</th>
+						<th>職位</th>
+						<th>職位評分</th>
+						<th>心得分享</th>
+						<th>動作</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -67,7 +56,8 @@
 					<c:forEach var="comment" items="${listComment}">
 						<tr>
 							<td><c:out value="${comment.share_id}" /></td>
-							<td><fmt:formatDate value="${comment.ref_time}" pattern="yyyy-MM" /></td>
+							<td><fmt:formatDate value="${comment.ref_time}"
+									pattern="yyyy-MM" /></td>
 							<td><c:out value="${comment.comp_name}" /></td>
 							<td class="listComp"
 								data-score="<c:out value='${comment.comp_score}' />"></td>

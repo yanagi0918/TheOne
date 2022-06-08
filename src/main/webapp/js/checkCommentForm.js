@@ -203,16 +203,37 @@ $(function() {
 //Data Table
 $(document).ready(function() {
 	var table = $('#commentTable').DataTable({
+
 		//don't display search bar
 		searching: false,
+
 		//remove column 3,5,7 sorter
-		columnDefs: [{ 
-			orderable: false, 
-			targets: [3,5,7] }
+		columnDefs: [{
+			orderable: false,
+			targets: [3, 5, 7]
+		}
 		],
+
 		//position of entire
 		dom: '<"bottom"i>rt<"bottom"flp><"clear">',
-	
+
+		//Menu
+		lengthMenu: [
+			[10, 25, 50, -1],
+			[10, 25, 50, 'All'],
+		],
+
+	});
+
+	$('#commentTable thead tr#filterboxrow th').each(function() {
+
+		var title = $('#commentTable thead tr#filterboxrow th').eq($(this).index()).text();
+
+		$(this).html('<input id="input' + $(this).index() + '" type="text" class="compact" style="width: 100%" placeholder="filter by ' + title + '" />')
+			.css('padding-left', '4px');
+		$(this).on('keyup change', function() {
+			table.column($(this).index()).search($('#input' + $(this).index()).val()).draw();
+		});
 	});
 
 });
