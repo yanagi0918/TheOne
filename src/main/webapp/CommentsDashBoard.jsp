@@ -25,22 +25,12 @@
 			<button type="button" class="btn btn-primary mb-0"
 				onclick="location.href='./CommentNew'">新增評論</button>
 		</div>
-		<div class="table-responsive">
+		<div class="container">
 			<table
-				class="table align-middle table-bordered mb-0 compact cell-border hover"
+				class="table align-middle table-bordered order-table mb-0 compact cell-border hover"
 				id="commentTable" style="width: 100%">
 				<thead>
-<!-- 					<tr class="text-dark" id="filterboxrow"> -->
-<!-- 						<th>編號</th> -->
-<!-- 						<th>參考時間</th> -->
-<!-- 						<th scope="col">公司名稱</th> -->
-<!-- 						<th scope="col">公司評分</th> -->
-<!-- 						<th scope="col">職位</th> -->
-<!-- 						<th scope="col">職位評分</th> -->
-<!-- 						<th scope="col"></th> -->
-<!-- 						<th scope="col"></th> -->
-<!-- 					</tr> -->
-					<tr>
+					<tr class="text-dark">
 						<th>編號</th>
 						<th>參考時間</th>
 						<th>公司名稱</th>
@@ -50,6 +40,16 @@
 						<th>心得分享</th>
 						<th>動作</th>
 					</tr>
+<!-- 					<tr id="test"> -->
+<!-- 						<th scope="col">編號</th> -->
+<!-- 						<th scope="col">參考時間</th> -->
+<!-- 						<th scope="col">公司名稱</th> -->
+<!-- 						<th scope="col">公司評分</th> -->
+<!-- 						<th scope="col">職位</th> -->
+<!-- 						<th scope="col">職位評分</th> -->
+<!-- 						<th scope="col">心得分享</th> -->
+<!-- 						<th scope="col">動作</th> -->
+<!-- 					</tr> -->
 				</thead>
 				<tbody>
 
