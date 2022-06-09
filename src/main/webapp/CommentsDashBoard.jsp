@@ -64,27 +64,14 @@
 							<td><c:out value="${comment.job_name}" /></td>
 							<td class="listJob"
 								data-score="<c:out value='${comment.job_score}' />"></td>
-							<!-- 
-							<td><c:out value="${comment.job_description}" /></td>
-							<td><c:out value="${comment.std_hour}" /></td>
-							<td><c:out value="${comment.real_hour}" /></td>
-							<td><c:out value="${comment.over_freq}" /></td>
-							<td><c:out value="${comment.seniority}" /></td>
-							<td><c:out value="${comment.total_seniority}" /></td>
-							<td><c:out value="${comment.monthly_salary}" /></td>
-							<td><c:out value="${comment.yearly_salary}" /></td>
-							<td><c:out value="${comment.bonus_count}" /></td>
-							<td><c:out value="${comment.user_id}" /></td>
-							 -->
 							<td><c:out value="${comment.share}" /></td>
 							<td>
 								<button type="button" class="btn btn-outline-info m-0"
 									onclick="location.href='./CommentDetail?id=<c:out value='${comment.share_id}' />'">內容</button>
 								<button type="button" class="btn btn-outline-primary m-0"
 									onclick="location.href='./CommentEdit?id=<c:out value='${comment.share_id}' />'">修改</button>
-								<button id="delete" type="button"
-									class="btn btn-outline-danger m-0"
-									onclick="javascript:if(confirm('確定要刪除嗎?'))location.href='./CommentDelete?id=<c:out value='${comment.share_id}' />'; else location.href='./CommentsManager'">刪除</button>
+								<button type="button"
+									class="btn btn-outline-danger m-0 comment-delete" value='${comment.share_id}'>刪除</button>
 						</tr>
 					</c:forEach>
 				</tbody>

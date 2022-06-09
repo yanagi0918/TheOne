@@ -1,5 +1,39 @@
+//Sweet Alert
+
+$(function() {
+	$('.comment-delete').click(function() {
+		Swal.fire({
+			title: '確定刪除嗎？',
+			text: '資料將永久刪除！',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: '刪除',
+			cancelButtonText: '取消'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				Swal.fire({
+					icon: 'success',
+					title: '已刪除!',
+					showConfirmButton: false,
+					timer: 1500
+				})
+				setTimeout(() => {
+					location.href = `./CommentDelete?id=${$(this).val()}`;
+				}, 1500)
+			} else {
+				location.href = './CommentsManager'
+			}
+
+		})
+
+	});
+});
+
+
 //Form rule
-$(function () {
+$(function() {
 
 	$('#form').validate({
 		rules: {
@@ -78,7 +112,7 @@ $(function () {
 //Star rating js
 $.raty.path = 'img';
 
-$(function () {
+$(function() {
 
 	$('#compScore').raty({
 		targetScore: '#comp_score',
@@ -115,7 +149,7 @@ $(function () {
 
 
 //One key input js
-$('#OneInput').click(function () {
+$('#OneInput').click(function() {
 	$('#user_id').val('A123456789')
 	$('#comp_name').val('狗來富寵物廣場')
 	$('#ref_time').val('2000-01-01')
@@ -137,13 +171,13 @@ $('#OneInput').click(function () {
 
 //anonymous/user show
 
-$(function () {
-	$('#anonymous').click(function () {
+$(function() {
+	$('#anonymous').click(function() {
 		$('#user_id').val('匿名');
 		$('#user_id').hide();
 	})
 
-	$('#user').click(function () {
+	$('#user').click(function() {
 		$('#user_id').val('');
 		$('#user_id').show();
 	});
@@ -153,11 +187,11 @@ $(function () {
 
 
 //DashBoard Search
-$(function () {
-	(function (document) {
+$(function() {
+	(function(document) {
 
 		// 建立 LightTableFilter
-		var LightTableFilter = (function (Arr) {
+		var LightTableFilter = (function(Arr) {
 
 			var _input;
 
@@ -165,8 +199,8 @@ $(function () {
 			function _onInputEvent(e) {
 				_input = e.target;
 				var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
-				Arr.forEach.call(tables, function (table) {
-					Arr.forEach.call(table.tBodies, function (tbody) {
+				Arr.forEach.call(tables, function(table) {
+					Arr.forEach.call(table.tBodies, function(tbody) {
 						Arr.forEach.call(tbody.rows, _filter);
 					});
 				});
@@ -180,9 +214,9 @@ $(function () {
 
 			return {
 				// 初始化函數
-				init: function () {
+				init: function() {
 					var inputs = document.getElementsByClassName('searchBar');
-					Arr.forEach.call(inputs, function (input) {
+					Arr.forEach.call(inputs, function(input) {
 						input.oninput = _onInputEvent;
 					});
 				}
@@ -191,7 +225,7 @@ $(function () {
 
 
 		// 網頁載入完成後，啟動 LightTableFilter
-		document.addEventListener('readystatechange', function () {
+		document.addEventListener('readystatechange', function() {
 			if (document.readyState === 'complete') {
 				LightTableFilter.init();
 			}
@@ -201,7 +235,7 @@ $(function () {
 })
 
 //Data Table
-$(document).ready(function () {
+$(document).ready(function() {
 
 	var table = $('#commentTable').DataTable({
 
@@ -230,25 +264,25 @@ $(document).ready(function () {
 
 	});
 
-    // // Setup - add a text input to each footer cell
-    // $('#commentTable thead #test th').each( function () {
-    //     var title = $(this).text();
-    //     $(this).html( '<input type="text" placeholder="'+title+'" />' );
-    // } );
- 
-   
-    // // Apply the search
-    // table.columns().every( function () {
-    //     var that = this;
- 
-    //     $( 'input', this.header() ).on( 'keyup change', function () {
-    //         if ( that.search() !== this.value ) {
-    //             that
-    //                 .search( this.value )
-    //                 .draw();
-    //         }
-    //     } );
-    // } );
+	// // Setup - add a text input to each footer cell
+	// $('#commentTable thead #test th').each( function () {
+	//     var title = $(this).text();
+	//     $(this).html( '<input type="text" placeholder="'+title+'" />' );
+	// } );
+
+
+	// // Apply the search
+	// table.columns().every( function () {
+	//     var that = this;
+
+	//     $( 'input', this.header() ).on( 'keyup change', function () {
+	//         if ( that.search() !== this.value ) {
+	//             that
+	//                 .search( this.value )
+	//                 .draw();
+	//         }
+	//     } );
+	// } );
 
 
 });
