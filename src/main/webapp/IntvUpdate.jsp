@@ -13,7 +13,7 @@
 		<div class="bg-light rounded h-100 p-4">
 			<h6 class="mb-4">修改紀錄</h6>
 			<form action="./InterViewServletDS" method="post"
-				onsubmit="return checkInterviewForm()">
+				onsubmit="return checkIntvForm()">
 				<% Interview intvForUpdate = (Interview) request.getAttribute("intvForUpdate"); %>
 				<div class="row mb-3">
 					<label class="col-sm-2 col-form-label">面試內容編號</label>
@@ -128,7 +128,7 @@
 							<c:if test="${intvForUpdate.getCompScore()== '10'}">checked="checked"</c:if>>10
 					</div>
 				</div>
-				<button type="button" class="btn btn-primary" name="Update" id="btn-submit"
+				<button type="submit" class="btn btn-primary" name="update" 
 					value="confirm">確認修改</button>
 				<button type="button" class="btn btn-primary"
 					onclick="location.href='./InterViewServletDS'">取消</button>

@@ -1,3 +1,51 @@
+function checkIntvForm() {
+	let checkIntvForm = true;
+
+	let userID = /^[a-z,A-Z]{1}[1-2,8-9]{1}\d{8}$/; 
+	if (!userID.test($("#userId").val())) {
+		Swal.fire('Warning!',
+			'身分證格式錯誤!',
+			'warning');
+		checkIntvForm = false;
+		return checkIntvForm;
+	}
+
+		let postDate = new Date($('#intTime').val());
+		let nowDate = new Date();
+		if (postDate > nowDate) {
+			Swal.fire('Warning!',
+			'刊登開始日期不可於刊登結束日期之後!',
+			'warning');
+			checkIntvForm = false;
+			return checkIntvForm;
+		}
+}
+$('#InterviewwrongInput').click(function () {
+    $('#userId').val('12A345675')
+    $('#orderDate').val('2022-05-20')
+    $("#state").val(2);
+    $('#productId').val('1,2,3,4')
+    $('#totalPrice').val('6666K')
+})
+
+$('#InterviewcorrectInput').click(function () {
+    $('#userId').val('A123456789')
+    $('#intTime').val('2022-05-20')
+    $('#compName').val('多拉A夢共和國')
+    $('#jobName').val('竹蜻蜓修復員')
+    $('#offer').val('否')
+    $('#test').val('有')
+    $('#qA').val('出了一張A4紙上面是個綜合試題國文/英文/數學/邏輯'); 
+    $('#share').val('現場 一入廠先去警衛室進行換證 被小夫帶至會議室進行人事資料表填寫考智力測驗，不說我還以為在寫什麼綜合試題 國文/英文/數學/邏輯 邏輯爆幹難 我嚴重懷疑是我智商不足 接著就面主管，看起來好像胖虎,之後就自我介紹完後進行簡報分享' 
+						
+ )
+})
+
+		
+
+
+
+
 $(function() {
 
 	$('.btn-intvDelete').click(function() {
@@ -30,54 +78,7 @@ $(function() {
 	})
 	
 	
-	$('#btn-submit').click(function() {
-		let warningStr = "";
-		let checkInterviewForm = true;
 
 
-		let postDate = new Date($("#intTime").val());
-		let nowDate = new Date();
-		if (postDate > nowDate) {
-			warningStr += "刊登開始日期不可於刊登結束日期之後" + "<br>";
-			checkInterviewForm = false;
-
-		}
-
-		let userID = /^[A-Z]{1}[1-2]{1}\d{8}$/;
-		if (!userID.test($("#userId").val())) {
-			warningStr += "身分證格式錯誤!" + "<br>";
-			checkInterviewForm = false;
-
-		} if (checkInterviewForm) {
-			Swal.fire({
-				title: confirmStr,
-				text: "",
-				icon: 'warning',
-				showCancelButton: true,
-				confirmButtonColor: '#3085d6',
-				cancelButtonColor: '#d33',
-				confirmButtonText: '確認',
-				cancelButtonText: '取消'
-			}).then((result) => {
-				if (result.isConfirmed) {
-					Swal.fire({
-						icon: 'success',
-						title: '已完成!',
-						showConfirmButton: false,
-						timer: 1500
-					})
-					setTimeout(() => {
-						$('#form').submit();
-					}, 1500)
-				}
-			})
-		} else {
-			Swal.fire({
-				icon: 'error',
-				title: '格式錯誤',
-				html: warningStr,
-			})
-		}
-	})
 
 });
