@@ -107,10 +107,10 @@
 					</div>
 					<button type="submit" class="btn btn-primary" name="create"
 						value="confirm">確認新增</button>
-						<button type="button" class="btn btn-outline-danger m-2" id="InterviewwrongInput">錯誤輸入</button>
-                            <button type="button" class="btn btn-outline-primary m-2" id="InterviewcorrectInput">正確輸入</button>
 					<button type="button" class="btn btn-primary"
 						onclick="location.href='./InterViewServletDS'">取消</button>
+                            <button type="button" class="btn btn-outline-primary m-2" id="InterviewcorrectInput">正確輸入</button>
+						<button type="button" class="btn btn-outline-danger m-2" id="InterviewwrongInput">錯誤輸入</button>
 
 				</form>
 			</div>
