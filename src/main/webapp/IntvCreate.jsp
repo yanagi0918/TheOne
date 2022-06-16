@@ -15,21 +15,23 @@
 		<div class="col-sm-12 col-xl-10">
 			<div class="bg-light rounded h-100 p-4">
 				<h6 class="mb-4">新增紀錄</h6>
-				<form action="./InterViewServletDS" method="post" onsubmit="return checkInterviewForm()">
-					
+				<form action="./InterViewServletDS" method="post"
+					onsubmit="return checkIntvForm()">
+
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">求職者帳號</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" name="userId" required placeholder="帳號為身份證字號"
-								id="userId "> <input type="hidden" class="form-control"
-								name="cvno" value="0">
+							<input type="text" class="form-control" name="userId" required
+								placeholder="帳號為身份證字號" id="userId"> <input type="hidden"
+								class="form-control" name="cvno" value="0">
 						</div>
 					</div>
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">面試時間</label>
 						<div class="col-sm-8">
-							<input type="date" class="form-control" name="intTime" id=intTime required>
-							<input type="hidden" class="form-control" name="createdTime">
+							<input type="date" class="form-control" name="intTime"
+								id="intTime" required> <input type="hidden"
+								class="form-control" name="createdTime">
 						</div>
 					</div>
 
@@ -38,8 +40,7 @@
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">面試公司</label>
 						<div class="col-sm-8">
-							<input type="text" class="form-control" name="compName"
-								size="10">
+							<input type="text" class="form-control" name="compName" id="compName" size="10">
 						</div>
 					</div>
 					<div class="row mb-3">
@@ -53,8 +54,8 @@
 						<label class="col-sm-2 col-form-label">是否錄取</label>
 
 						<div class="col-sm-8">
-							<input type="radio" name="offer" value="是">是 <input
-								type="radio" name="offer" value="否">否
+							<input type="radio" name="offer" value="是" id="offer">是 <input
+								type="radio" name="offer" value="否" id="offer">否
 						</div>
 					</div>
 
@@ -73,7 +74,7 @@
 						<label class="col-sm-2 col-form-label">考官問題</label>
 						<div class="col-sm-8">
 							<textarea class="form-control" placeholder="備註最多50字"
-								id="floatingTextarea" style="height: 150px;" name="qA"
+								id="qA" style="height: 150px;" name="qA"
 								maxlength="50"></textarea>
 						</div>
 					</div>
@@ -81,39 +82,41 @@
 						<label class="col-sm-2 col-form-label">心得分享</label>
 						<div class="col-sm-8">
 							<textarea class="form-control" placeholder="備註最多100字"
-								id="floatingTextarea" style="height: 150px;" name="share"
+								id="share" style="height: 150px;" name="share"
 								maxlength="100"></textarea>
 						</div>
 					</div>
 
-					
+
 
 
 					<div class="row mb-3">
 						<label class="col-sm-2 col-form-label">給該公司評分</label>
 						<div class="col-sm-8">
-							<input type="radio" name="compScore" value="1" >1
-							<input type="radio" name="compScore" value="2" >2
-							<input type="radio" name="compScore" value="3" >3
-							<input type="radio" name="compScore" value="4" >4
-							<input type="radio" name="compScore" value="5" >5
-							<input type="radio" name="compScore" value="6" >6
-							<input type="radio" name="compScore" value="7" >7
-							<input type="radio" name="compScore" value="8" >8
-							<input type="radio" name="compScore" value="9" >9
-							<input type="radio" name="compScore" value="10" >10
+							<input type="radio" name="compScore" id="compScore" value="1">1 <input
+								type="radio" name="compScore" id="compScore" value="2">2 <input
+								type="radio" name="compScore" id="compScore" value="3">3 <input
+								type="radio" name="compScore" id="compScore" value="4">4 <input
+								type="radio" name="compScore" id="compScore" value="5">5 <input
+								type="radio" name="compScore" id="compScore" value="6">6 <input
+								type="radio" name="compScore" id="compScore" value="7">7 <input
+								type="radio" name="compScore" id="compScore" value="8">8 <input
+								type="radio" name="compScore" id="compScore" value="9">9 <input
+								type="radio" name="compScore" id="compScore" value="10">10
 						</div>
 					</div>
-					<button type="button" class="btn btn-primary" name="create" id="btn-submit"
+					<button type="submit" class="btn btn-primary" name="create"
 						value="confirm">確認新增</button>
 					<button type="button" class="btn btn-primary"
 						onclick="location.href='./InterViewServletDS'">取消</button>
+                            <button type="button" class="btn btn-outline-primary m-2" id="InterviewcorrectInput">正確輸入</button>
+						<button type="button" class="btn btn-outline-danger m-2" id="InterviewwrongInput">錯誤輸入</button>
 
 				</form>
 			</div>
 		</div>
 	</div>
-	
+
 </body>
 <!-- Content End -->
 

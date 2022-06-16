@@ -13,32 +13,34 @@
 		<div class="bg-light rounded h-100 p-4">
 			<h6 class="mb-4">修改紀錄</h6>
 			<form action="./InterViewServletDS" method="post"
-				onsubmit="return checkInterviewForm()">
-				<% Interview intvForUpdate = (Interview) request.getAttribute("intvForUpdate"); %>
+				onsubmit="return checkIntvForm()">
+				<%
+				Interview intvForUpdate = (Interview) request.getAttribute("intvForUpdate");
+				%>
 				<div class="row mb-3">
 					<label class="col-sm-2 col-form-label">面試內容編號</label>
 					<div class="col-sm-8">
 						<input type="text" class="form-control" name="cvno"
-							value=<%= intvForUpdate.getCvNo() %> readonly>
+							value=<%=intvForUpdate.getCvNo()%> readonly>
 					</div>
 				</div>
 				<div class="row mb-3">
 					<label class="col-sm-2 col-form-label">求職者帳號</label>
 					<div class="col-sm-8">
 						<input type="text" class="form-control" name="userId"
-							value=<%= intvForUpdate.getUserId() %> required id="userId">
+							value=<%=intvForUpdate.getUserId()%> required id="userId">
 					</div>
 				</div>
 				<div class="row mb-3">
 					<label class="col-sm-2 col-form-label">面試時間</label>
 					<div class="col-sm-8">
 						<input type="date" class="form-control" name="intTime" required
-							id="intTime" value=<%= intvForUpdate.getIntTime() %>>
+							id="intTime" value=<%=intvForUpdate.getIntTime()%>>
 					</div>
 				</div>
 				<div class="row mb-3">
 					<label class="col-sm-2 col-form-label">修改時間</label>
-					<div class="col-sm-8"><%= intvForUpdate.getCreatedTime() %>
+					<div class="col-sm-8"><%=intvForUpdate.getCreatedTime()%>
 						<input type="hidden" class="form-control" name="createdTime"
 							id="createdTime">
 					</div>
@@ -48,7 +50,7 @@
 					<label class="col-sm-2 col-form-label">面試公司</label>
 					<div class="col-sm-8">
 						<input type="text" class="form-control" name="compName" size="10"
-							value=<%= intvForUpdate.getCompName() %>>
+							value=<%=intvForUpdate.getCompName()%>>
 					</div>
 				</div>
 				<div class="row mb-3">
@@ -56,7 +58,7 @@
 					<div class="col-sm-8">
 						<input type="text" class="form-control" name="jobName"
 							maxlength="8" required id="jobName" size="10"
-							value=<%= intvForUpdate.getJobName() %>>
+							value=<%=intvForUpdate.getJobName()%>>
 					</div>
 				</div>
 				<div class="row mb-3">
@@ -88,7 +90,7 @@
 					<div class="col-sm-8">
 						<textarea class="form-control" placeholder="備註最多50字"
 							id="floatingTextarea" style="height: 150px;" name="qA"
-							maxlength="50"><%= intvForUpdate.getQA() %></textarea>
+							maxlength="50"><%=intvForUpdate.getQA()%></textarea>
 					</div>
 				</div>
 				<div class="row mb-3">
@@ -96,7 +98,7 @@
 					<div class="col-sm-8">
 						<textarea class="form-control" placeholder="備註最多200字"
 							id="floatingTextarea" style="height: 150px;" name="share"
-							maxlength="200"><%= intvForUpdate.getShare() %></textarea>
+							maxlength="200"><%=intvForUpdate.getShare()%></textarea>
 					</div>
 				</div>
 
@@ -128,10 +130,14 @@
 							<c:if test="${intvForUpdate.getCompScore()== '10'}">checked="checked"</c:if>>10
 					</div>
 				</div>
-				<button type="button" class="btn btn-primary" name="Update" id="btn-submit"
+				<button type="submit" class="btn btn-primary" name="update"
 					value="confirm">確認修改</button>
 				<button type="button" class="btn btn-primary"
 					onclick="location.href='./InterViewServletDS'">取消</button>
+				<button type="button" class="btn btn-outline-primary m-2"
+					id="InterviewcorrectInput">正確輸入</button>
+				<button type="button" class="btn btn-outline-danger m-2"
+					id="InterviewwrongInput">錯誤輸入</button>
 
 			</form>
 		</div>

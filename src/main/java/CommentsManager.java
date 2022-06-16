@@ -120,6 +120,7 @@ public class CommentsManager extends HttpServlet {
 
 		int share_id = Integer.parseInt(request.getParameter("share_id").trim());
 		Date ref_time = new Date(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("ref_time").trim()).getTime());
+		Date create_time = new Date(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("create_time").trim()).getTime());
 		String comp_name = request.getParameter("comp_name").trim();
 		int comp_score = Integer.parseInt(request.getParameter("comp_score").trim());
 		String job_name = request.getParameter("job_name").trim();
@@ -136,7 +137,7 @@ public class CommentsManager extends HttpServlet {
 		String share = request.getParameter("share").trim();
 		String user_id = request.getParameter("user_id").trim();
 
-		comment = new CommentBean(share_id, ref_time, comp_name, comp_score, job_name, job_score, job_description,
+		comment = new CommentBean(share_id, ref_time, create_time, comp_name, comp_score, job_name, job_score, job_description,
 				std_hour, real_hour, over_freq, seniority, total_seniority, monthly_salary, yearly_salary, bonus_count,
 				share, user_id);
 		CommentService commentService = new CommentServiceImpl();
@@ -157,6 +158,7 @@ public class CommentsManager extends HttpServlet {
 	private void showConfirmForm(HttpServletRequest request, HttpServletResponse response, CommentBean comment)
 			throws ServletException, IOException, SQLException, ParseException {
 		Date ref_time = new Date(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("ref_time").trim()).getTime());
+		Date create_time = new Date(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("create_time").trim()).getTime());
 		String comp_name = request.getParameter("comp_name").trim();
 		int comp_score = Integer.parseInt(request.getParameter("comp_score").trim());
 		String job_name = request.getParameter("job_name").trim();
@@ -173,7 +175,7 @@ public class CommentsManager extends HttpServlet {
 		String share = request.getParameter("share").trim();
 		String user_id = request.getParameter("user_id").trim();
 
-		comment = new CommentBean(ref_time, comp_name, comp_score, job_name, job_score, job_description, std_hour,
+		comment = new CommentBean(ref_time, create_time, comp_name, comp_score, job_name, job_score, job_description, std_hour,
 				real_hour, over_freq, seniority, total_seniority, monthly_salary, yearly_salary, bonus_count, share,
 				user_id);
 		request.getSession(true).setAttribute("comment", comment);

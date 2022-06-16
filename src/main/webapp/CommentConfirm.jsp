@@ -26,8 +26,8 @@
 <%-- 							<td><jsp:getProperty name="comment" property="share_id" /></td> --%>
 <!-- 							</tr> -->
 							<tr>
-								<td>分享時間:</td>
-								<td><jsp:getProperty name="comment" property="ref_time" /></td>
+								<td>新增時間:</td>
+								<td><jsp:getProperty name="comment" property="create_time" /></td>
 								<td>帳號:</td>
 								<td><jsp:getProperty name="comment" property="user_id" /></td>
 								<td colspan="2"></td>
@@ -37,7 +37,8 @@
 								<td><jsp:getProperty name="comment" property="comp_name" /></td>
 								<td>公司評分:</td>
 								<td id="confirmComp" data-score="<jsp:getProperty name="comment" property="comp_score" />"></td>
-								<td colspan="2"></td>
+								<td>參考時間:</td>
+								<td><jsp:getProperty name="comment" property="ref_time" /></td>
 							</tr>
 							<tr>
 								<td>職位:</td>
