@@ -35,7 +35,7 @@ public class CourseController extends HttpServlet {
 			} else if (request.getParameter("findByNo") != null) { 
 				processFindCourseByNo(request, response);
 
-			} else if (request.getParameter("DELETE") != null) { // DeleteId exist & do delete
+			} else if (request.getParameter("Delete") != null) { // DeleteId exist & do delete
 				processDeleteByNo(request, response);
 
 			} else if (request.getParameter("findByMulti") != null) { // findByMulti exist & do multi query
@@ -154,7 +154,7 @@ public class CourseController extends HttpServlet {
 		boolean deletetCheck = courseService.deleteCourse(Integer.valueOf(courseNo));
 		try {
 			if (deletetCheck) {
-				System.out.println("DeleteId:" + courseNo + " Delete success");
+				System.out.println("DeleteNo:" + courseNo + " Delete success");
 				response.sendRedirect("./CourseController");
 			} else {
 				getServletContext().getRequestDispatcher("/404.jsp").forward(request, response);

@@ -117,9 +117,14 @@
 									<button type="button" class="btn btn-outline-primary m-0"
 										onclick="location.href='./CourseController?courseNo=${course.courseNo}&UptdByCourseNO=更新查詢'">更新</button>
 									
-									<button type="button" class="btn btn-outline-danger m-0"
-										onclick="javascript:if(confirm('確認要刪除嗎?'))location.href='./CourseController?courseNo=${course.courseNo}&DELETE=刪除'">刪除</button>
-<%-- 								亦可		onclick="if(confirm('確認要刪除嗎?'))location.href='./CourseController?courseNo=${course.courseNo}&DELETE=刪除'">刪除</button> --%>
+									<button type="button" class="btn btn-outline-danger m-0 btn-courseDelete" id="delete" value="${course.courseNo}">刪除</button>
+									
+<!-- 									<button type="button" class="btn btn-outline-danger m-0"  -->
+<%-- 										onclick="javascript:if(confirm('確認要刪除嗎?'))location.href='./CourseController?courseNo=${course.courseNo}&Delete=del'" --%>
+<!-- 										>刪除</button> -->
+										
+										
+<%-- 								亦可		onclick="if(confirm('確認要刪除嗎?'))location.href='./CourseController?courseNo=${course.courseNo}&Delete=del'">刪除</button> --%>
 								</td>
 							</tr>
 							</c:forEach>
