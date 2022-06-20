@@ -12,11 +12,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Controller;
+
 import Bean.Company;
 import Service.CompanyService;
 import Service.Impl.CompanyServiceImpl;
 
 @WebServlet("/CompanyServlet")
+@Controller
 public class CompanyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
