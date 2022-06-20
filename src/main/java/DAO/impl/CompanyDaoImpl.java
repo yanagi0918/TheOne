@@ -4,12 +4,15 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import Bean.Company;
 import DAO.CompanyDao;
 import util.HibernateUtils;
-
+@Repository
 public class CompanyDaoImpl implements CompanyDao{
+	@Autowired
 	SessionFactory factory;
 	
 	public CompanyDaoImpl() {

@@ -2,122 +2,63 @@ package Service.Impl;
 
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import Bean.Company;
 import DAO.CompanyDao;
 import DAO.impl.CompanyDaoImpl;
 import Service.CompanyService;
-import util.HibernateUtils;
 
+@Service
 public class CompanyServiceImpl implements CompanyService{
-	SessionFactory factory;
+	@Autowired
 	CompanyDao companyDao;
+	
 	public CompanyServiceImpl() {
-		this.factory = HibernateUtils.getSessionFactory();
 		this.companyDao = new CompanyDaoImpl();
 	}
+	
+	@Transactional
 	@Override
 	public boolean isDup(int compid) {
-		boolean result = false;
-		Session session = factory.getCurrentSession();
-		Transaction tx = null;
-		try {
-			tx=session.beginTransaction();
-			result = companyDao.isDup(compid);
-			tx.commit();
-		}catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-			throw new RuntimeException(e);
-		}
-		return result;
+		
+		return companyDao.isDup(compid);
 	}
+	@Transactional
 	@Override
 	public int save(Company company) {
-		int n = 0;
-		Session session = factory.getCurrentSession();
-		Transaction tx = null;
-		try {
-			tx=session.beginTransaction();
-			n = companyDao.save(company);
-			tx.commit();
-		}catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-			throw new RuntimeException(e);
-		}
-		return n;
-	}
 		
+		return companyDao.save(company);
+	}
+	
+	@Transactional
 	@Override
 	public List<Company> getAllCompanies() {
-		List<Company> companies = null;
-		Session session = factory.getCurrentSession();
-		Transaction tx = null;
-		try {
-			tx=session.beginTransaction();
-			companies = companyDao.getAllCompanies();
-			tx.commit();
-		}catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-			throw new RuntimeException(e);
-		}
-		return companies;
+		
+		return companyDao.getAllCompanies();
 	}
+	
+	@Transactional
 	@Override
 	public Company getCompany(int pk) {
-		Company company = null;
-		Session session = factory.getCurrentSession();
-		Transaction tx = null;
-		try {
-			tx=session.beginTransaction();
-			company = companyDao.getCompany(pk);
-			tx.commit();
-		}catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-			throw new RuntimeException(e);
-		}
-		return company;
+		
+		return companyDao.getCompany(pk);
 	}
+	
+	@Transactional
 	@Override
 	public void deleteCompany(int pk) {
-		Session session = factory.getCurrentSession();
-		Transaction tx = null;
-		try {
-			tx=session.beginTransaction();
-			companyDao.deleteCompany(pk);
-			tx.commit();
-		}catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-			throw new RuntimeException(e);
-		}
+		
+		companyDao.deleteCompany(pk);
 	}
+	
+	@Transactional
 	@Override
 	public void updateCompany(Company company) {
-		Session session = factory.getCurrentSession();
-		Transaction tx = null;
-		try {
-			tx=session.beginTransaction();
-			companyDao.updateCompany(company);
-			tx.commit();
-		}catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-			throw new RuntimeException(e);
-		}
 		
+		companyDao.updateCompany(company);
 	}
 
 }
