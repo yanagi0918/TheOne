@@ -1,6 +1,6 @@
 <%@ page import="org.apache.jasper.tagplugins.jstl.core.ForEach" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="Bean.Member" %>
+<%@ page import="tw.team5.bean.Member" %>
 <%@ page import="java.util.List" %>
 
 <!-- 由上讀到下，所以判斷寫在最上面 -->

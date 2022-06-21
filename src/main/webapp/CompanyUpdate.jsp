@@ -1,6 +1,6 @@
 <%@ page import="org.apache.jasper.tagplugins.jstl.core.ForEach" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="Bean.Company" %>
+<%@ page import="tw.team5.bean.Company" %>
 <%@ page import="java.util.List" %>
 
 

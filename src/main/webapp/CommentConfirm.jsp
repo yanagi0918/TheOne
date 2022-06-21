@@ -5,7 +5,7 @@
 
 
 <form action="./CommentsManager" method="post">
-	<jsp:useBean id="comment" class="Bean.CommentBean" scope="session" />
+	<jsp:useBean id="comment" class="tw.team5.bean.CommentBean" scope="session" />
 
 	<div class="container-fluid pt-4 px-4">
 		<div class="col-sm-12 col-xl-10">

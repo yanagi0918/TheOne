@@ -1,8 +1,8 @@
-<%@page import="DAO.ResumeDao"%>
+<%@page import="tw.team5.dao.ResumeDao"%>
 <%@ page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="Bean.Resume"%>
+<%@ page import="tw.team5.bean.Resume"%>
 <%@ page import="java.util.List"%>
 
 <%@include file="DashBoardHeader.jspf"%>

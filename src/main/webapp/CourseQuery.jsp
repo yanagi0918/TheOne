@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
-<%@ page import="Bean.CourseBean"%>
+<%@ page import="tw.team5.bean.CourseBean"%>
 <%@include file="DashBoardHeader.jspf"%>
 
 

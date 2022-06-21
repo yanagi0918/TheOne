@@ -1,6 +1,6 @@
 <%@ page import="org.apache.jasper.tagplugins.jstl.core.ForEach" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="Bean.Company" %>
+<%@ page import="tw.team5.bean.Company" %>
 <%@ page import="java.util.List" %>
 
 
@@ -39,9 +39,9 @@
                                     <td><%= c.getContact() %></td>
                                     <td><%= c.getComptele() %></td>
                                     <td>
-                                    	<button type="button" class="btn btn-outline-warning m-0" onclick="location.href='./CompanyServlet?detailForm=<%= c.getComppk() %>'">查看</button>
-                                        <button type="button" class="btn btn-outline-primary m-0" onclick="location.href='./CompanyServlet?UpdateId=<%= c.getComppk() %>'">更新</button>
-                                        <button type="button" class="btn btn-outline-danger m-0" onclick="javascript:if(confirm('確定要刪除嗎?'))location.href='./CompanyServlet?DeleteId=<%= c.getComppk() %>'">刪除</button>
+                                    	<button type="button" class="btn btn-outline-warning m-0" onclick="location.href='/company/detail?companyId=<%= c.getComppk() %>'">查看</button>
+                                        <button type="button" class="btn btn-outline-primary m-0" onclick="location.href='/company/update?companyId=<%= c.getComppk() %>'">更新</button>
+                                        <button type="button" class="btn btn-outline-danger m-0" onclick="javascript:if(confirm('確定要刪除嗎?'))location.href='/company/delete?companyId=<%= c.getComppk() %>'">刪除</button>
                                     </td>
                                 </tr>
                             <% }} %>
