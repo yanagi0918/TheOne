@@ -14,7 +14,7 @@ import tw.team5.service.CompanyService;
 @Service
 public class CompanyServiceImpl implements CompanyService{
 	@Autowired
-	CompanyDao companyDao;
+	private CompanyDao companyDao;
 	
 	public CompanyServiceImpl() {
 		this.companyDao = new CompanyDaoImpl();

@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="tw.team5.bean.Company" %>
 <%@ page import="java.util.List" %>
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@include file="DashBoardHeader.jspf" %>
 
@@ -12,7 +12,7 @@
                     <div class="d-flex align-items-center justify-content-between mb-4">
                         <h2 class="mb-0">公司資訊</h2>
                         
-                        <button type="button" class="btn btn-primary mb-0" onclick="location.href='./CompanyCreate.jsp'">新增公司</button>
+                        <button type="button" class="btn btn-primary mb-0" onclick="window.location.href='showForm'; return false;">新增公司</button>
                     </div>
                     <div class="table-responsive">
                         <table class="table align-middle table-bordered table-hover mb-0 order-table" id="lee">
@@ -27,24 +27,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <%
-                            List<Company> companies = (List<Company>) request.getAttribute("companies");
-                            if(companies != null){
-                            for(Company c : companies) {
-                            %>
+                            <c:forEach items="${companies}" var="companies">
                                 <tr>
-                                    <td><%= c.getCompid() %></td>
-                                    <td><%= c.getCorpname() %></td>
-                                    <td><%= c.getIndustry() %></td>
-                                    <td><%= c.getContact() %></td>
-                                    <td><%= c.getComptele() %></td>
+                                    <td>${companies.Compid}</td>
+                                    <td>${companies.Corpname}</td>
+                                    <td>${companies.Industry}</td>
+                                    <td>${companies.Contact}</td>
+                                    <td>${companies.Comptele}</td>
                                     <td>
-                                    	<button type="button" class="btn btn-outline-warning m-0" onclick="location.href='/company/detail?companyId=<%= c.getComppk() %>'">查看</button>
-                                        <button type="button" class="btn btn-outline-primary m-0" onclick="location.href='/company/update?companyId=<%= c.getComppk() %>'">更新</button>
-                                        <button type="button" class="btn btn-outline-danger m-0" onclick="javascript:if(confirm('確定要刪除嗎?'))location.href='/company/delete?companyId=<%= c.getComppk() %>'">刪除</button>
+                                    	<button type="button" class="btn btn-outline-warning m-0" onclick="location.href='/company/detail?companyId=${companies.Comppk}'">查看</button>
+                                        <button type="button" class="btn btn-outline-primary m-0" onclick="location.href='/company/update?companyId=${companies.Comppk}'">更新</button>
+                                        <button type="button" class="btn btn-outline-danger m-0" onclick="javascript:if(confirm('確定要刪除嗎?'))location.href='/company/delete?companyId=${companies.Comppk}'">刪除</button>
                                     </td>
                                 </tr>
-                            <% }} %>
+                            </c:forEach>
                             </tbody>
                         </table>
                     </div>

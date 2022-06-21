@@ -33,7 +33,7 @@ public class CompanyServlet {
         return "CompanyCreate";
     }
 	
-	@PostMapping("/saveCompany")
+	@GetMapping("/saveCompany")
 	public String saveCustomer(@ModelAttribute("company") Company company) {
 		companyService.save(company);
 		return "redirect:/company/list";

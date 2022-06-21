@@ -13,7 +13,7 @@ import tw.team5.dao.CompanyDao;
 @Repository
 public class CompanyDaoImpl implements CompanyDao{
 	@Autowired
-	SessionFactory factory;
+	private SessionFactory factory;
 	
 	@Override
 	public boolean isDup(int compid) {

@@ -16,7 +16,6 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-//相當於beans.config.xml的java程式組態
 @Configuration
 @ComponentScan(basePackages = "tw.team5.bean")
 @EnableWebMvc
@@ -36,7 +35,7 @@ public class RootAppConfig {
 	public LocalSessionFactoryBean sessionFactory() throws IllegalArgumentException, NamingException {
 		LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 		factoryBean.setDataSource(dataSource());
-		factoryBean.setPackagesToScan("tw.lee.model");
+		factoryBean.setPackagesToScan("tw.team5.bean");
 		factoryBean.setHibernateProperties(addtionalProperties());
 		return factoryBean;
 	}
