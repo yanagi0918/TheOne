@@ -4,18 +4,11 @@
 <%@ page import="java.util.List" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%@include file="DashBoardHeader.jspf" %>
-
-            <!-- Content Start -->
-            <div class="container-fluid pt-4 px-4">
-                <div class="bg-light text-center rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
                         <h2 class="mb-0">公司資訊</h2>
                         
                         <button type="button" class="btn btn-primary mb-0" onclick="window.location.href='showForm'; return false;">新增公司</button>
-                    </div>
                     <div class="table-responsive">
-                        <table class="table align-middle table-bordered table-hover mb-0 order-table" id="lee">
+                        <table  id="lee">
                             <thead>
                                 <tr class="text-dark">
                                     <th scope="col">帳號(統編)</th>
@@ -28,16 +21,29 @@
                             </thead>
                             <tbody>
                             <c:forEach items="${companies}" var="companies">
+
+       						<c:url var="detailLink" value="/company/detail">
+        					<c:param name="companyId" value="${companies.comppk}" />
+       						</c:url>
+                            
+                            <c:url var="updateLink" value="/company/showupdateinformation">
+        					<c:param name="companyId" value="${companies.comppk}" />
+       						</c:url>
+       						
+       						<c:url var="deleteLink" value="/company/delete">
+        					<c:param name="companyId" value="${companies.comppk}" />
+       						</c:url>
+       						
                                 <tr>
-                                    <td>${companies.Compid}</td>
-                                    <td>${companies.Corpname}</td>
-                                    <td>${companies.Industry}</td>
-                                    <td>${companies.Contact}</td>
-                                    <td>${companies.Comptele}</td>
+                                    <td>${companies.compid}</td>
+                                    <td>${companies.corpname}</td>
+                                    <td>${companies.industry}</td>
+                                    <td>${companies.contact}</td>
+                                    <td>${companies.comptele}</td>
                                     <td>
-                                    	<button type="button" class="btn btn-outline-warning m-0" onclick="location.href='/company/detail?companyId=${companies.Comppk}'">查看</button>
-                                        <button type="button" class="btn btn-outline-primary m-0" onclick="location.href='/company/update?companyId=${companies.Comppk}'">更新</button>
-                                        <button type="button" class="btn btn-outline-danger m-0" onclick="javascript:if(confirm('確定要刪除嗎?'))location.href='/company/delete?companyId=${companies.Comppk}'">刪除</button>
+                                   		<a href="${detailLink}">查看</a>
+                                    	<a href="${updateLink}">更新</a>
+                                    	<a href="${deleteLink}" onclick="if (!(confirm('確定要刪除嗎?'))) return false">刪除</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -45,8 +51,12 @@
                         </table>
                     </div>
                     
-                </div>
-            </div>
-            <!-- Content End -->
-
-<%@include file="DashBoardFooter.jspf" %>
+                    <script src="js/checkCompanyForm.js"></script>
+            <script src="lib/chart/chart.min.js"></script>
+    		<script src="lib/easing/easing.min.js"></script>
+    		<script src="lib/waypoints/waypoints.min.js"></script>
+    		<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    		<script src="lib/tempusdominus/js/moment.min.js"></script>
+    		<script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    		<script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

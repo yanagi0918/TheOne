@@ -6,8 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.stereotype.Component;
 @SuppressWarnings("serial")
 @Entity
+@Component
 @Table(name = "Company_Table")
 public class Company implements Serializable{
 	@Id

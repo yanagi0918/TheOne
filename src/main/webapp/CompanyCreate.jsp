@@ -2,24 +2,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="tw.team5.bean.Company" %>
 <%@ page import="java.util.List" %>
-
-<%@include file="DashBoardHeader.jspf" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
             <!-- Content Start -->
-            <div class="container-fluid pt-4 px-4">
+            <div class="container-fluid pt-4 px-4">	
                 <div class="col-sm-12 col-xl-10">
                     <div class="bg-light rounded h-100 p-4">
                         <h6 class="mb-4">新增公司</h6>
-                        <form action="./CompanyServlet" method="post" onsubmit="return checkCompanyForm()">
                         <div class="row mb-3">
                                     <input type="hidden"  class="form-control" name="comppk" id="comppk" value="0">
                             </div>
-                            
+                            <form action="saveCompany" method="post" modelAttribute="customer">
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">帳號(統編)</label>
                                 <div class="col-sm-8">
                                     <input type="text"  class="form-control"  maxlength="8" name="compid" required id="compid">
-                                    <font color='red' size='4'>${error.compid}</font>
                                 </div>
                             </div>
                             
@@ -101,15 +98,24 @@
                                 </div>
                             </div>
                             
-                            <button type="submit" class="btn btn-primary" name="create" value="confirm">確認新增</button>
+                            <a href="<c:url value='/company/saveCompany'/>"><button type="submit" class="btn btn-primary" name="create" value="confirm" onclick="return checkMemberForm()">確認新增</button></a>
                             <button type="reset" class="btn btn-primary">還原</button>
-                            <button type="button" class="btn btn-primary" onclick="location.href='./CompanyServlet'">取消</button>
+                          	<a href="<c:url value='/company/list'/>"><button type="button" class="btn btn-primary">取消</button></a>
                       	    <button type="button" class="btn btn-primary" id="wrongInput">輸入錯誤範例</button>
-                            <button type="button" class="btn btn-primary" id="correctInput">一鍵輸入</button>      
-                        </form>
+                            <button type="button" class="btn btn-primary" id="correctInput">一鍵輸入</button>  
+                            
+                            </form>    
                     </div>
                 </div>
             </div>
             <!-- Content End -->
+            <script src="js/checkCompanyForm.js"></script>
+            <script src="lib/chart/chart.min.js"></script>
+    		<script src="lib/easing/easing.min.js"></script>
+    		<script src="lib/waypoints/waypoints.min.js"></script>
+    		<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    		<script src="lib/tempusdominus/js/moment.min.js"></script>
+    		<script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    		<script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<%@include file="DashBoardFooter.jspf" %>

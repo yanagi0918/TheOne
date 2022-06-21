@@ -2,15 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ page import="tw.team5.bean.Company"%>
-<%@include file="DashBoardHeader.jspf"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
             <!-- Content Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="col-sm-12 col-xl-10">
                     <div class="bg-light rounded h-100 p-4">
                         <h6 class="mb-4">資料內容</h6>
-                        <FORM ACTION="./CompanyServlet" method="post">
-                        <% Company company = (Company) request.getAttribute("company");%>
+                        <% Company company = (Company) request.getAttribute("companydeatail");%>
                         <div class="row mb-3">
                                     <input type="hidden"  class="form-control" name="comppk" id="comppk" value="<%=company.getComppk()%>" readonly="readonly">
                             </div>
@@ -98,11 +97,9 @@
                                 <input type="text" class="form-control" maxlength="10"  name="capital"  id="capital" value="<%=company.getCapital()%>" readonly="readonly">  
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-primary" onclick="location.href='./CompanyServlet'">返回</button>
-                        </form>
+                            <a href="<c:url value='/company/list'/>"><button>返回</button></a>
                     </div>
                 </div>
             </div>
             <!-- Content End -->
 
-<%@include file="DashBoardFooter.jspf" %>

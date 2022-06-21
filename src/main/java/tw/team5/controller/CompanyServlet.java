@@ -33,20 +33,9 @@ public class CompanyServlet {
         return "CompanyCreate";
     }
 	
-	@GetMapping("/saveCompany")
+	@PostMapping("/saveCompany")
 	public String saveCustomer(@ModelAttribute("company") Company company) {
 		companyService.save(company);
-		return "redirect:/company/list";
-	}
-	@GetMapping("/update")
-	public String processUpdate(@RequestParam("companyId") int updateId,Model m){
-		Company company = companyService.getCompany(updateId);
-		m.addAttribute("companies",company);
-		return "redirect:/company/list";
-	}
-	@GetMapping("/delete")
-	public String processDelete(@RequestParam("companyId") int deleteId){
-		companyService.deleteCompany(deleteId);
 		return "redirect:/company/list";
 	}
 	@GetMapping("/detail")
@@ -54,6 +43,22 @@ public class CompanyServlet {
 		Company companydeatail = companyService.getCompany(detailId);
 		m.addAttribute("companydeatail",companydeatail);
 		return "CompanyDetail";
+	}
+	@GetMapping("/showupdateinformation")
+	public String showInformaionFromUpdate(@RequestParam("companyId") Integer updateId,Model m){
+		Company companyupdate = companyService.getCompany(updateId);
+		m.addAttribute("companyupdate",companyupdate);
+		return "CompanyUpdate";
+	}
+	@PostMapping("/update")
+	public String processUpdate(Company company){
+		companyService.updateCompany(company);
+		return "redirect:/company/list";
+	}
+	@GetMapping("/delete")
+	public String processDelete(@RequestParam("companyId") int deleteId){
+		companyService.deleteCompany(deleteId);
+		return "redirect:/company/list";
 	}
 	
 }

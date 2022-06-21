@@ -2,17 +2,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="tw.team5.bean.Company" %>
 <%@ page import="java.util.List" %>
-
-
-<%@include file="DashBoardHeader.jspf" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
             <!-- Content Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="col-sm-12 col-xl-10">
                     <div class="bg-light rounded h-100 p-4">
                         <h6 class="mb-4">修改公司資訊</h6>
-                        <form action="./CompanyServlet" method="post" onsubmit="return checkCompanyForm()">
-                        <% Company companyForUpdate = (Company) request.getAttribute("companyForUpdate"); %>
+                        <form action="<c:url value='/company/update'/>" method="post">
+                        <% Company companyForUpdate = (Company) request.getAttribute("companyupdate"); %>
                         	<div class="row mb-3">
                                     <input type="hidden"  class="form-control" name="comppk" required id="comppk" value="<%=companyForUpdate.getComppk()%>">
                             </div>
@@ -99,12 +97,11 @@
                                 <input type="text" class="form-control" maxlength="10"  name="capital" value="<%= companyForUpdate.getCapital() %>" id="capital" placeholder="(請加上單位，如1250萬)">  
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary" name="update" value="confirm">修改</button>
-                            <button type="button" class="btn btn-primary" onclick="location.href='./CompanyServlet'">取消</button>
+                            <input type="submit" value="更新">
+                            <a href="<c:url value='/company/list'/>"><button>取消修改並返回</button></a>
                         </form>
                     </div>
                 </div>
             </div>
             <!-- Content End -->
 
-<%@include file="DashBoardFooter.jspf" %>
