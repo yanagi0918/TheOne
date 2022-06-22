@@ -11,7 +11,7 @@ public interface JobService {
 	
 	List<Job> getAllJobs();
 	
-	Job getJobByJobID(int pk);
+	Job getJob(int pk);
 
 	void delete(int pk);
 	

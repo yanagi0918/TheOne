@@ -2,128 +2,58 @@ package tw.team5.service.impl;
 
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import tw.team5.bean.Job;
 import tw.team5.dao.*;
 import tw.team5.dao.impl.JobDaoImpl;
 import tw.team5.service.JobService;
-import tw.team5.util.HibernateUtils;
-
+@Transactional
+@Service
 public class JobServiceImpl implements JobService{
-	SessionFactory factory;
-	JobDao jobDao;
+	@Autowired
+	private JobDao jobDao;
 	
 	public JobServiceImpl() {
-		this.factory = HibernateUtils.getSessionFactory();
 		this.jobDao = new JobDaoImpl();
 	}
 
 	@Override
 	public int save(Job job) {
-		int n = 0;
-		Session session = factory.getCurrentSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			n = jobDao.save(job);
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-			throw new RuntimeException(e);
-		}
-		return n;
+		
+		return jobDao.save(job);
 	}
 
 	@Override
 	public List<Job> getAllJobs() {
-		List<Job> jobs = null;
-		Session session = factory.getCurrentSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			jobs = jobDao.getAllJobs();
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-				e.printStackTrace();
-			}
-			throw new RuntimeException(e);
-		}
-		return jobs;
+		
+		return jobDao.getAllJobs();
 	}
 
 	@Override
-	public Job getJobByJobID(int pk) {
-		Job job = null;
-		Session session = factory.getCurrentSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			job = jobDao.getJobByJobID(pk);
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-			throw new RuntimeException(e);
-		}
-		return job;
+	public Job getJob(int pk) {
+		
+		return jobDao.getJob(pk);
 	}
 
 	@Override
 	public void delete(int pk) {
-		Session session = factory.getCurrentSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			jobDao.delete(pk);
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-			throw new RuntimeException(e);
-		}
+
+		jobDao.delete(pk);
 	}
 
 	@Override
 	public void update(Job job) {
-		Session session = factory.getCurrentSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			jobDao.update(job);
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-			throw new RuntimeException(e);
-		}
+		
+		jobDao.update(job);
 	}
 
 	@Override
 	public boolean isDup(int pk) {
-		boolean result = false;
-		Session session = factory.getCurrentSession();
-		Transaction tx = null;
-		try {
-			tx = session.beginTransaction();
-			result = jobDao.isDup(pk);
-			tx.commit();
-		} catch (Exception e) {
-			if (tx != null) {
-				tx.rollback();
-			}
-			throw new RuntimeException(e);
-		}
-		return result;
+		
+		return jobDao.isDup(pk);
 	}
 
 }

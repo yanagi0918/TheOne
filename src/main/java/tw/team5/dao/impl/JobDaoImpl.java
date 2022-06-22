@@ -2,16 +2,16 @@ package tw.team5.dao.impl;
 import java.util.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import tw.team5.bean.Job;
 import tw.team5.dao.JobDao;
-import tw.team5.util.HibernateUtils;
-
+@Repository
 public class JobDaoImpl implements JobDao{
-	SessionFactory factory;
-	public JobDaoImpl() {
-		this.factory = HibernateUtils.getSessionFactory();
-	}
+	@Autowired
+	private SessionFactory factory;
+	
 	@Override
 	public int save(Job job) {
 		Session session = factory.getCurrentSession();
@@ -30,7 +30,7 @@ public class JobDaoImpl implements JobDao{
 	}
 
 	@Override
-	public Job getJobByJobID(int pk) {
+	public Job getJob(int pk) {
 		Session session = factory.getCurrentSession();
 		Job job = session.get(Job.class,pk);
 		return job;

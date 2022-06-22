@@ -3,7 +3,7 @@
 <%@ page import="tw.team5.bean.Company" %>
 <%@ page import="java.util.List" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@include file="DashBoardHeader.jspf"%>
             <!-- Content Start -->
             <div class="container-fluid pt-4 px-4">
                 <div class="col-sm-12 col-xl-10">
@@ -105,3 +105,4 @@
             </div>
             <!-- Content End -->
 
+<%@include file="DashBoardFooter.jspf"%>

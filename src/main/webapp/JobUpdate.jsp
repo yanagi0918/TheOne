@@ -1,9 +1,9 @@
-<%@page import="tw.team5.dao.impl.JobDaoImpl"%>
 <%@ page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="tw.team5.bean.Job"%>
 <%@include file="DashBoardHeader.jspf"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
 .center{
  text-align:center;
@@ -14,9 +14,9 @@
 <div class="bg-light text-center rounded p-4">
 
 <h1 class="mb-4">更新職缺</h1>
-<form action='update' method='post'>
+<form action="<c:url value='/job/update'/>" method='post'>
 <%
-Job job = (Job)request.getAttribute("job");
+Job job = (Job)request.getAttribute("jobupdate");
 %>
 <div class="row mb-3">
 <input type='hidden' name='job_id' value='<%=job.getJob_id() %>'/>
@@ -82,6 +82,7 @@ Job job = (Job)request.getAttribute("job");
 </div>
 <div class="center">
 <button type="submit" class="btn btn-primary">更改並儲存</button>
+<a href="<c:url value='/job/list'/>"><button>取消修改並返回</button></a>
 </div>
 </form>
 </div>

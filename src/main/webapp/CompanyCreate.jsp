@@ -3,8 +3,8 @@
 <%@ page import="tw.team5.bean.Company" %>
 <%@ page import="java.util.List" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@include file="DashBoardHeader.jspf" %>
 
-            <!-- Content Start -->
             <div class="container-fluid pt-4 px-4">	
                 <div class="col-sm-12 col-xl-10">
                     <div class="bg-light rounded h-100 p-4">
@@ -98,7 +98,7 @@
                                 </div>
                             </div>
                             
-                            <a href="<c:url value='/company/saveCompany'/>"><button type="submit" class="btn btn-primary" name="create" value="confirm" onclick="return checkMemberForm()">確認新增</button></a>
+                            <a href="<c:url value='/company/saveCompany'/>"><button type="submit" class="btn btn-primary" name="create" value="confirm" onclick="return checkMemberForm()">新增</button></a>
                             <button type="reset" class="btn btn-primary">還原</button>
                           	<a href="<c:url value='/company/list'/>"><button type="button" class="btn btn-primary">取消</button></a>
                       	    <button type="button" class="btn btn-primary" id="wrongInput">輸入錯誤範例</button>
@@ -108,14 +108,5 @@
                     </div>
                 </div>
             </div>
-            <!-- Content End -->
-            <script src="js/checkCompanyForm.js"></script>
-            <script src="lib/chart/chart.min.js"></script>
-    		<script src="lib/easing/easing.min.js"></script>
-    		<script src="lib/waypoints/waypoints.min.js"></script>
-    		<script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    		<script src="lib/tempusdominus/js/moment.min.js"></script>
-    		<script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    		<script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-    		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+            
+<%@include file="DashBoardFooter.jspf" %>

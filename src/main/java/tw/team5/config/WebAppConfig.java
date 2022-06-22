@@ -11,7 +11,6 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -25,16 +24,7 @@ public class WebAppConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/images/**").addResourceLocations("/WEB-INF/resources/images/");
-		registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/resources/css/");
-		
-	}
-
-	@Override
-	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addRedirectViewController("/", "gogomember");
-		registry.addViewController("/funny.sweet").setViewName("form");
-		registry.addViewController("/showresources.info").setViewName("showResources");
+		registry.addResourceHandler("/js/**").addResourceLocations("/js/");
 		
 	}
 

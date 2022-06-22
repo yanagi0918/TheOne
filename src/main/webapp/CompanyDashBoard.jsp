@@ -3,10 +3,13 @@
 <%@ page import="tw.team5.bean.Company" %>
 <%@ page import="java.util.List" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@include file="DashBoardHeader.jspf"%>
+<div class="container-fluid pt-4 px-4">
+<div class="bg-light text-center rounded p-4">
+					<div class="d-flex align-items-center justify-content-between mb-4">
                         <h2 class="mb-0">公司資訊</h2>
-                        
                         <button type="button" class="btn btn-primary mb-0" onclick="window.location.href='showForm'; return false;">新增公司</button>
+                    </div>
                     <div class="table-responsive">
                         <table  id="lee">
                             <thead>
@@ -50,13 +53,6 @@
                             </tbody>
                         </table>
                     </div>
-                    
-                    <script src="js/checkCompanyForm.js"></script>
-            <script src="lib/chart/chart.min.js"></script>
-    		<script src="lib/easing/easing.min.js"></script>
-    		<script src="lib/waypoints/waypoints.min.js"></script>
-    		<script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    		<script src="lib/tempusdominus/js/moment.min.js"></script>
-    		<script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    		<script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-    		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                    </div>
+                    </div>
+                    	<%@include file="DashBoardFooter.jspf"%>
