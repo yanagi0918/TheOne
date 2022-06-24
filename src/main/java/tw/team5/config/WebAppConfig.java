@@ -11,6 +11,7 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -24,6 +25,8 @@ public class WebAppConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/img/**").addResourceLocations("/img/");
+		registry.addResourceHandler("/css/**").addResourceLocations("/css/");
 		registry.addResourceHandler("/js/**").addResourceLocations("/js/");
 		
 	}
@@ -47,6 +50,10 @@ public class WebAppConfig implements WebMvcConfigurer {
 		CommonsMultipartResolver cmr1 = new CommonsMultipartResolver();
 		cmr1.setDefaultEncoding("UTF-8");
 		return cmr1;
+	}
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addRedirectViewController("/", "company/list");
 	}
 	@Bean
 	public MappingJackson2JsonView jsonView() {
