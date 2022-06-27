@@ -1,5 +1,8 @@
 package tw.team5.controller;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,9 +37,18 @@ public class CompanyServlet {
     }
 	
 	@PostMapping("/saveCompany")
-	public String saveCustomer(@ModelAttribute("company") Company company) {
+	public String saveCustomer(@ModelAttribute("company") Company company,Model m,@RequestParam(value="id") Integer compid) {
+		
+		//設定輸入錯誤
+		Map<String, String> errorMsg = new HashMap<String, String>();
+		m.addAttribute("errorMsg", errorMsg);
+		if(companyService.isDup(compid)) {
+			errorMsg.put("compid", "帳號(統編)重複，請重新輸入新帳號");
+			return "CompanyCreate";
+		}else {
 		companyService.save(company);
 		return "redirect:/company/list";
+		}
 	}
 	@GetMapping("/detail")
 	public String processShowDetail(@RequestParam("companyId") int detailId,Model m){
