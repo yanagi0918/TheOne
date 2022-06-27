@@ -20,7 +20,6 @@ function checkCompanyForm() {
 		return checkJobForm;
 	}
 	
-	
 	let comptele = /^[0-9]{10}$/g;
 	if(!comptele.test($("#comptele").val())){
 		Swal.fire('Warning!',

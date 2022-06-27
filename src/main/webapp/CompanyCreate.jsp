@@ -17,6 +17,7 @@
                                 <label class="col-sm-2 col-form-label">帳號(統編)</label>
                                 <div class="col-sm-8">
                                     <input type="text"  class="form-control"  maxlength="8" name="compid" required id="compid">
+                                    <font color='red' size='4'>${error.compid}</font>
                                 </div>
                             </div>
                             
@@ -25,6 +26,7 @@
                                 <div class="col-sm-8">
                                     <input type="password" class="form-control" maxlength="15" name="compwd" required id="compwd" placeholder="(最少六個字符，至少一個大寫字母，一個小寫字母和一個數字)">
                                 	<input type="checkbox" onclick="ShowPwd()">顯示密碼
+                                	<font color='red' size='4'>${error.compwd}</font>
                                 </div>
                             </div>
                             
@@ -32,6 +34,7 @@
                                 <label class="col-sm-2 col-form-label">公司名稱</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" maxlength="15" name="corpname" required id="corpname">
+                                    <font color='red' size='4'>${error.corpname}</font>
                                 </div>
                             </div>
                             
@@ -46,6 +49,7 @@
                                 <label class="col-sm-2 col-form-label">產業</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" maxlength="10" name="industry" required id="industry">
+                                    <font color='red' size='4'>${error.industry}</font>
                                 </div>
                             </div>
                             
@@ -53,6 +57,7 @@
                                 <label class="col-sm-2 col-form-label">聯絡人</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" maxlength="5" name="contact" required id="contact">
+                                    <font color='red' size='4'>${error.contact}</font>
                                 </div>
                             </div>
                             
@@ -74,6 +79,7 @@
                                 <label class="col-sm-2 col-form-label">公司地址</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" maxlength="30" name="compaddress" required id="compaddress">
+                                    <font color='red' size='4'>${error.compaddress}</font>
                                 </div>
                             </div>
                             
@@ -95,6 +101,7 @@
                                 <label class="col-sm-2 col-form-label">資本額</label>
                                 <div class="col-sm-8 text-center">
                                 <input type="text" class="form-control" maxlength="10"  name="capital" required id="capital" placeholder="(請輸入公司資本額，如1250萬)">  
+                                <font color='red' size='4'>${error.capital}</font>
                                 </div>
                             </div>
                             

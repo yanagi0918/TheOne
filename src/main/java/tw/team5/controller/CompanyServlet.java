@@ -37,19 +37,53 @@ public class CompanyServlet {
     }
 	
 	@PostMapping("/saveCompany")
-	public String saveCustomer(@ModelAttribute("company") Company company,Model m,@RequestParam(value="id") Integer compid) {
+	public String saveCustomer(@ModelAttribute("company") Company company ,Model m) {
 		
 		//設定輸入錯誤
 		Map<String, String> errorMsg = new HashMap<String, String>();
-		m.addAttribute("errorMsg", errorMsg);
+		m.addAttribute("error", errorMsg);
+		//讀取資料
+		int compid=company.getCompid();
+		String compwd = company.getCompwd();
+		String corpname = company.getCorpname();
+		String industry = company.getIndustry();
+		String contact = company.getContact();
+		String compaddress = company.getCompaddress();
+		String capital = company.getCapital();
+		
+		
+		//判斷新增是否錯誤
 		if(companyService.isDup(compid)) {
 			errorMsg.put("compid", "帳號(統編)重複，請重新輸入新帳號");
+		}
+		if(compwd== null || compwd.trim().length()==0){
+			errorMsg.put("compwd","密碼不可為空");
+		}
+		if(corpname== null || corpname.trim().length()==0){
+			errorMsg.put("corpname","公司名稱不可為空");
+		}
+		if(industry== null || industry.trim().length()==0){
+			errorMsg.put("industry","產業類別不可為空");
+		}
+		if(contact== null || contact.trim().length()==0){
+			errorMsg.put("contact","聯絡人不可為空");
+		}
+		if(compaddress== null || compaddress.trim().length()==0){
+			errorMsg.put("compaddress","公司地址不可為空");
+		}
+		if(capital== null || capital.trim().length()==0){
+			errorMsg.put("capital","資本額不可為空");
+		}
+		
+		if(!errorMsg.isEmpty()){
 			return "CompanyCreate";
-		}else {
+		}
+		
+		
 		companyService.save(company);
 		return "redirect:/company/list";
-		}
 	}
+	
 	@GetMapping("/detail")
 	public String processShowDetail(@RequestParam("companyId") int detailId,Model m){
 		Company companydeatail = companyService.getCompany(detailId);
